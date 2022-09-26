@@ -6,13 +6,10 @@ public class Suspension : MonoBehaviour
 {
     public List<Transform> suspensions;
 
-    [SerializeField]
-    private float _suspensionLength;
+    public float suspensionLength;
     [SerializeField]
     private float _suspensionStrength;
-
-    [SerializeField]
-    private LayerMask _groundLayerMask;
+    public LayerMask groundLayerMask;
 
     private Rigidbody _rigidbody => GetComponent<Rigidbody>();
 
@@ -20,12 +17,12 @@ public class Suspension : MonoBehaviour
     {
         foreach (Transform suspension in suspensions)
         {
-            Debug.DrawRay(suspension.position, this.transform.up * -1 * _suspensionLength, Color.green);
+            Debug.DrawRay(suspension.position, this.transform.up * -1 * suspensionLength, Color.green);
 
             RaycastHit hit;
-            if(Physics.Raycast(suspension.position, this.transform.up * -1, out hit, _suspensionLength, _groundLayerMask))
+            if(Physics.Raycast(suspension.position, this.transform.up * -1, out hit, suspensionLength, groundLayerMask))
             {
-                float compresstionRatio = (_suspensionLength - Vector3.Distance(hit.point, suspension.position)) / _suspensionLength;
+                float compresstionRatio = (suspensionLength - Vector3.Distance(hit.point, suspension.position)) / suspensionLength;
                 Vector3 suspensionForce = _suspensionStrength * Vector3.up * compresstionRatio;
                 _rigidbody.AddForceAtPosition(suspensionForce, suspension.position, ForceMode.Force);
             }
