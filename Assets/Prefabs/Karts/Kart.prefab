@@ -140,7 +140,6 @@ GameObject:
   - component: {fileID: 4587280264504072901}
   - component: {fileID: 4587280264504072905}
   - component: {fileID: 4587280264504072903}
-  - component: {fileID: 4587280264504072902}
   m_Layer: 6
   m_Name: Kart
   m_TagString: Untagged
@@ -192,23 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 474b09bd48852a54986a93b401eb01d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4587280264504072902
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4587280264504072904}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 865484f3c4d8ade45bad7e598e9ff0c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _suspensions:
-  - {fileID: 4587280265734996688}
-  - {fileID: 4587280266067728138}
-  - {fileID: 4587280265526750582}
-  - {fileID: 4587280265419457468}
+  _suspensions: {fileID: 4587280264126965112}
   _length: 3
   _restDistance: 2.2
   _strength: 260
