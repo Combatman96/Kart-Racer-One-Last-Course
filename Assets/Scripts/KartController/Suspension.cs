@@ -4,27 +4,32 @@ using UnityEngine;
 
 public class Suspension : MonoBehaviour
 {
-    public List<Transform> suspensions;
+    [SerializeField] private List<Transform> _suspensions;
 
-    public float suspensionLength;
-    [SerializeField]
-    private float _suspensionStrength;
-    public LayerMask groundLayerMask;
+    [SerializeField] private float _length;
+    [SerializeField] private float _restDistance;
+    [SerializeField] private float _strength;
+    [SerializeField] private float _damper;
+    [SerializeField] private LayerMask _groundLayerMask;
 
-    private Rigidbody _rigidbody => GetComponent<Rigidbody>();
+    private Rigidbody _carRigidbody => GetComponent<Rigidbody>();
 
     private void FixedUpdate()
     {
-        foreach (Transform suspension in suspensions)
+        foreach (Transform suspension in _suspensions)
         {
-            Debug.DrawRay(suspension.position, this.transform.up * -1 * suspensionLength, Color.green);
+            Debug.DrawRay(suspension.position, this.transform.up * -1 * _length, Color.green);
 
             RaycastHit hit;
-            if(Physics.Raycast(suspension.position, this.transform.up * -1, out hit, suspensionLength, groundLayerMask))
+            bool isRayHit = Physics.Raycast(suspension.position, this.transform.up * -1, out hit, _length, _groundLayerMask);
+            if(isRayHit)
             {
-                float compresstionRatio = (suspensionLength - Vector3.Distance(hit.point, suspension.position)) / suspensionLength;
-                Vector3 suspensionForce = _suspensionStrength * Vector3.up * compresstionRatio;
-                _rigidbody.AddForceAtPosition(suspensionForce, suspension.position, ForceMode.Force);
+                Vector3 springDir = suspension.up;
+                Vector3 springVel = _carRigidbody.GetPointVelocity(suspension.position);
+                float offet = _length - hit.distance;
+                float velocity = Vector3.Dot(springDir, springVel);
+                float force = (offet * _strength) - (velocity * _damper);
+                _carRigidbody.AddForceAtPosition(springDir * force, suspension.position);
             }
         }
     }
