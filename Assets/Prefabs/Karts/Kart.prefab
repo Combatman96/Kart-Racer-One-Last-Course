@@ -171,7 +171,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4587280264504072904}
   serializedVersion: 2
-  m_Mass: 12
+  m_Mass: 15
   m_Drag: 1
   m_AngularDrag: 1
   m_UseGravity: 1
@@ -191,6 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 474b09bd48852a54986a93b401eb01d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tireMass: 10
   _suspensions: {fileID: 4587280264126965112}
   _length: 3
   _restDistance: 2.2
@@ -199,6 +200,64 @@ MonoBehaviour:
   _groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  _maxSteeringSpeed: 200
+  _frontTiresGripCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _rearTiresGripCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _frontTiresGripFactor: 0.3
+  _rearTiresGripFactor: 0.05
+  _topSpeed: 500
+  _speedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.5023575
+      inSlope: -0.2333348
+      outSlope: -0.2333348
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.2598024
+    - serializedVersion: 3
+      time: 0.3787849
+      value: 1
+      inSlope: 0.005168968
+      outSlope: 0.005168968
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.48617044
+      outWeight: 0.14760108
+    - serializedVersion: 3
+      time: 0.6649059
+      value: 1
+      inSlope: 0.006252311
+      outSlope: 0.006252311
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.22973172
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0.30896378
+      inSlope: 0.14588214
+      outSlope: 0.14588214
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.60085297
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &4587280265419457411
 GameObject:
   m_ObjectHideFlags: 0
