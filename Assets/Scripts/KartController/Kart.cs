@@ -34,7 +34,10 @@ public class Kart : MonoBehaviour
         _accelerationInput = Input.GetAxis("Vertical") * _topSpeed;
         for (int i = 0; i < 2; i++)
             _suspensions.GetChild(i).localEulerAngles = new Vector3(0, (Input.GetAxis("Horizontal") * _maxSteeringAngle), _suspensions.GetChild(i).localEulerAngles.z);
-
+        if (Input.GetButtonDown("Jump"))
+        {
+            FlipCar();
+        }
     }
 
 
@@ -99,5 +102,16 @@ public class Kart : MonoBehaviour
             float torque = _speedCurve.Evaluate(speedNormalized) * _accelerationInput;
             _rigidbody.AddForceAtPosition(accelDir * torque, wheelTransform.position);
         }
+    }
+
+    private void FlipCar()
+    {
+        if (transform.up.y > 0) return;
+
+        Vector3 axis = transform.up * -1;
+        float torqueAmount = 120f;
+        Vector3 torque = axis * torqueAmount;
+        _rigidbody.AddForceAtPosition(torque, _suspensions.GetChild(0).position, ForceMode.Impulse);
+        _rigidbody.AddForceAtPosition(torque, _suspensions.GetChild(2).position, ForceMode.Impulse);
     }
 }
