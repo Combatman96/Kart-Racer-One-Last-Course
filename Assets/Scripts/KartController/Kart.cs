@@ -18,12 +18,23 @@ public class Kart : MonoBehaviour
 
     [Header("Steering")]
     [SerializeField] float _maxSteeringSpeed;
-    [SerializeField] AnimationCurve _frontTiresGrip;
-    [SerializeField] AnimationCurve _rearTiresGrip;
+    [SerializeField] AnimationCurve _frontTiresGripCurve;
+    [SerializeField] AnimationCurve _rearTiresGripCurve;
+    [SerializeField][Range(0, 1)] float _frontTiresGripFactor;
+    [SerializeField][Range(0, 1)] float _rearTiresGripFactor;
 
     [Header("Acceleration")]
     [SerializeField] float _topSpeed;
-    private float _accelerationInput;
+    [SerializeField] AnimationCurve _speedCurve;
+    private float _accelerationInput = 0f;
+
+    private void Update()
+    {
+        _accelerationInput = Input.GetAxis("Vertical") * _topSpeed;
+        for (int i = 0; i < 2; i++)
+            _suspensions.GetChild(i).localEulerAngles = new Vector3(0, (Input.GetAxis("Horizontal") * 60), _suspensions.GetChild(i).localEulerAngles.z);
+
+    }
 
 
     private void FixedUpdate()
