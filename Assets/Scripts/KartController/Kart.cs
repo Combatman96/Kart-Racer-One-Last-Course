@@ -18,6 +18,7 @@ public class Kart : MonoBehaviour
 
     [Header("Steering")]
     [SerializeField][Range(0, 80)] float _maxSteeringAngle = 25f;
+    [SerializeField] float _maxSteeringSpeed = 200f;
     [SerializeField] AnimationCurve _frontTiresGripCurve;
     [SerializeField] AnimationCurve _rearTiresGripCurve;
     [SerializeField][Range(0, 1)] float _frontTiresGripFactor;
@@ -47,35 +48,56 @@ public class Kart : MonoBehaviour
             bool isRayHit = Physics.Raycast(suspension.position, this.transform.up * -1, out hit, _length, _groundLayerMask);
             if (isRayHit)
             {
-                // Suspension force
-                Vector3 springDir = suspension.up;
-                Vector3 springVel = _rigidbody.GetPointVelocity(suspension.position);
-                float offet = _length - hit.distance;
-                float velocity = Vector3.Dot(springDir, springVel);
-                float force = (offet * _strength) - (velocity * _damper);
-                _rigidbody.AddForceAtPosition(springDir * force, suspension.position);
-
-                // Steering force
-                Vector3 steerDir = suspension.right;
-                Vector3 tireWoldVel = _rigidbody.GetPointVelocity(suspension.position);
-                float steerVel = Vector3.Dot(steerDir, tireWoldVel);
-                // float steerVelNormalized = Mathf.Clamp01(Mathf.Abs(steerVel) / _maxSteeringSpeed);
-                // float tireGripFactor = (suspension.GetSiblingIndex() < 2) ? _frontTiresGripCurve.Evaluate(steerVelNormalized) : _rearTiresGripCurve.Evaluate(steerVelNormalized);
-                float tireGripFactor = (suspension.GetSiblingIndex() < 2) ? _frontTiresGripFactor : _rearTiresGripFactor;
-                float desiredVelChange = -steerVel * tireGripFactor;
-                float desiredAccel = desiredVelChange / Time.fixedDeltaTime;
-                _rigidbody.AddForceAtPosition(steerDir * _tireMass * desiredAccel, suspension.position);
-
-                // Acceleration / Braking
-                Vector3 accelDir = suspension.forward;
-                if (_accelerationInput != 0f)
-                {
-                    float carSpeed = Vector3.Dot(this.transform.forward, _rigidbody.velocity);
-                    float speedNormalized = Mathf.Clamp01(Mathf.Abs(carSpeed) / _topSpeed);
-                    float torque = _speedCurve.Evaluate(speedNormalized) * _accelerationInput;
-                    _rigidbody.AddForceAtPosition(accelDir * torque, suspension.position);
-                }
+                int wheelIndex = suspension.GetSiblingIndex();
+                AddSuspensionForce(wheelIndex, hit);
+                AddSteeringForce(wheelIndex);
+                AddAccelerationForce(wheelIndex);
             }
+        }
+    }
+
+    private void AddSuspensionForce(int wheelIndex, RaycastHit hit)
+    {
+        Transform suspension = _suspensions.GetChild(wheelIndex);
+        Vector3 springDir = suspension.up;
+        Vector3 springVel = _rigidbody.GetPointVelocity(suspension.position);
+        float offet = _length - hit.distance;
+        float velocity = Vector3.Dot(springDir, springVel);
+        float force = (offet * _strength) - (velocity * _damper);
+        _rigidbody.AddForceAtPosition(springDir * force, suspension.position);
+    }
+
+    private void AddSteeringForce(int wheelIndex, bool isAutoDrif = false)
+    {
+        var wheelTransform = _suspensions.GetChild(wheelIndex);
+        Vector3 steerDir = wheelTransform.right;
+        Vector3 tireWoldVel = _rigidbody.GetPointVelocity(wheelTransform.position);
+        float steerVel = Vector3.Dot(steerDir, tireWoldVel);
+        float tireGripFactor = 0;
+        if (isAutoDrif)
+        {
+            float steerVelNormalized = Mathf.Clamp01(Mathf.Abs(steerVel) / _maxSteeringSpeed);
+            tireGripFactor = (wheelTransform.GetSiblingIndex() < 2) ? _frontTiresGripCurve.Evaluate(steerVelNormalized) : _rearTiresGripCurve.Evaluate(steerVelNormalized);
+        }
+        else
+        {
+            tireGripFactor = (wheelTransform.GetSiblingIndex() < 2) ? _frontTiresGripFactor : _rearTiresGripFactor;
+        }
+        float desiredVelChange = -steerVel * tireGripFactor;
+        float desiredAccel = desiredVelChange / Time.fixedDeltaTime;
+        _rigidbody.AddForceAtPosition(steerDir * _tireMass * desiredAccel, wheelTransform.position);
+    }
+
+    private void AddAccelerationForce(int wheelIndex)
+    {
+        var wheelTransform = _suspensions.GetChild(wheelIndex);
+        Vector3 accelDir = wheelTransform.forward;
+        if (_accelerationInput != 0f)
+        {
+            float carSpeed = Vector3.Dot(this.transform.forward, _rigidbody.velocity);
+            float speedNormalized = Mathf.Clamp01(Mathf.Abs(carSpeed) / _topSpeed);
+            float torque = _speedCurve.Evaluate(speedNormalized) * _accelerationInput;
+            _rigidbody.AddForceAtPosition(accelDir * torque, wheelTransform.position);
         }
     }
 }
