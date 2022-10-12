@@ -114,4 +114,14 @@ public class Kart : MonoBehaviour
         _rigidbody.AddForceAtPosition(torque, _suspensions.GetChild(0).position, ForceMode.Impulse);
         _rigidbody.AddForceAtPosition(torque, _suspensions.GetChild(2).position, ForceMode.Impulse);
     }
+
+    private void OnDrawGizmos()
+    {
+        foreach (Transform suspension in _suspensions)
+        {
+            Vector3 from = suspension.position;
+            Vector3 to = from - new Vector3(0, _length, 0);
+            Gizmos.DrawLine(from, to);
+        }
+    }
 }
