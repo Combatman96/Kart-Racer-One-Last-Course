@@ -17,7 +17,7 @@ public class Kart : MonoBehaviour
     private Rigidbody _rigidbody => GetComponent<Rigidbody>();
 
     [Header("Steering")]
-    [SerializeField] float _maxSteeringSpeed;
+    [SerializeField][Range(0, 80)] float _maxSteeringAngle = 25f;
     [SerializeField] AnimationCurve _frontTiresGripCurve;
     [SerializeField] AnimationCurve _rearTiresGripCurve;
     [SerializeField][Range(0, 1)] float _frontTiresGripFactor;
@@ -32,7 +32,7 @@ public class Kart : MonoBehaviour
     {
         _accelerationInput = Input.GetAxis("Vertical") * _topSpeed;
         for (int i = 0; i < 2; i++)
-            _suspensions.GetChild(i).localEulerAngles = new Vector3(0, (Input.GetAxis("Horizontal") * 60), _suspensions.GetChild(i).localEulerAngles.z);
+            _suspensions.GetChild(i).localEulerAngles = new Vector3(0, (Input.GetAxis("Horizontal") * _maxSteeringAngle), _suspensions.GetChild(i).localEulerAngles.z);
 
     }
 
@@ -70,13 +70,10 @@ public class Kart : MonoBehaviour
                 Vector3 accelDir = suspension.forward;
                 if (_accelerationInput != 0f)
                 {
-                    // if (suspension.GetSiblingIndex() > 1)
-                    {
-                        float carSpeed = Vector3.Dot(this.transform.forward, _rigidbody.velocity);
-                        float speedNormalized = Mathf.Clamp01(Mathf.Abs(carSpeed) / _topSpeed);
-                        float torque = _speedCurve.Evaluate(speedNormalized) * _accelerationInput;
-                        _rigidbody.AddForceAtPosition(accelDir * torque, suspension.position);
-                    }
+                    float carSpeed = Vector3.Dot(this.transform.forward, _rigidbody.velocity);
+                    float speedNormalized = Mathf.Clamp01(Mathf.Abs(carSpeed) / _topSpeed);
+                    float torque = _speedCurve.Evaluate(speedNormalized) * _accelerationInput;
+                    _rigidbody.AddForceAtPosition(accelDir * torque, suspension.position);
                 }
             }
         }
