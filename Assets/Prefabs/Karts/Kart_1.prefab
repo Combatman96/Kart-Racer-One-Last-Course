@@ -1309,11 +1309,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2462445312908405181, guid: 4a8182df0ad60054194b9488a798cab7, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.07236635
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2462445312908405181, guid: 4a8182df0ad60054194b9488a798cab7, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.9973782
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2462445312908405181, guid: 4a8182df0ad60054194b9488a798cab7, type: 3}
       propertyPath: m_LocalRotation.y
@@ -1325,7 +1325,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2462445312908405181, guid: 4a8182df0ad60054194b9488a798cab7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 1988.3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7153832361972743272, guid: 4a8182df0ad60054194b9488a798cab7, type: 3}
       propertyPath: m_RootOrder
@@ -1402,11 +1402,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2462445312908405181, guid: 4a8182df0ad60054194b9488a798cab7, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.07236635
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2462445312908405181, guid: 4a8182df0ad60054194b9488a798cab7, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.9973782
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2462445312908405181, guid: 4a8182df0ad60054194b9488a798cab7, type: 3}
       propertyPath: m_LocalRotation.y
@@ -1418,7 +1418,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2462445312908405181, guid: 4a8182df0ad60054194b9488a798cab7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 1988.3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7153832361972743272, guid: 4a8182df0ad60054194b9488a798cab7, type: 3}
       propertyPath: m_RootOrder
@@ -1636,7 +1636,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4587280264504072903, guid: ce10d05b47a419d48a51c5d6996cde64, type: 3}
       propertyPath: _speedCurve.m_Curve.Array.data[3].value
-      value: 0.66602075
+      value: 0.8001546
       objectReference: {fileID: 0}
     - target: {fileID: 4587280264504072903, guid: ce10d05b47a419d48a51c5d6996cde64, type: 3}
       propertyPath: _speedCurve.m_Curve.Array.data[4].value

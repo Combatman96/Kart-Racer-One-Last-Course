@@ -92,6 +92,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: L_Wheel
       objectReference: {fileID: 0}
+    - target: {fileID: 4016109926692216298, guid: 97cae28cd35877942ba203d2ae817045, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.0262
+      objectReference: {fileID: 0}
     - target: {fileID: 7744526915557251941, guid: 97cae28cd35877942ba203d2ae817045, type: 3}
       propertyPath: m_RootOrder
       value: 0
