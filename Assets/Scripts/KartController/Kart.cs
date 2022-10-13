@@ -12,6 +12,7 @@ public class Kart : MonoBehaviour
     [SerializeField] private float _restDistance;
     [SerializeField] private float _strength;
     [SerializeField] private float _damper;
+    [SerializeField] private float _wheelOffset = 2.14f;
     [SerializeField] private LayerMask _groundLayerMask;
 
     private Rigidbody _rigidbody => GetComponent<Rigidbody>();
@@ -122,6 +123,19 @@ public class Kart : MonoBehaviour
             Vector3 from = suspension.position;
             Vector3 to = from - new Vector3(0, _length, 0);
             Gizmos.DrawLine(from, to);
+        }
+    }
+
+    private void UpdateWheelPos(int wheelIndex, Vector3 groundPos, bool isGrounded)
+    {
+        Transform wheel = _suspensions.GetChild(wheelIndex).GetChild(0);
+        if (isGrounded)
+        {
+            wheel.position = groundPos + this.transform.up * _wheelOffset;
+        }
+        else
+        {
+            wheel.position = _suspensions.GetChild(wheelIndex).position - this.transform.up * (_length - _wheelOffset);
         }
     }
 }
