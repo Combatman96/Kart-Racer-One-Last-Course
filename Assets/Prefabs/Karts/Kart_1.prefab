@@ -1622,6 +1622,54 @@ PrefabInstance:
       propertyPath: _restDistance
       value: 2.1
       objectReference: {fileID: 0}
+    - target: {fileID: 4587280264504072903, guid: ce10d05b47a419d48a51c5d6996cde64, type: 3}
+      propertyPath: _speedCurve.m_Curve.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4587280264504072903, guid: ce10d05b47a419d48a51c5d6996cde64, type: 3}
+      propertyPath: _speedCurve.m_Curve.Array.data[3].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4587280264504072903, guid: ce10d05b47a419d48a51c5d6996cde64, type: 3}
+      propertyPath: _speedCurve.m_Curve.Array.data[4].time
+      value: 0.9983222
+      objectReference: {fileID: 0}
+    - target: {fileID: 4587280264504072903, guid: ce10d05b47a419d48a51c5d6996cde64, type: 3}
+      propertyPath: _speedCurve.m_Curve.Array.data[3].value
+      value: 0.66602075
+      objectReference: {fileID: 0}
+    - target: {fileID: 4587280264504072903, guid: ce10d05b47a419d48a51c5d6996cde64, type: 3}
+      propertyPath: _speedCurve.m_Curve.Array.data[4].value
+      value: 0.66602075
+      objectReference: {fileID: 0}
+    - target: {fileID: 4587280264504072903, guid: ce10d05b47a419d48a51c5d6996cde64, type: 3}
+      propertyPath: _speedCurve.m_Curve.Array.data[3].inSlope
+      value: 0.14588214
+      objectReference: {fileID: 0}
+    - target: {fileID: 4587280264504072903, guid: ce10d05b47a419d48a51c5d6996cde64, type: 3}
+      propertyPath: _speedCurve.m_Curve.Array.data[4].inSlope
+      value: 0.14588214
+      objectReference: {fileID: 0}
+    - target: {fileID: 4587280264504072903, guid: ce10d05b47a419d48a51c5d6996cde64, type: 3}
+      propertyPath: _speedCurve.m_Curve.Array.data[3].inWeight
+      value: 0.60085297
+      objectReference: {fileID: 0}
+    - target: {fileID: 4587280264504072903, guid: ce10d05b47a419d48a51c5d6996cde64, type: 3}
+      propertyPath: _speedCurve.m_Curve.Array.data[3].outSlope
+      value: 0.14588214
+      objectReference: {fileID: 0}
+    - target: {fileID: 4587280264504072903, guid: ce10d05b47a419d48a51c5d6996cde64, type: 3}
+      propertyPath: _speedCurve.m_Curve.Array.data[4].inWeight
+      value: 0.60085297
+      objectReference: {fileID: 0}
+    - target: {fileID: 4587280264504072903, guid: ce10d05b47a419d48a51c5d6996cde64, type: 3}
+      propertyPath: _speedCurve.m_Curve.Array.data[4].outSlope
+      value: 0.14588214
+      objectReference: {fileID: 0}
+    - target: {fileID: 4587280264504072903, guid: ce10d05b47a419d48a51c5d6996cde64, type: 3}
+      propertyPath: _speedCurve.m_Curve.Array.data[3].outWeight
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4587280264504072904, guid: ce10d05b47a419d48a51c5d6996cde64, type: 3}
       propertyPath: m_Name
       value: Kart_1
