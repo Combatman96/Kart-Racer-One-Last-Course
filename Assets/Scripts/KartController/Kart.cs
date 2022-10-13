@@ -47,15 +47,20 @@ public class Kart : MonoBehaviour
         foreach (Transform suspension in _suspensions)
         {
             Debug.DrawRay(suspension.position, this.transform.up * -1 * _length, Color.green);
+            int wheelIndex = suspension.GetSiblingIndex();
 
             RaycastHit hit;
             bool isRayHit = Physics.Raycast(suspension.position, this.transform.up * -1, out hit, _length, _groundLayerMask);
             if (isRayHit)
             {
-                int wheelIndex = suspension.GetSiblingIndex();
                 AddSuspensionForce(wheelIndex, hit);
                 AddSteeringForce(wheelIndex);
-                AddAccelerationForce(wheelIndex);
+                if (wheelIndex > 1) AddAccelerationForce(wheelIndex);
+                UpdateWheelPos(wheelIndex, hit.point, true);
+            }
+            else
+            {
+                UpdateWheelPos(wheelIndex, hit.point, false);
             }
         }
     }
