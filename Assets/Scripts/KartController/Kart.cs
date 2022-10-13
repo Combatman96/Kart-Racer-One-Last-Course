@@ -63,6 +63,7 @@ public class Kart : MonoBehaviour
                 UpdateWheelPos(wheelIndex, hit.point, false);
             }
         }
+        SpinWheels();
     }
 
     private void AddSuspensionForce(int wheelIndex, RaycastHit hit)
@@ -141,6 +142,19 @@ public class Kart : MonoBehaviour
         else
         {
             wheel.position = _suspensions.GetChild(wheelIndex).position - this.transform.up * (_length - _wheelOffset);
+        }
+    }
+
+    private void SpinWheels()
+    {
+        foreach (Transform suspension in _suspensions)
+        {
+            Transform wheel = suspension.GetChild(0);
+            Transform wheelAxis = wheel.GetChild(0);
+            Vector3 wheelDir = wheel.forward;
+            Vector3 wheelVel = _rigidbody.GetPointVelocity(wheel.position);
+            var wheelForwardVel = Vector3.Dot(wheelDir, wheelVel);
+            wheelAxis.Rotate(new Vector3(wheelForwardVel / 3.4f, 0, 0), Space.Self);
         }
     }
 }
