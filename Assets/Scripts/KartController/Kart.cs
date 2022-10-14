@@ -153,7 +153,6 @@ public class Kart : MonoBehaviour
             Transform wheelAxis = wheel.GetChild(0);
             Transform wheelEdge = wheelAxis.GetChild(1);
             float radius = wheelEdge.localPosition.z;
-            Debug.Log(radius);
             Vector3 wheelDir = wheel.forward;
             Vector3 wheelVel = _rigidbody.GetPointVelocity(wheel.position);
             var wheelForwardVel = Vector3.Dot(wheelDir, wheelVel);
