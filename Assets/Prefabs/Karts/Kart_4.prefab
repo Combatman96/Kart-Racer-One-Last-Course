@@ -1132,7 +1132,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4587280264504072903, guid: ce10d05b47a419d48a51c5d6996cde64, type: 3}
       propertyPath: _length
-      value: 2.6
+      value: 2.33
       objectReference: {fileID: 0}
     - target: {fileID: 4587280264504072903, guid: ce10d05b47a419d48a51c5d6996cde64, type: 3}
       propertyPath: _strength
@@ -1140,7 +1140,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4587280264504072903, guid: ce10d05b47a419d48a51c5d6996cde64, type: 3}
       propertyPath: _restDistance
-      value: 2.1
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 4587280264504072903, guid: ce10d05b47a419d48a51c5d6996cde64, type: 3}
       propertyPath: _rearTiresGripFactor
