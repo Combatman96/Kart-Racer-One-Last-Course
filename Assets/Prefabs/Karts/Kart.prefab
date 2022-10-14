@@ -89,7 +89,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 931908067132819236}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 12b9fdf66b679584386fe6233bb7c6a0, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -224,12 +224,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 474b09bd48852a54986a93b401eb01d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlayer: 0
   _tireMass: 10
   _suspensions: {fileID: 4587280264126965112}
   _length: 3
   _restDistance: 2.2
   _strength: 260
   _damper: 16
+  _wheelOffset: 2.14
   _groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
