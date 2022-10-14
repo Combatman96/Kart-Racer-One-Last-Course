@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Kart : MonoBehaviour
 {
+    public bool isPlayer;
+
     [Header("Suspensions")]
     [SerializeField] float _tireMass;
     [SerializeField] Transform _suspensions;
@@ -32,6 +34,8 @@ public class Kart : MonoBehaviour
 
     private void Update()
     {
+        if (!isPlayer) return;
+
         _accelerationInput = Input.GetAxis("Vertical") * _topSpeed;
         for (int i = 0; i < 2; i++)
             _suspensions.GetChild(i).localEulerAngles = new Vector3(0, (Input.GetAxis("Horizontal") * _maxSteeringAngle), _suspensions.GetChild(i).localEulerAngles.z);
