@@ -576,7 +576,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2637593495975357975}
-  - component: {fileID: 2727335574225378169}
   m_Layer: 0
   m_Name: LCRG Kart 01
   m_TagString: Untagged
@@ -613,25 +612,6 @@ Transform:
   m_Father: {fileID: 648614406514396515}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &2727335574225378169
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2633961305618157827}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: b414c95a4d7656d43b81814295ad70bc, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2634044724735500473
 GameObject:
   m_ObjectHideFlags: 0
@@ -1696,7 +1676,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4587280265419457468, guid: ce10d05b47a419d48a51c5d6996cde64, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.66
+      value: -3.26
       objectReference: {fileID: 0}
     - target: {fileID: 4587280265419457468, guid: ce10d05b47a419d48a51c5d6996cde64, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1708,7 +1688,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4587280265526750582, guid: ce10d05b47a419d48a51c5d6996cde64, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.66
+      value: 3.26
       objectReference: {fileID: 0}
     - target: {fileID: 4587280265526750582, guid: ce10d05b47a419d48a51c5d6996cde64, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1720,7 +1700,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4587280265734996688, guid: ce10d05b47a419d48a51c5d6996cde64, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.66
+      value: 2.89
       objectReference: {fileID: 0}
     - target: {fileID: 4587280265734996688, guid: ce10d05b47a419d48a51c5d6996cde64, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1732,7 +1712,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4587280266067728138, guid: ce10d05b47a419d48a51c5d6996cde64, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.66
+      value: -2.89
       objectReference: {fileID: 0}
     - target: {fileID: 4587280266067728138, guid: ce10d05b47a419d48a51c5d6996cde64, type: 3}
       propertyPath: m_LocalPosition.y
