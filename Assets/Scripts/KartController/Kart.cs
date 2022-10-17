@@ -27,6 +27,11 @@ public class Kart : MonoBehaviour
     [SerializeField][Range(0, 1)] float _frontTiresGripFactor;
     [SerializeField][Range(0, 1)] float _rearTiresGripFactor;
 
+    [Header("Drifting")]
+    public bool isAutoDrif = false;
+    [SerializeField][Range(0, 1)] float _nomalRearGripFactor;
+    [SerializeField][Range(0, 1)] float _drifRearGripFactor;
+
     [Header("Acceleration")]
     [SerializeField] float _topSpeed;
     [SerializeField] AnimationCurve _speedCurve;
@@ -43,6 +48,7 @@ public class Kart : MonoBehaviour
         {
             FlipCar();
         }
+        Drifting();
     }
 
 
@@ -162,6 +168,18 @@ public class Kart : MonoBehaviour
             var wheelForwardVel = Vector3.Dot(wheelDir, wheelVel);
             float rad = wheelForwardVel * Time.fixedDeltaTime / radius;
             wheelAxis.Rotate(new Vector3(rad * Mathf.Rad2Deg, 0, 0), Space.Self);
+        }
+    }
+
+    private void Drifting()
+    {
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
+            _rearTiresGripFactor =  _drifRearGripFactor;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            _rearTiresGripFactor =  _nomalRearGripFactor;
         }
     }
 }
