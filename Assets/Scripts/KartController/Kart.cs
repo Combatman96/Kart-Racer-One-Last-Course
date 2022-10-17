@@ -31,7 +31,7 @@ public class Kart : MonoBehaviour
     public bool isAutoDrif = false;
     [SerializeField][Range(0, 1)] float _nomalRearGripFactor;
     [SerializeField][Range(0, 1)] float _drifRearGripFactor;
-    [SerializeField][Range(0,1)] private List<float> m_tireGrips = new List<float> {0, 0, 0, 0};
+    [SerializeField][Range(0,1)] private List<float> m_tireGripsDebug = new List<float> {0, 0, 0, 0};
 
     [Header("Acceleration")]
     [SerializeField] float _topSpeed;
@@ -105,7 +105,7 @@ public class Kart : MonoBehaviour
         {
             tireGripFactor = (wheelTransform.GetSiblingIndex() < 2) ? _frontTiresGripFactor : _rearTiresGripFactor;
         }
-        m_tireGrips[wheelIndex] = tireGripFactor;
+        m_tireGripsDebug[wheelIndex] = tireGripFactor;
         float desiredVelChange = -steerVel * tireGripFactor;
         float desiredAccel = desiredVelChange / Time.fixedDeltaTime;
         _rigidbody.AddForceAtPosition(steerDir * _tireMass * desiredAccel, wheelTransform.position);
