@@ -37,6 +37,9 @@ public class Kart : MonoBehaviour
     [SerializeField] AnimationCurve _speedCurve;
     private float _accelerationInput = 0f;
 
+    [Range(0,1)]
+    public List<float> tiregrips = new List<float> {0, 0, 0, 0};
+
     private void Update()
     {
         if (!isPlayer) return;
@@ -64,7 +67,7 @@ public class Kart : MonoBehaviour
             if (isRayHit)
             {
                 AddSuspensionForce(wheelIndex, hit);
-                AddSteeringForce(wheelIndex);
+                AddSteeringForce(wheelIndex, isAutoDrif);
                 if (wheelIndex > 1) AddAccelerationForce(wheelIndex);
                 UpdateWheelPos(wheelIndex, hit.point, true);
             }
@@ -173,6 +176,8 @@ public class Kart : MonoBehaviour
 
     private void Drifting()
     {
+        if(isAutoDrif) return;
+
         if(Input.GetKey(KeyCode.LeftShift))
         {
             _rearTiresGripFactor =  _drifRearGripFactor;
