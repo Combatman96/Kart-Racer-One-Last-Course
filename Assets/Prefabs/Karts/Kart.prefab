@@ -312,11 +312,16 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _frontTiresGripFactor: 0.3
-  _rearTiresGripFactor: 0.05
+  _frontTiresGripFactor: 0.32
+  _rearTiresGripFactor: 0.2
   isAutoDrif: 0
-  _nomalRearGripFactor: 0.3
-  _drifRearGripFactor: 0.02
+  _nomalRearGripFactor: 0.2
+  _drifRearGripFactor: 0.05
+  m_tireGripsDebug:
+  - 0
+  - 0
+  - 0
+  - 0
   _topSpeed: 500
   _speedCurve:
     serializedVersion: 2
