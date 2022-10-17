@@ -1615,6 +1615,14 @@ PrefabInstance:
       value: 2.1
       objectReference: {fileID: 0}
     - target: {fileID: 4587280264504072903, guid: ce10d05b47a419d48a51c5d6996cde64, type: 3}
+      propertyPath: _drifRearGripFactor
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4587280264504072903, guid: ce10d05b47a419d48a51c5d6996cde64, type: 3}
+      propertyPath: _nomalRearGripFactor
+      value: 0.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 4587280264504072903, guid: ce10d05b47a419d48a51c5d6996cde64, type: 3}
       propertyPath: _speedCurve.m_Curve.Array.size
       value: 4
       objectReference: {fileID: 0}

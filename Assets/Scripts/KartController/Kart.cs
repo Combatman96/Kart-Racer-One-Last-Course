@@ -27,10 +27,17 @@ public class Kart : MonoBehaviour
     [SerializeField][Range(0, 1)] float _frontTiresGripFactor;
     [SerializeField][Range(0, 1)] float _rearTiresGripFactor;
 
+    [Header("Drifting")]
+    public bool isAutoDrif = false;
+    [SerializeField][Range(0, 1)] float _nomalRearGripFactor;
+    [SerializeField][Range(0, 1)] float _drifRearGripFactor;
+    [SerializeField][Range(0,1)] private List<float> m_tireGripsDebug = new List<float> {0, 0, 0, 0};
+
     [Header("Acceleration")]
     [SerializeField] float _topSpeed;
     [SerializeField] AnimationCurve _speedCurve;
     private float _accelerationInput = 0f;
+
 
     private void Update()
     {
@@ -43,6 +50,7 @@ public class Kart : MonoBehaviour
         {
             FlipCar();
         }
+        Drifting();
     }
 
 
@@ -58,7 +66,7 @@ public class Kart : MonoBehaviour
             if (isRayHit)
             {
                 AddSuspensionForce(wheelIndex, hit);
-                AddSteeringForce(wheelIndex);
+                AddSteeringForce(wheelIndex, isAutoDrif);
                 if (wheelIndex > 1) AddAccelerationForce(wheelIndex);
                 UpdateWheelPos(wheelIndex, hit.point, true);
             }
@@ -97,6 +105,7 @@ public class Kart : MonoBehaviour
         {
             tireGripFactor = (wheelTransform.GetSiblingIndex() < 2) ? _frontTiresGripFactor : _rearTiresGripFactor;
         }
+        m_tireGripsDebug[wheelIndex] = tireGripFactor;
         float desiredVelChange = -steerVel * tireGripFactor;
         float desiredAccel = desiredVelChange / Time.fixedDeltaTime;
         _rigidbody.AddForceAtPosition(steerDir * _tireMass * desiredAccel, wheelTransform.position);
@@ -162,6 +171,20 @@ public class Kart : MonoBehaviour
             var wheelForwardVel = Vector3.Dot(wheelDir, wheelVel);
             float rad = wheelForwardVel * Time.fixedDeltaTime / radius;
             wheelAxis.Rotate(new Vector3(rad * Mathf.Rad2Deg, 0, 0), Space.Self);
+        }
+    }
+
+    private void Drifting()
+    {
+        if(isAutoDrif) return;
+
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
+            _rearTiresGripFactor =  _drifRearGripFactor;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            _rearTiresGripFactor =  _nomalRearGripFactor;
         }
     }
 }
