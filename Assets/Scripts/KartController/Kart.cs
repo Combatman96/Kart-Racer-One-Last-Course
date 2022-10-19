@@ -24,13 +24,16 @@ public class Kart : MonoBehaviour
     [SerializeField] float _maxSteeringSpeed = 200f;
     [SerializeField] AnimationCurve _frontTiresGripCurve;
     [SerializeField] AnimationCurve _rearTiresGripCurve;
+    [Header("Not Edit")]
     [SerializeField][Range(0, 1)] float _frontTiresGripFactor;
     [SerializeField][Range(0, 1)] float _rearTiresGripFactor;
 
     [Header("Drifting")]
     public bool isAutoDrif = false;
+    [SerializeField][Range(0, 1)] float _normalFrontGripFactor;
     [SerializeField][Range(0, 1)] float _nomalRearGripFactor;
     [SerializeField][Range(0, 1)] float _drifRearGripFactor;
+    [SerializeField][Range(0, 1)] float _drifFrontGripFactor;
     [SerializeField][Range(0,1)] private List<float> m_tireGripsDebug = new List<float> {0, 0, 0, 0};
 
     [Header("Acceleration")]
@@ -38,6 +41,11 @@ public class Kart : MonoBehaviour
     [SerializeField] AnimationCurve _speedCurve;
     private float _accelerationInput = 0f;
 
+    private void Awake()
+    {
+        _frontTiresGripFactor = _normalFrontGripFactor;
+        _rearTiresGripFactor = _nomalRearGripFactor;
+    }
 
     private void Update()
     {
@@ -180,10 +188,12 @@ public class Kart : MonoBehaviour
 
         if(Input.GetKey(KeyCode.LeftShift))
         {
+            _frontTiresGripFactor = _drifFrontGripFactor;
             _rearTiresGripFactor =  _drifRearGripFactor;
         }
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
+            _frontTiresGripFactor = _normalFrontGripFactor;
             _rearTiresGripFactor =  _nomalRearGripFactor;
         }
     }

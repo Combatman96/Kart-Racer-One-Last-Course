@@ -312,11 +312,13 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _frontTiresGripFactor: 0.32
-  _rearTiresGripFactor: 0.29
+  _frontTiresGripFactor: 0.62
+  _rearTiresGripFactor: 0.59
   isAutoDrif: 0
-  _nomalRearGripFactor: 0.29
-  _drifRearGripFactor: 0.05
+  _normalFrontGripFactor: 0.62
+  _nomalRearGripFactor: 0.59
+  _drifRearGripFactor: 0.04
+  _drifFrontGripFactor: 0.8
   m_tireGripsDebug:
   - 0
   - 0
