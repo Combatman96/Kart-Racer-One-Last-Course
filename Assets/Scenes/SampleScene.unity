@@ -666,7 +666,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2157987768364897484, guid: 651c257e0f2487e419cfe825e9811e02, type: 3}
   m_PrefabInstance: {fileID: 2096746449}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &567227974
+--- !u!1001 &571225114
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -677,25 +677,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kart_2
       objectReference: {fileID: 0}
-    - target: {fileID: 7289045471741817432, guid: 16836129ca65a6041abb2daedaca476b, type: 3}
-      propertyPath: isPlayer
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7289045471741817434, guid: 16836129ca65a6041abb2daedaca476b, type: 3}
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7289045471741817434, guid: 16836129ca65a6041abb2daedaca476b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 207
+      value: 212.18771
       objectReference: {fileID: 0}
     - target: {fileID: 7289045471741817434, guid: 16836129ca65a6041abb2daedaca476b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.6
+      value: 20.1
       objectReference: {fileID: 0}
     - target: {fileID: 7289045471741817434, guid: 16836129ca65a6041abb2daedaca476b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 114
+      value: 22.625664
       objectReference: {fileID: 0}
     - target: {fileID: 7289045471741817434, guid: 16836129ca65a6041abb2daedaca476b, type: 3}
       propertyPath: m_LocalRotation.w
