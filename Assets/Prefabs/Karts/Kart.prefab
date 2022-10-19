@@ -236,7 +236,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _maxSteeringAngle: 20
-  _maxSteeringSpeed: 500
+  _maxSteeringSpeed: 10
   _frontTiresGripCurve:
     serializedVersion: 2
     m_Curve:
@@ -312,18 +312,24 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _emptyCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   _frontTiresGripFactor: 0.62
   _rearTiresGripFactor: 0.59
   isAutoDrif: 0
+  m_tireGripsAutoDebug:
+  - 0
+  - 0
+  - 0
+  - 0
   _normalFrontGripFactor: 0.62
-  _nomalRearGripFactor: 0.59
+  _normalRearGripFactor: 0.59
   _drifRearGripFactor: 0.04
   _drifFrontGripFactor: 0.8
-  m_tireGripsDebug:
-  - 0
-  - 0
-  - 0
-  - 0
   _topSpeed: 500
   _speedCurve:
     serializedVersion: 2
