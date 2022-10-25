@@ -24,27 +24,54 @@ public class Kart : MonoBehaviour
     [SerializeField] float _maxSteeringSpeed = 200f;
     [SerializeField] AnimationCurve _frontTiresGripCurve;
     [SerializeField] AnimationCurve _rearTiresGripCurve;
+    [SerializeField] AnimationCurve _emptyCurve;
+    [Header("Not Edit")]
     [SerializeField][Range(0, 1)] float _frontTiresGripFactor;
     [SerializeField][Range(0, 1)] float _rearTiresGripFactor;
+
+    [Header("Drifting")]
+    public bool isAutoDrif = false;
+    [SerializeField][Range(0,1)] private List<float> m_tireGripsAutoDebug = new List<float> {0, 0, 0, 0};
+    [SerializeField][Range(0, 1)] float _normalFrontGripFactor;
+    [SerializeField][Range(0, 1)] float _normalRearGripFactor;
+    [SerializeField][Range(0, 1)] float _drifRearGripFactor;
+    [SerializeField][Range(0, 1)] float _drifFrontGripFactor;
 
     [Header("Acceleration")]
     [SerializeField] float _topSpeed;
     [SerializeField] AnimationCurve _speedCurve;
-    private float _accelerationInput = 0f;
+    private float _acceleration = 0f;
+    private float _steering = 0f;
+
+    private void Awake()
+    {
+        _frontTiresGripFactor = _normalFrontGripFactor;
+        _rearTiresGripFactor = _normalRearGripFactor;
+    }
+
+    public void InputHandler(float accelerationInput, float steeringInput, bool flipInput, bool drifInput)
+    {
+        _acceleration = accelerationInput * _topSpeed;
+        for (int i = 0; i < 2; i++)
+        {
+            var suspension = _suspensions.GetChild(i);
+            suspension.localEulerAngles = new Vector3(0, steeringInput * _maxSteeringAngle, suspension.localEulerAngles.z);
+        }
+        Drifting(drifInput);
+        FlipCar(flipInput);
+    }
 
     private void Update()
     {
         if (!isPlayer) return;
 
-        _accelerationInput = Input.GetAxis("Vertical") * _topSpeed;
-        for (int i = 0; i < 2; i++)
-            _suspensions.GetChild(i).localEulerAngles = new Vector3(0, (Input.GetAxis("Horizontal") * _maxSteeringAngle), _suspensions.GetChild(i).localEulerAngles.z);
-        if (Input.GetButtonDown("Jump"))
-        {
-            FlipCar();
-        }
-    }
+        float accelerationInput = Input.GetAxis("Vertical");
+        float steeringInput = Input.GetAxis("Horizontal");
+        bool drifInput = Input.GetKey(KeyCode.LeftShift);
+        bool flipInput = Input.GetButtonDown("Jump");
 
+        InputHandler(accelerationInput, steeringInput, flipInput, drifInput);
+    }
 
     private void FixedUpdate()
     {
@@ -58,7 +85,7 @@ public class Kart : MonoBehaviour
             if (isRayHit)
             {
                 AddSuspensionForce(wheelIndex, hit);
-                AddSteeringForce(wheelIndex);
+                AddSteeringForce(wheelIndex, isAutoDrif);
                 if (wheelIndex > 1) AddAccelerationForce(wheelIndex);
                 UpdateWheelPos(wheelIndex, hit.point, true);
             }
@@ -97,6 +124,7 @@ public class Kart : MonoBehaviour
         {
             tireGripFactor = (wheelTransform.GetSiblingIndex() < 2) ? _frontTiresGripFactor : _rearTiresGripFactor;
         }
+        m_tireGripsAutoDebug[wheelIndex] = tireGripFactor;
         float desiredVelChange = -steerVel * tireGripFactor;
         float desiredAccel = desiredVelChange / Time.fixedDeltaTime;
         _rigidbody.AddForceAtPosition(steerDir * _tireMass * desiredAccel, wheelTransform.position);
@@ -106,18 +134,19 @@ public class Kart : MonoBehaviour
     {
         var wheelTransform = _suspensions.GetChild(wheelIndex);
         Vector3 accelDir = wheelTransform.forward;
-        if (_accelerationInput != 0f)
+        if (_acceleration != 0f)
         {
             float carSpeed = Vector3.Dot(this.transform.forward, _rigidbody.velocity);
             float speedNormalized = Mathf.Clamp01(Mathf.Abs(carSpeed) / _topSpeed);
-            float torque = _speedCurve.Evaluate(speedNormalized) * _accelerationInput;
+            float torque = _speedCurve.Evaluate(speedNormalized) * _acceleration;
             _rigidbody.AddForceAtPosition(accelDir * torque, wheelTransform.position);
         }
     }
 
-    private void FlipCar()
+    private void FlipCar(bool isFlipInput)
     {
         if (transform.up.y > 0) return;
+        if (!isFlipInput) return;
 
         Vector3 axis = transform.up * -1;
         float torqueAmount = 120f;
@@ -163,5 +192,13 @@ public class Kart : MonoBehaviour
             float rad = wheelForwardVel * Time.fixedDeltaTime / radius;
             wheelAxis.Rotate(new Vector3(rad * Mathf.Rad2Deg, 0, 0), Space.Self);
         }
+    }
+
+    private void Drifting(bool isDrifInput)
+    {
+        if(isAutoDrif) return;
+
+        _frontTiresGripFactor = (isDrifInput) ? _drifFrontGripFactor : _normalFrontGripFactor;
+        _rearTiresGripFactor = (isDrifInput) ?  _drifRearGripFactor : _normalRearGripFactor;
     }
 }

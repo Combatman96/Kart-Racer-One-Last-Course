@@ -209,9 +209,9 @@ Rigidbody:
   m_AngularDrag: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &4587280264504072903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,22 +235,101 @@ MonoBehaviour:
   _groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  _maxSteeringAngle: 25
-  _maxSteeringSpeed: 200
+  _maxSteeringAngle: 20
+  _maxSteeringSpeed: 10
   _frontTiresGripCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.5696917
+      inSlope: -0.11914102
+      outSlope: -0.11914102
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.18408641
+    - serializedVersion: 3
+      time: 0.37542465
+      value: 0.50711215
+      inSlope: -0.29309064
+      outSlope: -0.29309064
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.18106411
+      outWeight: 0.27921134
+    - serializedVersion: 3
+      time: 0.6261979
+      value: 0.1761597
+      inSlope: -0.17191516
+      outSlope: -0.17191516
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.1846689
+    - serializedVersion: 3
+      time: 1
+      value: 0.12831497
+      inSlope: -0.10383481
+      outSlope: -0.10383481
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.2296228
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   _rearTiresGripCurve:
     serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.8044281
+      inSlope: 0.22873797
+      outSlope: 0.22873797
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.2254617
+    - serializedVersion: 3
+      time: 0.31985646
+      value: 0.1724168
+      inSlope: -0.14622834
+      outSlope: -0.14622834
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.17631571
+    - serializedVersion: 3
+      time: 1
+      value: 0.114045404
+      inSlope: -0.056390714
+      outSlope: -0.056390714
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.10417851
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _emptyCurve:
+    serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _frontTiresGripFactor: 0.3
-  _rearTiresGripFactor: 0.05
+  _frontTiresGripFactor: 0.62
+  _rearTiresGripFactor: 0.59
+  isAutoDrif: 0
+  m_tireGripsAutoDebug:
+  - 0
+  - 0
+  - 0
+  - 0
+  _normalFrontGripFactor: 0.62
+  _normalRearGripFactor: 0.59
+  _drifRearGripFactor: 0.04
+  _drifFrontGripFactor: 0.8
   _topSpeed: 500
   _speedCurve:
     serializedVersion: 2
