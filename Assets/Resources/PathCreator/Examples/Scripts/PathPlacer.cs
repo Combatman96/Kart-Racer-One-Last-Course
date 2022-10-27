@@ -9,6 +9,7 @@ namespace PathCreation.Examples {
         public GameObject prefab;
         public GameObject holder;
         public float spacing = 3;
+        public float roadWidth = 0f;
 
         const float minSpacing = .1f;
 
@@ -20,10 +21,12 @@ namespace PathCreation.Examples {
 
                 spacing = Mathf.Max(minSpacing, spacing);
                 float dst = 0;
-
+                
                 while (dst < path.length) {
                     Vector3 point = path.GetPointAtDistance (dst);
+                    Vector3 normal = path.GetNormalAtDistance(dst);
                     Quaternion rot = path.GetRotationAtDistance (dst);
+                    point += normal * roadWidth;
                     Instantiate (prefab, point, rot, holder.transform);
                     dst += spacing;
                 }
