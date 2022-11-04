@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Kart : MonoBehaviour
 {
+    public KartName kartName;
     public bool isPlayer;
 
     [Header("Suspensions")]

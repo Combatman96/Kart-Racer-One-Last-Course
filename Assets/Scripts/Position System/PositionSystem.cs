@@ -11,15 +11,16 @@ public class PositionSystem : MonoBehaviour
     public PathCreator track;
     public Transform kartGroup;
     public Transform finishLine;
-    public List<float> distances = new List<float>();
+    public List<RaceData> raceDatas = new List<RaceData>();
     public LayerMask kartLayerMask;
 
     private void Awake()
     {
-        distances.Clear();
+        raceDatas.Clear();
         foreach (Transform child in kartGroup)
         {
-            distances.Add(0f);
+            KartName kartName = child.GetComponent<Kart>().kartName;
+            raceDatas.Add(new RaceData(kartName));
         }
     }
 
@@ -43,7 +44,7 @@ public class PositionSystem : MonoBehaviour
             float distance = distanceAlongPath - finishLineDistanceAlongPath;
             if (distance < 0)
                 distance = distanceAlongPath + finishLineDistanceAlongPath;
-            distances[i] = distance;
+            raceDatas[i].distance = distance;
         }
     }
 
@@ -80,11 +81,11 @@ public class PositionSystem : MonoBehaviour
             float dot = Vector3.Dot(kartIncomingDir, trackForwardDir);
             if(dot > 0) 
             {
-                distances[kartIndex] += track.path.length;
+                raceDatas[kartIndex].distance += track.path.length;
             }
             else
             {
-                distances[kartIndex] -= track.path.length;
+                raceDatas[kartIndex].distance -= track.path.length;
             }
         }
     }
@@ -97,12 +98,19 @@ public class PositionSystem : MonoBehaviour
         Gizmos.DrawWireCube(raycast.position, raycast.localScale);
     }
 
-    public int GetKartPositionInRace(int kartIndex)
+    public void SetKartPositionInRace(int kartIndex)
     {
-        var descending = new List<float>(distances);
-        descending.Sort((a, b) => b.CompareTo(a));
-        int pos = descending.IndexOf(distances[kartIndex]);
-        return pos;
+        var descending = new List<RaceData>(raceDatas);
+        descending.Sort((a, b) => b.distance.CompareTo(a.distance));
+        int pos = descending.IndexOf(raceDatas[kartIndex]);
+        raceDatas[kartIndex].racePosition = pos;
     }
 
+    public void SetKartsPositionsInRace()
+    {
+        for (int i = 0; i < kartGroup.childCount; i++)
+        {
+            SetKartPositionInRace(i);
+        }
+    }
 }
