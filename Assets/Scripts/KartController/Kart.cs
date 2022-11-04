@@ -207,7 +207,9 @@ public class Kart : MonoBehaviour
     {
         if(other.CompareTag("FinishLine"))
         {
-            Debug.Log(kartName.ToString() + " cross finish line");
+            // Debug.Log(kartName.ToString() + " cross finish line");
+            int kartIndex = transform.GetSiblingIndex();
+            EventController.current.RaiseEvent(EventGameplay.Kart_Cross_Finish_Line, kartIndex.ToString());
         }
     }
 }
