@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6121286976675581268}
   - component: {fileID: 1805180122256518248}
   - component: {fileID: 9125618913336075579}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6021022952903288316}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: KartBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,7 +134,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4587280264126965112}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Suspencions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 4587280264504072905}
   - component: {fileID: 4587280264504072903}
   - component: {fileID: 4474266545925749100}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Kart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -225,8 +225,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 474b09bd48852a54986a93b401eb01d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  kartName: 0
   isPlayer: 0
-  camFollow: {fileID: 5321511372284727304}
   _tireMass: 10
   _suspensions: {fileID: 4587280264126965112}
   _length: 3
@@ -398,7 +398,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4587280265419457468}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -428,7 +428,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4587280265526750582}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -458,7 +458,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4587280265734996688}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -488,7 +488,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4587280266067728138}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -518,7 +518,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5321511372284727304}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CamFollow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -548,7 +548,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4490973516346597409}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CenterMass
   m_TagString: Untagged
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
