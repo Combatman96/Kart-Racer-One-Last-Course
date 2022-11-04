@@ -12,9 +12,10 @@ public class RaceData
     public long startRaceTicks;
     public long endRaceTicks;
 
-    public RaceData(KartName kartName)
+    public RaceData(KartName kartName, int lapCompleted)
     {
         this.kartName = kartName;
+        this.lapCompleted = lapCompleted;
     }
 
     public void SetStartRaceTicks(DateTime dateTime) 

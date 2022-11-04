@@ -20,7 +20,7 @@ public class PositionSystem : MonoBehaviour
         foreach (Transform child in kartGroup)
         {
             KartName kartName = child.GetComponent<Kart>().kartName;
-            raceDatas.Add(new RaceData(kartName));
+            raceDatas.Add(new RaceData(kartName, 0));
         }
     }
 
@@ -81,10 +81,12 @@ public class PositionSystem : MonoBehaviour
             float dot = Vector3.Dot(kartIncomingDir, trackForwardDir);
             if(dot > 0) 
             {
+                raceDatas[kartIndex].lapCompleted++;
                 raceDatas[kartIndex].distance += track.path.length;
             }
             else
             {
+                if(raceDatas[kartIndex].lapCompleted > 0) raceDatas[kartIndex].lapCompleted--;
                 raceDatas[kartIndex].distance -= track.path.length;
             }
         }
