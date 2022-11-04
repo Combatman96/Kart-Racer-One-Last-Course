@@ -202,4 +202,12 @@ public class Kart : MonoBehaviour
         _frontTiresGripFactor = (isDrifInput) ? _drifFrontGripFactor : _normalFrontGripFactor;
         _rearTiresGripFactor = (isDrifInput) ?  _drifRearGripFactor : _normalRearGripFactor;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("FinishLine"))
+        {
+            Debug.Log(kartName.ToString() + " cross finish line");
+        }
+    }
 }

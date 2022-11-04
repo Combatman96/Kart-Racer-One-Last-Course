@@ -19,22 +19,24 @@ public class PositionSystem : MonoBehaviour
     public List<int> racePositionsDebug = new List<int>();
     public List<int> lapCompletedDebug = new List<int>();
 
-    private float _offet = 0f;
+    private List<float> _lapDistances = new List<float>();
 
     private void Awake()
     {
         raceDatas.Clear();
+        _lapDistances.Clear();
         foreach (Transform child in kartGroup)
         {
             KartName kartName = child.GetComponent<Kart>().kartName;
+            Debug.Log(kartName);
             raceDatas.Add(new RaceData(kartName, 0));
+            _lapDistances.Add(0);
         }
     }
 
     private void FixedUpdate()
     {
         GetKartsPositions();
-        OnKartsCrossFinishLine();
 
         //Debug
         DebugRacePos();
@@ -51,65 +53,34 @@ public class PositionSystem : MonoBehaviour
             float finishLineDistanceAlongPath = path.GetClosestDistanceAlongPath(
                 finishLine.position
             );
-            float distance = distanceAlongPath - finishLineDistanceAlongPath + _offet;
+            float distance = distanceAlongPath - finishLineDistanceAlongPath + _lapDistances[i];
             if (distance < 0)
-                distance = distanceAlongPath + finishLineDistanceAlongPath + _offet;
+                distance = distanceAlongPath + finishLineDistanceAlongPath + _lapDistances[i];
             raceDatas[i].distance = distance;
         }
     }
 
-    private List<int> GetKartCrossFinishLine()
+    public void OnKartsCrossFinishLine(int kartIndex)
     {
-        Transform raycast = finishLine.Find("Raycast");
-        Collider[] colliders = Physics.OverlapBox(
-            raycast.position,
-            raycast.localScale / 2,
-            Quaternion.identity,
-            kartLayerMask
-        );
-        if (colliders.Length == 0)
-            return null;
-        List<int> listKartIndex = new List<int>();
-        foreach (var collider in colliders)
+        Vector3 kartPos = kartGroup.GetChild(kartIndex).position;
+        Vector3 inComingDir = (finishLine.position - kartPos).normalized;
+        Vector3 trackForward = finishLine.Find("TrackForward").localPosition.normalized;
+        float dot = Vector3.Dot(inComingDir, trackForward);
+        if(dot < 0)
         {
-            var kartTransform = collider.transform.parent;
-            int indexInKartGroup = kartTransform.GetSiblingIndex();
-            listKartIndex.Add(indexInKartGroup);
+            if(raceDatas[kartIndex].lapCompleted > 0)
+            {
+                raceDatas[kartIndex].lapCompleted -= 1;
+                _lapDistances[kartIndex] = -1 * track.path.length * (raceDatas[kartIndex].lapCompleted);
+            }               
         }
-        return listKartIndex;
-    }
-
-    private void OnKartsCrossFinishLine()
-    {
-        var kartIndexs = GetKartCrossFinishLine();
-        if(kartIndexs == null) return;
-        var trackForward = finishLine.Find("TrackForward");
-        Vector3 trackForwardDir = trackForward.localPosition.normalized;
-        foreach(var kartIndex in kartIndexs)
+        else
         {
-            Vector3 kartIncomingDir = (finishLine.position - kartGroup.GetChild(kartIndex).transform.position).normalized;
-            float dot = Vector3.Dot(kartIncomingDir, trackForwardDir);
-            if(dot > 0) 
-            {
-                raceDatas[kartIndex].lapCompleted++;
-                _offet = track.path.length;
-            }
-            else
-            {
-                if(raceDatas[kartIndex].lapCompleted > 0) raceDatas[kartIndex].lapCompleted--;
-                _offet = -1 * track.path.length;
-            }
+            raceDatas[kartIndex].lapCompleted += 1;
+            _lapDistances[kartIndex] = -1 * track.path.length * (raceDatas[kartIndex].lapCompleted - 1);
         }
     }
-
-    private void OnDrawGizmos()
-    {
-        //Draw finishLine Raycast
-        Transform raycast = finishLine.Find("Raycast");
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(raycast.position, raycast.localScale);
-    }
-
+    
     public void SetKartPositionInRace(int kartIndex)
     {
         var descending = new List<RaceData>(raceDatas);
