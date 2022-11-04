@@ -14,6 +14,13 @@ public class PositionSystem : MonoBehaviour
     public List<RaceData> raceDatas = new List<RaceData>();
     public LayerMask kartLayerMask;
 
+    [Header("Debug")]
+    public List<float> distancesDebug = new List<float>();
+    public List<int> racePositionsDebug = new List<int>();
+    public List<int> lapCompletedDebug = new List<int>();
+
+    private float _offet = 0f;
+
     private void Awake()
     {
         raceDatas.Clear();
@@ -28,6 +35,9 @@ public class PositionSystem : MonoBehaviour
     {
         GetKartsPositions();
         OnKartsCrossFinishLine();
+
+        //Debug
+        DebugRacePos();
     }
 
     [Button]
@@ -41,9 +51,9 @@ public class PositionSystem : MonoBehaviour
             float finishLineDistanceAlongPath = path.GetClosestDistanceAlongPath(
                 finishLine.position
             );
-            float distance = distanceAlongPath - finishLineDistanceAlongPath;
+            float distance = distanceAlongPath - finishLineDistanceAlongPath + _offet;
             if (distance < 0)
-                distance = distanceAlongPath + finishLineDistanceAlongPath;
+                distance = distanceAlongPath + finishLineDistanceAlongPath + _offet;
             raceDatas[i].distance = distance;
         }
     }
@@ -82,12 +92,12 @@ public class PositionSystem : MonoBehaviour
             if(dot > 0) 
             {
                 raceDatas[kartIndex].lapCompleted++;
-                raceDatas[kartIndex].distance += track.path.length;
+                _offet = track.path.length;
             }
             else
             {
                 if(raceDatas[kartIndex].lapCompleted > 0) raceDatas[kartIndex].lapCompleted--;
-                raceDatas[kartIndex].distance -= track.path.length;
+                _offet = -1 * track.path.length;
             }
         }
     }
@@ -114,5 +124,12 @@ public class PositionSystem : MonoBehaviour
         {
             SetKartPositionInRace(i);
         }
+    }
+
+    private void DebugRacePos()
+    {
+        distancesDebug = raceDatas.Select(x => x.distance).ToList();
+        racePositionsDebug = raceDatas.Select(x => x.racePosition).ToList();
+        lapCompletedDebug = raceDatas.Select(x => x.lapCompleted).ToList();
     }
 }
