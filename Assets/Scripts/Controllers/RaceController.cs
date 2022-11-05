@@ -1,0 +1,118 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using NaughtyAttributes;
+using PathCreation;
+using System.Linq;
+using System;
+
+public class RaceController : MonoBehaviour
+{
+    public PathCreator track;
+    public Transform kartGroup;
+    public Transform finishLine;
+    public List<RaceData> raceDatas = new List<RaceData>();
+    public List<KartName> racePositions = new List<KartName>();
+
+    [Header("Debug")]
+    public List<float> distancesDebug = new List<float>();
+    public List<int> lapCompletedDebug = new List<int>();
+
+    private List<float> _lapDistances = new List<float>();
+
+    public static RaceController current;
+
+    private void Awake()
+    {
+        current = this;
+    }
+
+    private void Start()
+    {
+        raceDatas.Clear();
+        _lapDistances.Clear();
+        foreach (Transform child in kartGroup)
+        {
+            KartName kartName = child.GetComponent<Kart>().kartName;
+            raceDatas.Add(new RaceData(kartName, 0));
+            _lapDistances.Add(0);
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        GetKartsPositions();
+        SetKartsPositionsInRace();
+
+        Debug();
+    }
+
+    [Button]
+    public void GetKartsPositions()
+    {
+        var path = track.path;
+        for (int i = 0; i < kartGroup.childCount; i++)
+        {
+            Vector3 kartPos = kartGroup.GetChild(i).position;
+            float distanceAlongPath = path.GetClosestDistanceAlongPath(kartPos);
+            float finishLineDistanceAlongPath = path.GetClosestDistanceAlongPath(
+                finishLine.position
+            );
+            float distance = distanceAlongPath - finishLineDistanceAlongPath + _lapDistances[i];
+            if (distance < 0)
+                distance = distanceAlongPath + finishLineDistanceAlongPath + _lapDistances[i];
+            raceDatas[i].distance = distance;
+        }
+    }
+
+    public void OnKartsCrossFinishLine(int kartIndex , Vector3 inComingDir)
+    {
+        Vector3 kartPos = kartGroup.GetChild(kartIndex).position;
+        Vector3 trackForward = finishLine.Find("TrackForward").localPosition.normalized;
+        float dot = Vector3.Dot(inComingDir, trackForward);
+        if(dot < 0)
+        {
+            if(raceDatas[kartIndex].lap > 0)
+            {
+                raceDatas[kartIndex].lap -= 1;
+            }               
+        }
+        else
+        {
+            raceDatas[kartIndex].lap += 1;
+        }
+        _lapDistances[kartIndex] = track.path.length * (raceDatas[kartIndex].lap);
+    }
+    
+    public void SetKartsPositionsInRace()
+    {
+        List<RaceData> DES = new List<RaceData>(raceDatas);
+        DES.Sort((a, b) => b.distance.CompareTo(a.distance));
+        racePositions = DES.Select(x => x.kartName).ToList();
+    }
+
+    public int GetPlayerRacePosition()
+    {
+        foreach(Transform kartTransform in kartGroup)
+        {
+            var kart = kartGroup.GetComponent<Kart>();
+            if(kart.isPlayer) 
+            {
+                return GetRacePosition(kart.kartName);
+            }
+        }
+        return -1;
+    }
+
+    public int GetRacePosition(KartName kartName)
+    {
+        return racePositions.IndexOf(kartName);
+    }
+
+    [Button]
+    private void Debug()
+    {
+        distancesDebug = raceDatas.Select(x => x.distance).ToList();
+        lapCompletedDebug = raceDatas.Select(x => x.lap).ToList();
+    }
+}
