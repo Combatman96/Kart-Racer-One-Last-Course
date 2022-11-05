@@ -6,13 +6,12 @@ using PathCreation;
 using System.Linq;
 using System;
 
-public class PositionSystem : MonoBehaviour
+public class RaceController : MonoBehaviour
 {
     public PathCreator track;
     public Transform kartGroup;
     public Transform finishLine;
     public List<RaceData> raceDatas = new List<RaceData>();
-    public LayerMask kartLayerMask;
 
     [Header("Debug")]
     public List<float> distancesDebug = new List<float>();
@@ -21,7 +20,7 @@ public class PositionSystem : MonoBehaviour
 
     private List<float> _lapDistances = new List<float>();
 
-    public static PositionSystem current;
+    public static RaceController current;
 
     private void Awake()
     {
@@ -66,24 +65,23 @@ public class PositionSystem : MonoBehaviour
         }
     }
 
-    public void OnKartsCrossFinishLine(int kartIndex)
+    public void OnKartsCrossFinishLine(int kartIndex , Vector3 inComingDir)
     {
         Vector3 kartPos = kartGroup.GetChild(kartIndex).position;
-        Vector3 inComingDir = (finishLine.position - kartPos).normalized;
         Vector3 trackForward = finishLine.Find("TrackForward").localPosition.normalized;
         float dot = Vector3.Dot(inComingDir, trackForward);
         if(dot < 0)
         {
-            if(raceDatas[kartIndex].lapCompleted > 0)
+            if(raceDatas[kartIndex].lap > 0)
             {
-                raceDatas[kartIndex].lapCompleted -= 1;
+                raceDatas[kartIndex].lap -= 1;
             }               
         }
         else
         {
-            raceDatas[kartIndex].lapCompleted += 1;
+            raceDatas[kartIndex].lap += 1;
         }
-        _lapDistances[kartIndex] = track.path.length * (raceDatas[kartIndex].lapCompleted);
+        _lapDistances[kartIndex] = track.path.length * (raceDatas[kartIndex].lap);
     }
     
     public void SetKartPositionInRace(int kartIndex)
@@ -106,6 +104,6 @@ public class PositionSystem : MonoBehaviour
     {
         distancesDebug = raceDatas.Select(x => x.distance).ToList();
         racePositionsDebug = raceDatas.Select(x => x.racePosition).ToList();
-        lapCompletedDebug = raceDatas.Select(x => x.lapCompleted).ToList();
+        lapCompletedDebug = raceDatas.Select(x => x.lap).ToList();
     }
 }

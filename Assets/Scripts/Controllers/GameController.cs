@@ -15,7 +15,7 @@ public class GameController : MonoBehaviour
         EventController.current.onRaiseEvent += OnEventRaise;
     }
 
-    private void OnEventRaise(string eventName, string p1, string p2, string p3)
+    private void OnEventRaise(string eventName, string p1, string p2, string p3, Vector3 v1, Vector3 v2)
     {
         switch (eventName)
         {
@@ -23,8 +23,7 @@ public class GameController : MonoBehaviour
                 Debug.Log(eventName);
                 break;
             case EventGameplay.Kart_Cross_Finish_Line:
-                int kartIndex = int.Parse(p1);
-                PositionSystem.current.OnKartsCrossFinishLine(kartIndex);
+                RaceController.current.OnKartsCrossFinishLine(kartIndex: int.Parse(p1), inComingDir: v1);
                 break;
         }
     }

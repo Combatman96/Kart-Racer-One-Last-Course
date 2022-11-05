@@ -7,15 +7,15 @@ public class RaceData
 {
     public KartName kartName;
     public int racePosition;
-    public int lapCompleted;
+    public int lap;
     public float distance;
     public long startRaceTicks;
     public long endRaceTicks;
 
-    public RaceData(KartName kartName, int lapCompleted)
+    public RaceData(KartName kartName, int lap)
     {
         this.kartName = kartName;
-        this.lapCompleted = lapCompleted;
+        this.lap = lap;
     }
 
     public void SetStartRaceTicks(DateTime dateTime) 

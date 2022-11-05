@@ -209,7 +209,8 @@ public class Kart : MonoBehaviour
         {
             // Debug.Log(kartName.ToString() + " cross finish line");
             int kartIndex = transform.GetSiblingIndex();
-            EventController.current.RaiseEvent(EventGameplay.Kart_Cross_Finish_Line, kartIndex.ToString());
+            Vector3 vel = _rigidbody.velocity.normalized;
+            EventController.current.RaiseEvent(EventGameplay.Kart_Cross_Finish_Line, p1: kartIndex.ToString(), v1: vel);
         }
     }
 }
