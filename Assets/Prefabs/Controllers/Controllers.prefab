@@ -29,11 +29,11 @@ Transform:
   m_Children:
   - {fileID: 9130373374629080556}
   - {fileID: 9130373375215633725}
-  - {fileID: 9130373375187469628}
+  - {fileID: 8308773652907400768}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &2163960092878383043
+--- !u!1001 &1440243226441383103
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -42,19 +42,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6967759155408462589, guid: e4a29632db0801342b922b1819e5f85f, type: 3}
       propertyPath: m_Name
-      value: PositionSystem
-      objectReference: {fileID: 0}
-    - target: {fileID: 6967759155408462590, guid: e4a29632db0801342b922b1819e5f85f, type: 3}
-      propertyPath: track
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6967759155408462590, guid: e4a29632db0801342b922b1819e5f85f, type: 3}
-      propertyPath: kartGroup
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6967759155408462590, guid: e4a29632db0801342b922b1819e5f85f, type: 3}
-      propertyPath: finishLine
-      value: 
+      value: RaceController
       objectReference: {fileID: 0}
     - target: {fileID: 6967759155408462591, guid: e4a29632db0801342b922b1819e5f85f, type: 3}
       propertyPath: m_RootOrder
@@ -102,10 +90,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4a29632db0801342b922b1819e5f85f, type: 3}
---- !u!4 &9130373375187469628 stripped
+--- !u!4 &8308773652907400768 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6967759155408462591, guid: e4a29632db0801342b922b1819e5f85f, type: 3}
-  m_PrefabInstance: {fileID: 2163960092878383043}
+  m_PrefabInstance: {fileID: 1440243226441383103}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3374723564105453122
 PrefabInstance:
