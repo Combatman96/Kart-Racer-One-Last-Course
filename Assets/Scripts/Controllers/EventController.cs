@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class EventController : MonoBehaviour
 {
-    public static EventController current;
+    public static EventController instance;
     
     private void Awake()
     {
-        current = this;
+        instance = this;
     }
 
     public event Action<string, string, string, string, Vector3, Vector3> onRaiseEvent;

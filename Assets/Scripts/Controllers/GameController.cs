@@ -4,15 +4,37 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    public static GameController current;
+    public static GameController instance;
     private void Awake()
     {
-        current = this;
+        instance = this;
     }
+
+    public GameState gameState;
 
     private void Start()
     {
-        EventController.current.onRaiseEvent += OnEventRaise;
+        EventController.instance.onRaiseEvent += OnEventRaise;
+    }
+
+    public void StartGame()
+    {
+        gameState = GameState.StartGame;
+    }
+
+    public void PauseGame()
+    {
+        gameState = GameState.Pause;
+    }
+
+    public void PlayGame()
+    {
+        gameState = GameState.GamePlay;
+    }
+
+    public void EndGame()
+    {
+        gameState = GameState.EndGame;
     }
 
     private void OnEventRaise(string eventName, string p1, string p2, string p3, Vector3 v1, Vector3 v2)
@@ -30,6 +52,15 @@ public class GameController : MonoBehaviour
 
     private void OnDestroy()
     {
-        EventController.current.onRaiseEvent -= OnEventRaise;
+        EventController.instance.onRaiseEvent -= OnEventRaise;
     }
 }
+
+public enum GameState
+{
+    StartGame,
+    GamePlay,
+    Pause,
+    EndGame
+}
+
