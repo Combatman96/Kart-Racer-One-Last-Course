@@ -7,11 +7,3 @@ public class TypesBase
    
 }
 
-public enum KartName
-{
-    Hellblaze,
-    GentaClassic,
-    ModelPlay,
-    WarTanker,
-    Kardilact
-}
