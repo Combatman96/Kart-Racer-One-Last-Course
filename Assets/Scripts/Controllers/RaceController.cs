@@ -12,10 +12,10 @@ public class RaceController : MonoBehaviour
     public Transform kartGroup;
     public Transform finishLine;
     public List<RaceData> raceDatas = new List<RaceData>();
+    public List<KartName> racePositions = new List<KartName>();
 
     [Header("Debug")]
     public List<float> distancesDebug = new List<float>();
-    public List<int> racePositionsDebug = new List<int>();
     public List<int> lapCompletedDebug = new List<int>();
 
     private List<float> _lapDistances = new List<float>();
@@ -42,9 +42,9 @@ public class RaceController : MonoBehaviour
     private void FixedUpdate()
     {
         GetKartsPositions();
+        SetKartsPositionsInRace();
 
-        //Debug
-        DebugRacePos();
+        Debug();
     }
 
     [Button]
@@ -84,26 +84,35 @@ public class RaceController : MonoBehaviour
         _lapDistances[kartIndex] = track.path.length * (raceDatas[kartIndex].lap);
     }
     
-    public void SetKartPositionInRace(int kartIndex)
-    {
-        var descending = new List<RaceData>(raceDatas);
-        descending.Sort((a, b) => b.distance.CompareTo(a.distance));
-        int pos = descending.IndexOf(raceDatas[kartIndex]);
-        raceDatas[kartIndex].racePosition = pos;
-    }
-
     public void SetKartsPositionsInRace()
     {
-        for (int i = 0; i < kartGroup.childCount; i++)
-        {
-            SetKartPositionInRace(i);
-        }
+        List<RaceData> DES = new List<RaceData>(raceDatas);
+        DES.Sort((a, b) => b.distance.CompareTo(a.distance));
+        racePositions = DES.Select(x => x.kartName).ToList();
     }
 
-    private void DebugRacePos()
+    public int GetPlayerRacePosition()
+    {
+        foreach(Transform kartTransform in kartGroup)
+        {
+            var kart = kartGroup.GetComponent<Kart>();
+            if(kart.isPlayer) 
+            {
+                return GetRacePosition(kart.kartName);
+            }
+        }
+        return -1;
+    }
+
+    public int GetRacePosition(KartName kartName)
+    {
+        return racePositions.IndexOf(kartName);
+    }
+
+    [Button]
+    private void Debug()
     {
         distancesDebug = raceDatas.Select(x => x.distance).ToList();
-        racePositionsDebug = raceDatas.Select(x => x.racePosition).ToList();
         lapCompletedDebug = raceDatas.Select(x => x.lap).ToList();
     }
 }
