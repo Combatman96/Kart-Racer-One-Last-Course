@@ -21,14 +21,20 @@ public class PositionSystem : MonoBehaviour
 
     private List<float> _lapDistances = new List<float>();
 
+    public static PositionSystem current;
+
     private void Awake()
+    {
+        current = this;
+    }
+
+    private void Start()
     {
         raceDatas.Clear();
         _lapDistances.Clear();
         foreach (Transform child in kartGroup)
         {
             KartName kartName = child.GetComponent<Kart>().kartName;
-            Debug.Log(kartName);
             raceDatas.Add(new RaceData(kartName, 0));
             _lapDistances.Add(0);
         }
@@ -71,14 +77,13 @@ public class PositionSystem : MonoBehaviour
             if(raceDatas[kartIndex].lapCompleted > 0)
             {
                 raceDatas[kartIndex].lapCompleted -= 1;
-                _lapDistances[kartIndex] = -1 * track.path.length * (raceDatas[kartIndex].lapCompleted);
             }               
         }
         else
         {
             raceDatas[kartIndex].lapCompleted += 1;
-            _lapDistances[kartIndex] = -1 * track.path.length * (raceDatas[kartIndex].lapCompleted - 1);
         }
+        _lapDistances[kartIndex] = track.path.length * (raceDatas[kartIndex].lapCompleted);
     }
     
     public void SetKartPositionInRace(int kartIndex)
