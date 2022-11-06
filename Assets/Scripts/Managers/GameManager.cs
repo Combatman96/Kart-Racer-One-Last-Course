@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    public GameFlow gameFlow;
+
     private void Awake()
     {
         if (instance == null)
@@ -42,12 +44,18 @@ public class GameManager : MonoBehaviour
 
     public void LoadScene(int buidldIndex)
     {
-        SceneManager.LoadScene(buidldIndex, LoadSceneMode.Single);
+        SceneManager.LoadScene(buidldIndex, LoadSceneMode.Single); 
     }
 
     public void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+    }
+
+    private void SetGameFlow(SceneName sceneName)
+    {
+        if( (int)sceneName > 2) gameFlow = GameFlow.GamePlay;
+        else gameFlow = (GameFlow)((int)sceneName);
     }
 
     private void Update()
@@ -59,12 +67,15 @@ public class GameManager : MonoBehaviour
 
 public enum GameFlow
 {
-    TitleScreen,
-    OptionsScreen,
-    KartSelectScreen
+    TitleScreen = 0,
+    OptionsScreen = 1,
+    KartSelectScreen = 2,
+    GamePlay = 3
 }
 
 public enum SceneName
 {
-
+    TitleScreen = 0,
+    OptionsScreen = 1,
+    KartSelectScreen = 2
 }
