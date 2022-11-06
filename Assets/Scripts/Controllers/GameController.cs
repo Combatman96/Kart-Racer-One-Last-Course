@@ -7,7 +7,7 @@ public class GameController : MonoBehaviour
     public static GameController instance;
     private void Awake()
     {
-        instance = this;
+        if(instance == null ) instance = this;
     }
 
     public GameState gameState;
@@ -45,7 +45,7 @@ public class GameController : MonoBehaviour
                 Debug.Log(eventName);
                 break;
             case EventGameplay.Kart_Cross_Finish_Line:
-                RaceController.current.OnKartsCrossFinishLine(kartIndex: int.Parse(p1), inComingDir: v1);
+                RaceController.instance.OnKartsCrossFinishLine(kartIndex: int.Parse(p1), inComingDir: v1);
                 break;
         }
     }

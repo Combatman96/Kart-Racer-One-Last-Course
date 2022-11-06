@@ -9,7 +9,7 @@ public class EventController : MonoBehaviour
     
     private void Awake()
     {
-        instance = this;
+        if(instance == null) instance = this;
     }
 
     public event Action<string, string, string, string, Vector3, Vector3> onRaiseEvent;

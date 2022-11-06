@@ -9,7 +9,7 @@ public class UIController : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        if(instance == null) instance = this;
     }
 
     public List<BaseUI> listScreen => GetComponentsInChildren<BaseUI>().ToList();

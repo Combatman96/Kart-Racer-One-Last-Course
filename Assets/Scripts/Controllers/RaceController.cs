@@ -20,11 +20,11 @@ public class RaceController : MonoBehaviour
 
     private List<float> _lapDistances = new List<float>();
 
-    public static RaceController current;
+    public static RaceController instance;
 
     private void Awake()
     {
-        current = this;
+        if(instance == null) instance = this;
     }
 
     private void Start()
