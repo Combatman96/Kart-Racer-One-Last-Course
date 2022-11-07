@@ -12,11 +12,11 @@ public class UIController : MonoBehaviour
         if(instance == null) instance = this;
     }
 
-    public List<BaseUI> listScreen => GetComponentsInChildren<BaseUI>().ToList();
-    public ScreenStartGame screenStartGame => GetComponentInChildren<ScreenStartGame>();
-    public ScreenIngame screenIngame => GetComponentInChildren<ScreenIngame>();
-    public PopupPauseGame popupPauseGame => GetComponentInChildren<PopupPauseGame>();
-    public ScreenEndGame screenEndGame => GetComponentInChildren<ScreenEndGame>();
+    public List<BaseUI> listScreen => GetComponentsInChildren<BaseUI>(true).ToList();
+    public ScreenStartGame screenStartGame => GetComponentInChildren<ScreenStartGame>(true);
+    public ScreenIngame screenIngame => GetComponentInChildren<ScreenIngame>(true);
+    public PopupPauseGame popupPauseGame => GetComponentInChildren<PopupPauseGame>(true);
+    public ScreenEndGame screenEndGame => GetComponentInChildren<ScreenEndGame>(true);
 
     private void Start()
     {
