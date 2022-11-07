@@ -5,6 +5,8 @@ using System.Linq;
 [Serializable]
 public class PlayerData 
 {
+    public GameSetting gameSetting;
+
     public List<Record> records = new List<Record>();
 
     public void InitRecords()
@@ -34,4 +36,10 @@ public class Record
         this.track = track;
         this.raceData = raceData;
     }
+}
+
+[Serializable]
+public class GameSetting
+{
+    public int lapPerRace = 3;
 }

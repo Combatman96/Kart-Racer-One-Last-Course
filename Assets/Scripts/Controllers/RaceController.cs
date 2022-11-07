@@ -18,6 +18,7 @@ public class RaceController : MonoBehaviour
     private List<Kart> _karts = new List<Kart>();
 
     private List<float> _lapDistances = new List<float>();
+    private int _lapRequire;
 
     public static RaceController instance;
 
@@ -30,6 +31,7 @@ public class RaceController : MonoBehaviour
     {
         raceDatas.Clear();
         _lapDistances.Clear();
+        _lapRequire = DataManager.instance.playerData.gameSetting.lapPerRace;
 
         _karts = kartGroup.GetComponentsInChildren<Kart>().ToList();
         var playerKartName = DataManager.instance.gameData.playerKartName;
@@ -52,7 +54,7 @@ public class RaceController : MonoBehaviour
     public IEnumerator CountDown(int time) 
     {
         yield return new WaitForSeconds(time);
-        
+
         _playerKart.isPlayer = true;
         EventController.instance.RaiseEvent(EventGameplay.Change_State_Game, GameState.GamePlay);
     }
@@ -101,6 +103,16 @@ public class RaceController : MonoBehaviour
             raceDatas[kartIndex].lap += 1;
         }
         _lapDistances[kartIndex] = track.path.length * (raceDatas[kartIndex].lap);
+        CheckEndRace();
+    }
+
+    private void CheckEndRace()
+    {
+        var playerRaceData = GetRaceData(_playerKart.kartName);
+        if(playerRaceData.lap <= _lapRequire) return;
+
+        int pos = GetRacePosition(_playerKart.kartName);
+        EventController.instance.RaiseEvent(EventGameplay.Change_State_Game,  new object[] { GameState.EndGame });
     }
 
     public void SetKartsPositionsInRace()
@@ -110,21 +122,18 @@ public class RaceController : MonoBehaviour
         racePositions = DES.Select(x => x.kartName).ToList();
     }
 
-    public int GetPlayerRacePosition()
+    public RaceData GetRaceData(KartName kartName)
     {
-        foreach (Transform kartTransform in kartGroup)
-        {
-            var kart = kartGroup.GetComponent<Kart>();
-            if (kart.isPlayer)
-            {
-                return GetRacePosition(kart.kartName);
-            }
-        }
-        return -1;
+        return raceDatas.Single(x => x.kartName == kartName);
     }
 
     public int GetRacePosition(KartName kartName)
     {
         return racePositions.IndexOf(kartName);
+    }
+
+    public int GetPlayerRacePosition()
+    {
+        return GetRacePosition(_playerKart.kartName);
     }
 }

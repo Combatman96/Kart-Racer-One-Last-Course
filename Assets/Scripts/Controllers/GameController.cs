@@ -36,6 +36,10 @@ public class GameController : MonoBehaviour
     private void OnEndGame()
     {
         gameState = GameState.EndGame;
+
+        int playerPos = RaceController.instance.GetPlayerRacePosition();
+        //ok win or lose
+        Debug.Log("race end : " + playerPos);
     }
 
     private void OnGameStateChange( GameState state)
