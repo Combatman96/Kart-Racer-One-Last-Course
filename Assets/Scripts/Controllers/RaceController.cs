@@ -14,17 +14,13 @@ public class RaceController : MonoBehaviour
     public List<RaceData> raceDatas = new List<RaceData>();
     public List<KartName> racePositions = new List<KartName>();
 
-    [Header("Debug")]
-    public List<float> distancesDebug = new List<float>();
-    public List<int> lapCompletedDebug = new List<int>();
-
     private List<float> _lapDistances = new List<float>();
 
     public static RaceController instance;
 
     private void Awake()
     {
-        if(instance == null) instance = this;
+        if (instance == null) instance = this;
     }
 
     private void Start()
@@ -43,8 +39,6 @@ public class RaceController : MonoBehaviour
     {
         GetKartsPositions();
         SetKartsPositionsInRace();
-
-        Debug();
     }
 
     [Button]
@@ -65,17 +59,17 @@ public class RaceController : MonoBehaviour
         }
     }
 
-    public void OnKartsCrossFinishLine(int kartIndex , Vector3 inComingDir)
+    public void OnKartsCrossFinishLine(int kartIndex, Vector3 inComingDir)
     {
         Vector3 kartPos = kartGroup.GetChild(kartIndex).position;
         Vector3 trackForward = finishLine.Find("TrackForward").localPosition.normalized;
         float dot = Vector3.Dot(inComingDir, trackForward);
-        if(dot < 0)
+        if (dot < 0)
         {
-            if(raceDatas[kartIndex].lap > 0)
+            if (raceDatas[kartIndex].lap > 0)
             {
                 raceDatas[kartIndex].lap -= 1;
-            }               
+            }
         }
         else
         {
@@ -83,7 +77,7 @@ public class RaceController : MonoBehaviour
         }
         _lapDistances[kartIndex] = track.path.length * (raceDatas[kartIndex].lap);
     }
-    
+
     public void SetKartsPositionsInRace()
     {
         List<RaceData> DES = new List<RaceData>(raceDatas);
@@ -93,10 +87,10 @@ public class RaceController : MonoBehaviour
 
     public int GetPlayerRacePosition()
     {
-        foreach(Transform kartTransform in kartGroup)
+        foreach (Transform kartTransform in kartGroup)
         {
             var kart = kartGroup.GetComponent<Kart>();
-            if(kart.isPlayer) 
+            if (kart.isPlayer)
             {
                 return GetRacePosition(kart.kartName);
             }
@@ -107,12 +101,5 @@ public class RaceController : MonoBehaviour
     public int GetRacePosition(KartName kartName)
     {
         return racePositions.IndexOf(kartName);
-    }
-
-    [Button]
-    private void Debug()
-    {
-        distancesDebug = raceDatas.Select(x => x.distance).ToList();
-        lapCompletedDebug = raceDatas.Select(x => x.lap).ToList();
     }
 }
