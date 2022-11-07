@@ -13,6 +13,10 @@ public class UIController : MonoBehaviour
     }
 
     public List<BaseUI> listScreen => GetComponentsInChildren<BaseUI>().ToList();
+    public ScreenStartGame screenStartGame => GetComponentInChildren<ScreenStartGame>();
+    public ScreenIngame screenIngame => GetComponentInChildren<ScreenIngame>();
+    public PopupPauseGame popupPauseGame => GetComponentInChildren<PopupPauseGame>();
+    public ScreenEndGame screenEndGame => GetComponentInChildren<ScreenEndGame>();
 
     private void Start()
     {
@@ -25,6 +29,30 @@ public class UIController : MonoBehaviour
         {
             case EventGameplay.Empty_Event:
                 Debug.Log(eventName);
+                break;
+            case EventGameplay.Change_State_Game:
+                GameState state = (GameState)p[0];
+                OnGameStateChange(state);
+                break;
+
+        }
+    }
+
+    private void OnGameStateChange(GameState state)
+    {
+        switch(state)
+        {
+            case GameState.StartGame:
+                screenStartGame.Show();
+                break;
+            case GameState.GamePlay:
+                screenIngame.Show();
+                break;
+            case GameState.Pause:
+                popupPauseGame.Show();
+                break;
+            case GameState.EndGame:
+                screenEndGame.Show();
                 break;
         }
     }
