@@ -44,15 +44,19 @@ public class UIController : MonoBehaviour
         {
             case GameState.StartGame:
                 screenStartGame.Show();
+                screenStartGame.DoStart();
                 break;
             case GameState.GamePlay:
                 screenIngame.Show();
+                screenIngame.DoStart();
                 break;
             case GameState.Pause:
                 popupPauseGame.Show();
+                popupPauseGame.DoStart();
                 break;
             case GameState.EndGame:
                 screenEndGame.Show();
+                screenEndGame.DoStart();
                 break;
         }
     }

@@ -5,6 +5,11 @@ using UnityEngine.UI;
 public class BaseUI : MonoBehaviour
 {
     [SerializeField] bool _isHideOtherScreen = false;
+
+    public virtual void DoStart()
+    {
+
+    }
     
     public void Show()
     {
