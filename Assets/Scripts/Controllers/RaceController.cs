@@ -37,7 +37,7 @@ public class RaceController : MonoBehaviour
         var playerKartName = DataManager.instance.gameData.playerKartName;
         _playerKart = _karts.SingleOrDefault(x => x.kartName == playerKartName);
         _playerKart.transform.SetSiblingIndex(0);
-
+        _karts = kartGroup.GetComponentsInChildren<Kart>().ToList();
         for (int i = 0; i < kartGroup.childCount; i++)
         {
             _karts[i].isPlayer = false;
@@ -129,7 +129,7 @@ public class RaceController : MonoBehaviour
 
     public int GetRacePosition(KartName kartName)
     {
-        return racePositions.IndexOf(kartName);
+        return racePositions.IndexOf(kartName) + 1;
     }
 
     public int GetPlayerRacePosition()

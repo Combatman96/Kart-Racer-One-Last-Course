@@ -21,6 +21,8 @@ public class GameController : MonoBehaviour
     private void OnStartGame()
     {
         gameState = GameState.StartGame;
+
+        RaceController.instance.DoStart();
     }
 
     private void OnPauseGame()
