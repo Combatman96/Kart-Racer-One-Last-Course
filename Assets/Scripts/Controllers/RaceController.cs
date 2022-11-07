@@ -13,6 +13,9 @@ public class RaceController : MonoBehaviour
     public Transform finishLine;
     public List<RaceData> raceDatas = new List<RaceData>();
     public List<KartName> racePositions = new List<KartName>();
+    [SerializeField] private Transform _kartPosGroup;
+    private Kart _playerKart;
+    private List<Kart> _karts = new List<Kart>();
 
     private List<float> _lapDistances = new List<float>();
 
@@ -23,22 +26,44 @@ public class RaceController : MonoBehaviour
         if (instance == null) instance = this;
     }
 
-    private void Start()
+    public void DoStart()
     {
         raceDatas.Clear();
         _lapDistances.Clear();
-        foreach (Transform child in kartGroup)
+
+        _karts = kartGroup.GetComponentsInChildren<Kart>().ToList();
+        var playerKartName = DataManager.instance.gameData.playerKartName;
+        _playerKart = _karts.SingleOrDefault(x => x.kartName == playerKartName);
+        _playerKart.transform.SetSiblingIndex(0);
+
+        for (int i = 0; i < kartGroup.childCount; i++)
         {
-            KartName kartName = child.GetComponent<Kart>().kartName;
-            raceDatas.Add(new RaceData(kartName, 0));
+            _karts[i].isPlayer = false;
+            raceDatas.Add(new RaceData(_karts[i].kartName, 0));
             _lapDistances.Add(0);
+            kartGroup.GetChild(i).transform.position = _kartPosGroup.GetChild(i).position;
+            kartGroup.GetChild(i).transform.rotation = _kartPosGroup.GetChild(i).rotation;
+            kartGroup.GetChild(i).gameObject.SetActive(i < DataManager.instance.gameData.maxKart);
         }
+
+        StartCoroutine(CountDown(4));
+    }
+
+    public IEnumerator CountDown(int time) 
+    {
+        yield return new WaitForSeconds(time);
+        
+        _playerKart.isPlayer = true;
+        EventController.instance.RaiseEvent(EventGameplay.Change_State_Game, GameState.GamePlay);
     }
 
     private void FixedUpdate()
     {
-        GetKartsPositions();
-        SetKartsPositionsInRace();
+        if (GameController.instance.gameState == GameState.GamePlay)
+        {
+            GetKartsPositions();
+            SetKartsPositionsInRace();
+        }
     }
 
     [Button]
