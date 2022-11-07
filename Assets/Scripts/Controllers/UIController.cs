@@ -19,7 +19,7 @@ public class UIController : MonoBehaviour
         EventController.instance.onRaiseEvent += OnEventRaise;
     }
 
-    private void OnEventRaise(string eventName, string p1, string p2, string p3, Vector3 v1, Vector3 v2)
+    private void OnEventRaise(string eventName, params object[] p)
     {
         switch (eventName)
         {

@@ -37,7 +37,7 @@ public class GameController : MonoBehaviour
         gameState = GameState.EndGame;
     }
 
-    private void OnEventRaise(string eventName, string p1, string p2, string p3, Vector3 v1, Vector3 v2)
+    private void OnEventRaise(string eventName, params object[] p)
     {
         switch (eventName)
         {
@@ -45,7 +45,7 @@ public class GameController : MonoBehaviour
                 Debug.Log(eventName);
                 break;
             case EventGameplay.Kart_Cross_Finish_Line:
-                RaceController.instance.OnKartsCrossFinishLine(kartIndex: int.Parse(p1), inComingDir: v1);
+                RaceController.instance.OnKartsCrossFinishLine(kartIndex: (int) p[0], inComingDir: (Vector3) p[1]);
                 break;
         }
     }
