@@ -123,6 +123,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4578876493059820286}
     m_Modifications:
+    - target: {fileID: 3708485323283520541, guid: 9d60fd2ba21139e499d797c1f404e500, type: 3}
+      propertyPath: _isHideOtherScreen
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3708485323283520992, guid: 9d60fd2ba21139e499d797c1f404e500, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -313,6 +317,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1607101195315598384, guid: 9979d26c49c0be748bfd44b798cb948d, type: 3}
+      propertyPath: _isHideOtherScreen
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9979d26c49c0be748bfd44b798cb948d, type: 3}
 --- !u!224 &4578876492871531194 stripped
@@ -415,6 +423,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Screen-Ingame
       objectReference: {fileID: 0}
+    - target: {fileID: 1289316634397976917, guid: aba7225c2bd8f1540a832b703002da11, type: 3}
+      propertyPath: _isHideOtherScreen
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aba7225c2bd8f1540a832b703002da11, type: 3}
 --- !u!224 &4578876494279579324 stripped
@@ -429,6 +441,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4578876493059820286}
     m_Modifications:
+    - target: {fileID: 6182088257233902536, guid: 0b11c0f809c88e346a63c48201ecf8a3, type: 3}
+      propertyPath: _isHideOtherScreen
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6182088257233902540, guid: 0b11c0f809c88e346a63c48201ecf8a3, type: 3}
       propertyPath: m_Name
       value: Popup-PauseGame
