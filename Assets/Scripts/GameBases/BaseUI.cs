@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BaseUI : MonoBehaviour
 {
@@ -24,6 +24,13 @@ public class BaseUI : MonoBehaviour
     public void Hide()
     {
         this.gameObject.SetActive(false);
+    }
+
+    public void SetEvent(Button btn, Action action)
+    {
+        if(btn == null) return;
+        btn.onClick.RemoveAllListeners();
+        btn.onClick.AddListener(() => action?.Invoke());
     }
 
 }
