@@ -4,14 +4,14 @@ using UnityEngine.UI;
 
 public class BaseUI : MonoBehaviour
 {
-    public bool isHideOtherScreen = false;
-
+    [SerializeField] bool _isHideOtherScreen = false;
+    
     public void Show()
     {
         var listScreen = UIController.instance.listScreen;
         if(listScreen.Count == 0) return;
 
-        if(isHideOtherScreen)
+        if(_isHideOtherScreen)
         {
             foreach(var screen in listScreen)
             {
