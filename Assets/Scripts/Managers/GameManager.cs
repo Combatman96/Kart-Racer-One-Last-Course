@@ -60,8 +60,13 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        // TESTING
         if(Input.GetKeyDown(KeyCode.U)) LoadScene(0);
         if(Input.GetKeyDown(KeyCode.I)) LoadScene(1);
+        if(Input.GetKeyDown(KeyCode.O)) 
+        {
+            DataManager.instance.gameData.playerKartName = KartName.Kardilact;
+        }
     }
 }
 
