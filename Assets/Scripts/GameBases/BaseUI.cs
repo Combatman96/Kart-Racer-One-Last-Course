@@ -11,14 +11,16 @@ public class BaseUI : MonoBehaviour
         var listScreen = UIController.instance.listScreen;
         if(listScreen.Count == 0) return;
 
-        if(_isHideOtherScreen)
+        foreach(var screen in listScreen)
         {
-            foreach(var screen in listScreen)
+            screen.enabled = false;
+            if(_isHideOtherScreen)
             {
                 screen.Hide();
             }
         }
         this.gameObject.SetActive(true);
+        this.enabled = true;
     }
 
     public void Hide()
