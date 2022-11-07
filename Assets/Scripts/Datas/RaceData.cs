@@ -4,12 +4,14 @@ using System;
 public class RaceData
 {
     public KartName kartName;
-    public int racePosition;
-    public int lap;
-    public float distance;
-    public long startRaceTicks;
-    public long endRaceTicks;
+    public int racePosition = 0;
+    public int lap = 0;
+    public float distance = 0;
+    public long startRaceTicks = 0;
+    public long endRaceTicks = 0;
 
+    public RaceData() { }
+    
     public RaceData(KartName kartName, int lap)
     {
         this.kartName = kartName;

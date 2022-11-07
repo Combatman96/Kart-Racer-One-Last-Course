@@ -67,6 +67,11 @@ public class GameManager : MonoBehaviour
         {
             DataManager.instance.gameData.playerKartName = KartName.Kardilact;
         }
+        if(Input.GetKeyDown(KeyCode.S)) 
+        {
+            DataManager.instance.playerData.InitRecords();
+            DataManager.instance.SavePlayerData();
+        }
     }
 }
 
