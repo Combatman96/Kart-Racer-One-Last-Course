@@ -15,26 +15,46 @@ public class GameController : MonoBehaviour
     private void Start()
     {
         EventController.instance.onRaiseEvent += OnEventRaise;
+        EventController.instance.RaiseEvent(EventGameplay.Change_State_Game, new object[] { GameState.StartGame });
     }
 
-    public void StartGame()
+    private void OnStartGame()
     {
         gameState = GameState.StartGame;
     }
 
-    public void PauseGame()
+    private void OnPauseGame()
     {
         gameState = GameState.Pause;
     }
 
-    public void PlayGame()
+    private void OnPlayGame()
     {
         gameState = GameState.GamePlay;
     }
 
-    public void EndGame()
+    private void OnEndGame()
     {
         gameState = GameState.EndGame;
+    }
+
+    private void OnGameStateChange( GameState state)
+    {
+        switch(state)
+        {
+            case GameState.StartGame:
+                OnStartGame();
+                break;
+            case GameState.GamePlay:
+                OnPlayGame();
+                break;
+            case GameState.Pause:
+                OnPauseGame();
+                break;
+            case GameState.EndGame:
+                OnEndGame();
+                break;
+        }
     }
 
     private void OnEventRaise(string eventName, params object[] p)
@@ -46,6 +66,10 @@ public class GameController : MonoBehaviour
                 break;
             case EventGameplay.Kart_Cross_Finish_Line:
                 RaceController.instance.OnKartsCrossFinishLine(kartIndex: (int) p[0], inComingDir: (Vector3) p[1]);
+                break;
+            case EventGameplay.Change_State_Game:
+                var newState = (GameState) p[0];
+                OnGameStateChange(newState);
                 break;
         }
     }
