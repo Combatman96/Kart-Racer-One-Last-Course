@@ -120,6 +120,10 @@ public class RaceController : MonoBehaviour
         List<RaceData> DES = new List<RaceData>(raceDatas);
         DES.Sort((a, b) => b.distance.CompareTo(a.distance));
         racePositions = DES.Select(x => x.kartName).ToList();
+        foreach (var data in raceDatas)
+        {
+            data.racePosition = GetRacePosition(data.kartName);
+        }
     }
 
     public RaceData GetRaceData(KartName kartName)
