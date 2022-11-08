@@ -20,7 +20,7 @@ public class SpriteAnimator : MonoBehaviour
             _timer -= _framerate;
             _currentFrame = (_currentFrame + 1) % _frames.Length;
             _img.sprite = _frames[_currentFrame];
-            _img.SetNativeSize();
+            // _img.SetNativeSize();
         }
 
     }

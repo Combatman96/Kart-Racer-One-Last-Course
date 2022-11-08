@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2237452612307641234}
+  - component: {fileID: 1577073273}
   m_Layer: 5
   m_Name: WindowConfetti
   m_TagString: Untagged
@@ -35,3 +36,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1577073273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2237452612307641245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c03a7c275af799541b38cb3cc4a02694, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _confettiPrefab: {fileID: 5984521542744582395, guid: a9e144bd085071e41b2719823dc4a95c, type: 3}
+  _colors:
+  - {r: 0.25178, g: 0.7541496, b: 0.7735849, a: 1}
+  - {r: 0.89411765, g: 0.16470589, b: 0.375534, a: 1}
+  - {r: 1, g: 0.3764706, b: 0, a: 1}
+  - {r: 0, g: 0.8301887, b: 0.22715257, a: 1}
+  - {r: 0.08597365, g: 0.28415716, b: 0.8679245, a: 1}
+  - {r: 0.8784709, g: 1, b: 0, a: 1}
+  - {r: 0.38183647, g: 0, b: 0.8584906, a: 1}
+  - {r: 1, g: 0.5518868, b: 0.5518868, a: 1}

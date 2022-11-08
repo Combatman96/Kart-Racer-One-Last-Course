@@ -61,7 +61,7 @@ public class WindowConfetti : MonoBehaviour
             _rectTransform = _transform.GetComponent<RectTransform>();
             _rectTransform.anchoredPosition = anchor;
 
-            _rectTransform.sizeDelta *= Random.Range(0.7f, 1.1f);
+            _rectTransform.sizeDelta *= Random.Range(0.9f, 1.3f);
 
             _euler = new Vector3(0, 0, Random.Range(0, 360f));
             _eulerSpeed = Random.Range(100f, 200f);
