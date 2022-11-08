@@ -141,4 +141,9 @@ public class RaceController : MonoBehaviour
     {
         return _playerKart;
     }
+
+    public int GetTotalKart()
+    {
+        return _lapDistances.Count;
+    }
 }
