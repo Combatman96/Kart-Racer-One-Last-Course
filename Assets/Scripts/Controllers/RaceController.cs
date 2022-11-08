@@ -56,7 +56,24 @@ public class RaceController : MonoBehaviour
         yield return new WaitForSeconds(time);
 
         _playerKart.isPlayer = true;
+        SetStartTimes();
         EventController.instance.RaiseEvent(EventGameplay.Change_State_Game, GameState.GamePlay);
+    }
+
+    private void SetStartTimes()
+    {
+        foreach (var data in raceDatas)
+        {
+            data.SetStartRaceTicks(DateTime.Now);
+        }
+    }
+
+    private void SetEndTimes()
+    {
+        foreach (var data in raceDatas)
+        {
+            data.SetEndRaceTicks(DateTime.Now);
+        }
     }
 
     private void FixedUpdate()
@@ -112,6 +129,7 @@ public class RaceController : MonoBehaviour
         if (playerRaceData.lap <= _lapRequire) return;
 
         int pos = GetRacePosition(_playerKart.kartName);
+        SetEndTimes();
         EventController.instance.RaiseEvent(EventGameplay.Change_State_Game, new object[] { GameState.EndGame });
     }
 
@@ -129,6 +147,11 @@ public class RaceController : MonoBehaviour
     public RaceData GetRaceData(KartName kartName)
     {
         return raceDatas.Single(x => x.kartName == kartName);
+    }
+
+    public RaceData GetPlayerRaceData()
+    {
+        return GetRaceData(_playerKart.kartName);
     }
 
     public int GetRacePosition(KartName kartName)

@@ -13,6 +13,15 @@ public class WindowConfetti : MonoBehaviour
     private float _spawnTimer;
     private const float SPAWN_TIMER_MAX = 0.033f;
 
+    private void OnDisable()
+    {
+        _confettiList.Clear();
+        foreach (Transform child in this.transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+
     private void Update()
     {
         foreach (var confetti in new List<Confetti>(_confettiList))
