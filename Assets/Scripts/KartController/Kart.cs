@@ -32,7 +32,7 @@ public class Kart : MonoBehaviour
 
     [Header("Drifting")]
     public bool isAutoDrif = false;
-    [SerializeField][Range(0,1)] private List<float> m_tireGripsAutoDebug = new List<float> {0, 0, 0, 0};
+    [SerializeField][Range(0, 1)] private List<float> m_tireGripsAutoDebug = new List<float> { 0, 0, 0, 0 };
     [SerializeField][Range(0, 1)] float _normalFrontGripFactor;
     [SerializeField][Range(0, 1)] float _normalRearGripFactor;
     [SerializeField][Range(0, 1)] float _drifRearGripFactor;
@@ -197,21 +197,27 @@ public class Kart : MonoBehaviour
 
     private void Drifting(bool isDrifInput)
     {
-        if(isAutoDrif) return;
+        if (isAutoDrif) return;
 
         _frontTiresGripFactor = (isDrifInput) ? _drifFrontGripFactor : _normalFrontGripFactor;
-        _rearTiresGripFactor = (isDrifInput) ?  _drifRearGripFactor : _normalRearGripFactor;
+        _rearTiresGripFactor = (isDrifInput) ? _drifRearGripFactor : _normalRearGripFactor;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("FinishLine"))
+        if (other.CompareTag("FinishLine"))
         {
             // Debug.Log(kartName.ToString() + " cross finish line");
             int kartIndex = transform.GetSiblingIndex();
             Vector3 vel = _rigidbody.velocity.normalized;
-            EventController.instance.RaiseEvent(EventGameplay.Kart_Cross_Finish_Line, new object[] {kartIndex, vel});
+            EventController.instance.RaiseEvent(EventGameplay.Kart_Cross_Finish_Line, new object[] { kartIndex, vel });
         }
+    }
+
+    public float GetSpeed()
+    {
+        var vel = _rigidbody.velocity;
+        return vel.sqrMagnitude;
     }
 }
 

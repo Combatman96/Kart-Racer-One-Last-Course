@@ -51,7 +51,7 @@ public class RaceController : MonoBehaviour
         StartCoroutine(CountDown(4));
     }
 
-    public IEnumerator CountDown(int time) 
+    public IEnumerator CountDown(int time)
     {
         yield return new WaitForSeconds(time);
 
@@ -109,10 +109,10 @@ public class RaceController : MonoBehaviour
     private void CheckEndRace()
     {
         var playerRaceData = GetRaceData(_playerKart.kartName);
-        if(playerRaceData.lap <= _lapRequire) return;
+        if (playerRaceData.lap <= _lapRequire) return;
 
         int pos = GetRacePosition(_playerKart.kartName);
-        EventController.instance.RaiseEvent(EventGameplay.Change_State_Game,  new object[] { GameState.EndGame });
+        EventController.instance.RaiseEvent(EventGameplay.Change_State_Game, new object[] { GameState.EndGame });
     }
 
     public void SetKartsPositionsInRace()
@@ -135,5 +135,10 @@ public class RaceController : MonoBehaviour
     public int GetPlayerRacePosition()
     {
         return GetRacePosition(_playerKart.kartName);
+    }
+
+    public Kart GetPlayerKart()
+    {
+        return _playerKart;
     }
 }
