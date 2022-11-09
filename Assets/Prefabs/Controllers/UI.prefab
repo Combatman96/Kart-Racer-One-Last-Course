@@ -53,7 +53,7 @@ Canvas:
   m_GameObject: {fileID: 4578876493059820274}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -117,6 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f0b7a68742091544ae9fc2a012924a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiCamera: {fileID: 0}
 --- !u!1001 &935693370133866234
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -223,6 +224,14 @@ PrefabInstance:
     - target: {fileID: 3708485323283520993, guid: 9d60fd2ba21139e499d797c1f404e500, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6580051182690019753, guid: 9d60fd2ba21139e499d797c1f404e500, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -170.46002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7810653851706153942, guid: 9d60fd2ba21139e499d797c1f404e500, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -80.153015
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d60fd2ba21139e499d797c1f404e500, type: 3}
