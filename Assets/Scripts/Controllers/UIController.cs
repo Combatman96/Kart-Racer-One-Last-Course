@@ -9,7 +9,7 @@ public class UIController : MonoBehaviour
 
     private void Awake()
     {
-        if(instance == null) instance = this;
+        if (instance == null) instance = this;
     }
 
     public List<BaseUI> listScreen => GetComponentsInChildren<BaseUI>(true).ToList();
@@ -34,13 +34,16 @@ public class UIController : MonoBehaviour
                 GameState state = (GameState)p[0];
                 OnGameStateChange(state);
                 break;
-
+            case EventGameplay.Is_New_Record:
+                bool isNewRecord = (bool)p[0];
+                screenEndGame.NewRecord(isNewRecord);
+                break;
         }
     }
 
     private void OnGameStateChange(GameState state)
     {
-        switch(state)
+        switch (state)
         {
             case GameState.StartGame:
                 screenStartGame.Show();

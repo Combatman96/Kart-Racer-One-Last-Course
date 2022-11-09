@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public GameFlow gameFlow;
+    public SceneName scene;
 
     private void Awake()
     {
@@ -44,7 +45,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadScene(int buidldIndex)
     {
-        SceneManager.LoadScene(buidldIndex, LoadSceneMode.Single); 
+        SceneManager.LoadScene(buidldIndex, LoadSceneMode.Single);
     }
 
     public void LoadScene(string sceneName)
@@ -54,20 +55,21 @@ public class GameManager : MonoBehaviour
 
     private void SetGameFlow(SceneName sceneName)
     {
-        if( (int)sceneName > 2) gameFlow = GameFlow.GamePlay;
+        if ((int)sceneName > 2) gameFlow = GameFlow.GamePlay;
         else gameFlow = (GameFlow)((int)sceneName);
+        scene = sceneName;
     }
 
     private void Update()
     {
         // TESTING
-        if(Input.GetKeyDown(KeyCode.U)) LoadScene(0);
-        if(Input.GetKeyDown(KeyCode.I)) LoadScene(1);
-        if(Input.GetKeyDown(KeyCode.O)) 
+        if (Input.GetKeyDown(KeyCode.U)) LoadScene(0);
+        if (Input.GetKeyDown(KeyCode.I)) LoadScene(1);
+        if (Input.GetKeyDown(KeyCode.O))
         {
             DataManager.instance.gameData.playerKartName = KartName.Kardilact;
         }
-        if(Input.GetKeyDown(KeyCode.S)) 
+        if (Input.GetKeyDown(KeyCode.S))
         {
             DataManager.instance.playerData.InitRecords();
             DataManager.instance.SavePlayerData();

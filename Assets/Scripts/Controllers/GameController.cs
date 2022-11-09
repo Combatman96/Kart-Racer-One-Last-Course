@@ -7,7 +7,7 @@ public class GameController : MonoBehaviour
     public static GameController instance;
     private void Awake()
     {
-        if(instance == null ) instance = this;
+        if (instance == null) instance = this;
     }
 
     public GameState gameState;
@@ -40,13 +40,24 @@ public class GameController : MonoBehaviour
         gameState = GameState.EndGame;
 
         int playerPos = RaceController.instance.GetPlayerRacePosition();
-        //ok win or lose
-        Debug.Log("race end : " + playerPos);
+        CheckRecord();
     }
 
-    private void OnGameStateChange( GameState state)
+    private void CheckRecord()
     {
-        switch(state)
+        SceneName track = GameManager.instance.scene;
+        RaceData playerRaceData = RaceController.instance.GetPlayerRaceData();
+        bool isNewRecord = DataManager.instance.IsNewRecord(track, playerRaceData);
+        if (isNewRecord)
+        {
+            DataManager.instance.UpdateRecord(track, playerRaceData);
+        }
+        EventController.instance.RaiseEvent(EventGameplay.Is_New_Record, new object[] { isNewRecord });
+    }
+
+    private void OnGameStateChange(GameState state)
+    {
+        switch (state)
         {
             case GameState.StartGame:
                 OnStartGame();
@@ -71,10 +82,10 @@ public class GameController : MonoBehaviour
                 Debug.Log(eventName);
                 break;
             case EventGameplay.Kart_Cross_Finish_Line:
-                RaceController.instance.OnKartsCrossFinishLine(kartIndex: (int) p[0], inComingDir: (Vector3) p[1]);
+                RaceController.instance.OnKartsCrossFinishLine(kartIndex: (int)p[0], inComingDir: (Vector3)p[1]);
                 break;
             case EventGameplay.Change_State_Game:
-                var newState = (GameState) p[0];
+                var newState = (GameState)p[0];
                 OnGameStateChange(newState);
                 break;
         }

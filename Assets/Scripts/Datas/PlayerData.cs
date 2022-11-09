@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 [Serializable]
-public class PlayerData 
+public class PlayerData
 {
     public GameSetting gameSetting;
 
@@ -11,9 +11,9 @@ public class PlayerData
 
     public void InitRecords()
     {
-        if(records.Count > 0) return;
+        if (records.Count > 0) return;
         var tracks = Enum.GetValues(typeof(SceneName)).Cast<SceneName>().ToList();
-        foreach(var track in tracks)
+        foreach (var track in tracks)
         {
             records.Add(new Record(track, new RaceData()));
         }
@@ -23,10 +23,25 @@ public class PlayerData
     {
         return records.SingleOrDefault(x => x.track == track).raceData;
     }
+
+    public bool IsNewRecord(SceneName track, RaceData raceData)
+    {
+        InitRecords();
+        RaceData data = GetRecordByTrack(track);
+        if (raceData.endRaceTicks < data.endRaceTicks)
+            return true;
+        return false;
+    }
+
+    public void UpdateRaceData(SceneName track, RaceData raceData)
+    {
+        var data = GetRecordByTrack(track);
+        data = raceData;
+    }
 }
 
 [Serializable]
-public class Record 
+public class Record
 {
     public SceneName track;
     public RaceData raceData;

@@ -7,14 +7,14 @@ public class DataManager : MonoBehaviour
     public static DataManager instance;
     private void Awake()
     {
-        if(instance == null) instance = this;
+        if (instance == null) instance = this;
     }
 
-    [Header ("Data")]
+    [Header("Data")]
     public GameData gameData;
     public PlayerData playerData;
-    
-    [Header ("Save Path")]
+
+    [Header("Save Path")]
     [SerializeField] private bool _isPersistance;
     private const string _SAVE_FILE = "SaveData\\SaveFile.json";
 
@@ -34,7 +34,7 @@ public class DataManager : MonoBehaviour
 
     private string GetSavePath()
     {
-        return (!_isPersistance) ? Application.dataPath + Path.AltDirectorySeparatorChar + _SAVE_FILE 
+        return (!_isPersistance) ? Application.dataPath + Path.AltDirectorySeparatorChar + _SAVE_FILE
                                 : Application.persistentDataPath + Path.AltDirectorySeparatorChar + _SAVE_FILE;
     }
 
@@ -43,5 +43,15 @@ public class DataManager : MonoBehaviour
     {
         playerData = new PlayerData();
         SavePlayerData();
+    }
+
+    public bool IsNewRecord(SceneName track, RaceData raceData)
+    {
+        return playerData.IsNewRecord(track, raceData);
+    }
+
+    public void UpdateRecord(SceneName track, RaceData raceData)
+    {
+        playerData.UpdateRaceData(track, raceData);
     }
 }
