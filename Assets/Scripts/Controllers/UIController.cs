@@ -12,6 +12,8 @@ public class UIController : MonoBehaviour
         if (instance == null) instance = this;
     }
 
+    public Camera uiCamera;
+
     public List<BaseUI> listScreen => GetComponentsInChildren<BaseUI>(true).ToList();
     public ScreenStartGame screenStartGame => GetComponentInChildren<ScreenStartGame>(true);
     public ScreenIngame screenIngame => GetComponentInChildren<ScreenIngame>(true);
