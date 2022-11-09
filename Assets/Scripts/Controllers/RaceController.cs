@@ -16,6 +16,8 @@ public class RaceController : MonoBehaviour
     [SerializeField] private Transform _kartPosGroup;
     private Kart _playerKart;
     private List<Kart> _karts = new List<Kart>();
+    [SerializeField] Transform _markerGroup;
+    [SerializeField] Vector3 _markerOffet;
 
     private List<float> _lapDistances = new List<float>();
     private int _lapRequire;
@@ -26,6 +28,7 @@ public class RaceController : MonoBehaviour
     {
         if (instance == null) instance = this;
     }
+
 
     public void DoStart()
     {
@@ -80,13 +83,48 @@ public class RaceController : MonoBehaviour
     {
         if (GameController.instance.gameState == GameState.GamePlay)
         {
-            GetKartsPositions();
+            GetKartsDistances();
             SetKartsPositionsInRace();
+            MarkKartsPositions();
+        }
+    }
+
+    private void MarkKartsPositions()
+    {
+        var worldPosList = new List<Vector3>();
+        foreach (var x in racePositions)
+        {
+            var worldPos = _karts.SingleOrDefault(k => k.kartName == x).transform.position;
+            worldPosList.Add(worldPos);
+        }
+        var playerPos = GetPlayerRacePosition();
+
+        for (int i = 0; i < _markerGroup.childCount; i++)
+        {
+            var marker = _markerGroup.GetChild(i);
+            if (i > worldPosList.Count - 1)
+            {
+                marker.gameObject.SetActive(false);
+                continue;
+            }
+            marker.position = worldPosList[i] + _markerOffet;
+            marker.forward = UIController.instance.uiCamera.transform.forward;
+            if (i == playerPos - 1)
+            {
+                marker.gameObject.SetActive(false);
+            }
+            else
+            {
+                if (marker.gameObject.activeInHierarchy == false)
+                {
+                    marker.gameObject.SetActive(true);
+                }
+            }
         }
     }
 
     [Button]
-    public void GetKartsPositions()
+    public void GetKartsDistances()
     {
         var path = track.path;
         for (int i = 0; i < kartGroup.childCount; i++)
@@ -128,6 +166,10 @@ public class RaceController : MonoBehaviour
         var playerRaceData = GetRaceData(_playerKart.kartName);
         if (playerRaceData.lap <= _lapRequire) return;
 
+        foreach (Transform child in _markerGroup)
+        {
+            child.gameObject.SetActive(false);
+        }
         int pos = GetRacePosition(_playerKart.kartName);
         SetEndTimes();
         EventController.instance.RaiseEvent(EventGameplay.Change_State_Game, new object[] { GameState.EndGame });
