@@ -25,6 +25,11 @@ public class UIController : MonoBehaviour
         EventController.instance.onRaiseEvent += OnEventRaise;
     }
 
+    private void OnDestroy()
+    {
+        EventController.instance.onRaiseEvent -= OnEventRaise;
+    }
+
     private void OnEventRaise(string eventName, params object[] p)
     {
         switch (eventName)
@@ -39,6 +44,10 @@ public class UIController : MonoBehaviour
             case EventGameplay.Is_New_Record:
                 bool isNewRecord = (bool)p[0];
                 screenEndGame.NewRecord(isNewRecord);
+                break;
+            case EventGameplay.Player_Cross_FinishLine:
+                int lap = (int)p[0];
+                screenIngame.SetLapCounter(lap);
                 break;
         }
     }

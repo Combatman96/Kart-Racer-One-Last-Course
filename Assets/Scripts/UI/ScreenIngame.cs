@@ -6,10 +6,17 @@ using TMPro;
 
 public class ScreenIngame : BaseUI
 {
+    [Header("Position Counter")]
     [SerializeField] private TextMeshProUGUI _positionCounter;
     [SerializeField] private TextMeshProUGUI _totalKartCounter;
+
+    [Header("Speed Counter")]
     [SerializeField] private TextMeshProUGUI _speedCounter;
     [SerializeField] private Image _speedMeter;
+
+    [Header("Lap counter")]
+    [SerializeField] private TextMeshProUGUI _currentLap;
+    [SerializeField] private TextMeshProUGUI _totalLap;
 
     private Kart _playerKart;
 
@@ -19,6 +26,9 @@ public class ScreenIngame : BaseUI
 
         int totalKart = RaceController.instance.GetTotalKart();
         _totalKartCounter.SetText("/" + totalKart);
+        int totalLap = RaceController.instance.GetLapRequire();
+        _totalLap.SetText("/" + totalLap);
+        _currentLap.SetText("0");
     }
 
     void Update()
@@ -41,5 +51,10 @@ public class ScreenIngame : BaseUI
     {
         int playerPos = RaceController.instance.GetPlayerRacePosition();
         _positionCounter.SetText(playerPos.ToString());
+    }
+
+    public void SetLapCounter(int lap)
+    {
+        _currentLap.SetText(lap.ToString());
     }
 }

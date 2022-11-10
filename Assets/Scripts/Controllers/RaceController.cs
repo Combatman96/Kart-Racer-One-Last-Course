@@ -50,7 +50,6 @@ public class RaceController : MonoBehaviour
             kartGroup.GetChild(i).transform.rotation = _kartPosGroup.GetChild(i).rotation;
             kartGroup.GetChild(i).gameObject.SetActive(i < DataManager.instance.gameData.maxKart);
         }
-
         StartCoroutine(CountDown(4));
     }
 
@@ -160,7 +159,16 @@ public class RaceController : MonoBehaviour
             raceDatas[kartIndex].lap += 1;
         }
         _lapDistances[kartIndex] = track.path.length * (raceDatas[kartIndex].lap);
+        UpdatePlayerKartLap(kartIndex);
         CheckEndRace();
+    }
+
+    private void UpdatePlayerKartLap(int index)
+    {
+        if (!_karts[index].isPlayer) return;
+
+        var raceData = GetRaceData(_playerKart.kartName);
+        EventController.instance.RaiseEvent(EventGameplay.Player_Cross_FinishLine, new object[] { raceData.lap });
     }
 
     private void CheckEndRace()
@@ -216,5 +224,10 @@ public class RaceController : MonoBehaviour
     public int GetTotalKart()
     {
         return _lapDistances.Count;
+    }
+
+    public int GetLapRequire()
+    {
+        return _lapRequire;
     }
 }
