@@ -51422,6 +51422,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: FinishLine
       objectReference: {fileID: 0}
+    - target: {fileID: 7148416301291976990, guid: c24d1158055930844816347c30d07ea2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7148416301291976990, guid: c24d1158055930844816347c30d07ea2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 38.86
+      objectReference: {fileID: 0}
+    - target: {fileID: 7148416301291976990, guid: c24d1158055930844816347c30d07ea2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -6.01
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c24d1158055930844816347c30d07ea2, type: 3}
 --- !u!1001 &7813563046596632131
@@ -51431,6 +51443,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3039700802268378507, guid: 1d93538ff0ac94744ab6b1cc40becbc4, type: 3}
+      propertyPath: playerData.gameSetting.lapPerRace
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7813563045573978118, guid: 1d93538ff0ac94744ab6b1cc40becbc4, type: 3}
       propertyPath: m_RootOrder
       value: 11
