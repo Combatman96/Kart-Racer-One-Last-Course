@@ -20,7 +20,7 @@ public class RaceController : MonoBehaviour
     [SerializeField] Vector3 _markerOffet;
 
     private List<float> _lapDistances = new List<float>();
-    private int _lapRequire;
+    [SerializeField] private int _lapRequire;
 
     public static RaceController instance;
 
@@ -143,6 +143,8 @@ public class RaceController : MonoBehaviour
 
     public void OnKartsCrossFinishLine(int kartIndex, Vector3 inComingDir)
     {
+        if (GameController.instance.gameState != GameState.GamePlay) return;
+
         Vector3 kartPos = kartGroup.GetChild(kartIndex).position;
         Vector3 trackForward = finishLine.Find("TrackForward").localPosition.normalized;
         float dot = Vector3.Dot(inComingDir, trackForward);

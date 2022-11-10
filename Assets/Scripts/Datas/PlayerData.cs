@@ -28,7 +28,9 @@ public class PlayerData
     {
         InitRecords();
         RaceData data = GetRecordByTrack(track);
-        if (raceData.endRaceTicks < data.endRaceTicks)
+        var newTime = raceData.endRaceTicks - raceData.startRaceTicks;
+        var oldTime = data.endRaceTicks - data.startRaceTicks;
+        if (oldTime > newTime || oldTime == 0)
             return true;
         return false;
     }
