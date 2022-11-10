@@ -38,3 +38,5 @@ sysinfo.txt
 
 # Log
 Logs/
+
+venv/
