@@ -24,7 +24,7 @@ public class ScreenEndGame : BaseUI
         int pos = raceData.racePosition;
         _resultTxt.text = pos.ToString();
         int index = Mathf.Clamp(pos - 1, 0, 3);
-        _raceTimeTxt.material = _textMats[index];
+        _resultTxt.fontMaterial = _textMats[index];
         _resultImg.gameObject.SetActive(pos < 4);
         _raceTimeTxt.text = raceData.GetRaceTime();
 
