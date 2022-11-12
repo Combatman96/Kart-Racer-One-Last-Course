@@ -7,7 +7,7 @@ using Unity.MLAgents.Actuators;
 
 public class KartAgent : Agent
 {
-    private Transform _checkPointGroup;
+    private Transform _checkPointGroup => FindObjectOfType<CheckPointGroup>().transform;
     private Kart _kart => GetComponentInParent<Kart>();
 
     [SerializeField] private Transform _spawnPos;
@@ -19,7 +19,6 @@ public class KartAgent : Agent
 
     public void InitCheckPoint()
     {
-        _checkPointGroup = FindObjectOfType<CheckPointGroup>().transform;
         _checkPointCount = _checkPointGroup.childCount;
         _nextCheckPointIndex = _firstCheckPoint.GetSiblingIndex() % _checkPointCount;
         _curCheckPointIndex = (_nextCheckPointIndex - 1) % _checkPointCount;
@@ -30,13 +29,15 @@ public class KartAgent : Agent
         int index = checkPoint.GetSiblingIndex();
         if (index == _nextCheckPointIndex)
         {
-            AddReward(1f);
+            AddReward(1.5f);
+            Debug.Log("right way");
             _curCheckPointIndex = _nextCheckPointIndex;
             _nextCheckPointIndex = (_nextCheckPointIndex + 1) % _checkPointCount;
         }
         else
         {
             AddReward(-1f);
+            Debug.Log("wrong way");
         }
     }
 
@@ -45,9 +46,14 @@ public class KartAgent : Agent
         AddReward(-0.1f);
     }
 
+    public void OnWallEnter()
+    {
+        AddReward(-0.6f);
+    }
+
     public override void OnEpisodeBegin()
     {
-        _kart.transform.position = _spawnPos.position = new Vector3(Random.Range(-3f, 3f), 0, Random.Range(-3f, 3f));
+        _kart.transform.position = _spawnPos.position + new Vector3(Random.Range(-3f, 3f), 0, Random.Range(-3f, 3f));
         _kart.transform.forward = _spawnPos.forward;
         InitCheckPoint();
         _kart.Stop();

@@ -44,6 +44,8 @@ public class Kart : MonoBehaviour
     private float _acceleration = 0f;
     private float _steering = 0f;
 
+    private KartAgent _kartAgent => GetComponentInChildren<KartAgent>();
+
     private void Awake()
     {
         _frontTiresGripFactor = _normalFrontGripFactor;
@@ -211,6 +213,22 @@ public class Kart : MonoBehaviour
             int kartIndex = transform.GetSiblingIndex();
             Vector3 vel = _rigidbody.velocity.normalized;
             EventController.instance.RaiseEvent(EventGameplay.Kart_Cross_Finish_Line, new object[] { kartIndex, vel });
+        }
+        if (other.CompareTag("CheckPoint"))
+        {
+            _kartAgent.OnCheckPointReached(other.transform);
+        }
+        if (other.CompareTag("Wall"))
+        {
+            _kartAgent.OnWallEnter();
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("CheckPoint"))
+        {
+            _kartAgent.OnCheckPointStay();
         }
     }
 

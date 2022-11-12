@@ -1,0 +1,29 @@
+{
+    "KartDrive": {
+        "checkpoints": [
+            {
+                "steps": 3840,
+                "file_path": "results\\testtrack1\\KartDrive\\KartDrive-3840.onnx",
+                "reward": null,
+                "creation_time": 1668260247.0149667,
+                "auxillary_file_paths": [
+                    "results\\testtrack1\\KartDrive\\KartDrive-3840.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 3840,
+            "file_path": "results\\testtrack1\\KartDrive.onnx",
+            "reward": null,
+            "creation_time": 1668260247.0149667,
+            "auxillary_file_paths": [
+                "results\\testtrack1\\KartDrive\\KartDrive-3840.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}
