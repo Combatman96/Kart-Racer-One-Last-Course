@@ -73056,6 +73056,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FinishLine
       objectReference: {fileID: 0}
+    - target: {fileID: 5369186762862673343, guid: c24d1158055930844816347c30d07ea2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7148416301291976990, guid: c24d1158055930844816347c30d07ea2, type: 3}
       propertyPath: m_LocalScale.x
       value: 3

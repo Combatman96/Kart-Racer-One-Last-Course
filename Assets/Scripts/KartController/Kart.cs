@@ -55,6 +55,7 @@ public class Kart : MonoBehaviour
     public void InputHandler(float accelerationInput, float steeringInput, bool flipInput = false, bool drifInput = false)
     {
         _acceleration = accelerationInput * _topSpeed;
+        if (_acceleration < 0) _acceleration = accelerationInput * _topSpeed * 0.18f;
         for (int i = 0; i < 2; i++)
         {
             var suspension = _suspensions.GetChild(i);
