@@ -1,4 +1,26 @@
 {
+    "KartDrive": {
+        "checkpoints": [
+            {
+                "steps": 128,
+                "file_path": "results\\ppo\\KartDrive\\KartDrive-128.onnx",
+                "reward": null,
+                "creation_time": 1668241892.9480388,
+                "auxillary_file_paths": [
+                    "results\\ppo\\KartDrive\\KartDrive-128.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 128,
+            "file_path": "results\\ppo\\KartDrive.onnx",
+            "reward": null,
+            "creation_time": 1668241892.9480388,
+            "auxillary_file_paths": [
+                "results\\ppo\\KartDrive\\KartDrive-128.pt"
+            ]
+        }
+    },
     "metadata": {
         "stats_format_version": "0.3.0",
         "mlagents_version": "0.28.0",
