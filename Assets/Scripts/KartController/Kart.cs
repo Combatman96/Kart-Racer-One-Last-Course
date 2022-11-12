@@ -50,7 +50,7 @@ public class Kart : MonoBehaviour
         _rearTiresGripFactor = _normalRearGripFactor;
     }
 
-    public void InputHandler(float accelerationInput, float steeringInput, bool flipInput, bool drifInput)
+    public void InputHandler(float accelerationInput, float steeringInput, bool flipInput = false, bool drifInput = false)
     {
         _acceleration = accelerationInput * _topSpeed;
         for (int i = 0; i < 2; i++)
@@ -218,6 +218,11 @@ public class Kart : MonoBehaviour
     {
         var vel = _rigidbody.velocity;
         return vel.sqrMagnitude;
+    }
+
+    public void Stop()
+    {
+        _rigidbody.velocity = Vector3.zero;
     }
 }
 
