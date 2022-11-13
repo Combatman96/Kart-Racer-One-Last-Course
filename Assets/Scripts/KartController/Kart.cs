@@ -215,6 +215,7 @@ public class Kart : MonoBehaviour
             Vector3 vel = _rigidbody.velocity.normalized;
             EventController.instance.RaiseEvent(EventGameplay.Kart_Cross_Finish_Line, new object[] { kartIndex, vel });
         }
+        if (_kartAgent == null) return;
         if (other.CompareTag("CheckPoint"))
         {
             _kartAgent.OnCheckPointReached(other.transform);
@@ -227,6 +228,7 @@ public class Kart : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        if (_kartAgent == null) return;
         if (other.CompareTag("CheckPoint"))
         {
             _kartAgent.OnCheckPointStay();

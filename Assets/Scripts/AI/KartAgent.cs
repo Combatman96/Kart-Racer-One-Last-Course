@@ -17,6 +17,14 @@ public class KartAgent : Agent
     private int _nextCheckPointIndex = 0;
     private int _checkPointCount;
 
+    private void DoStart()
+    {
+        _kart.transform.position = _spawnPos.position + new Vector3(Random.Range(-4f, 4f), 0, Random.Range(-4f, 4f));
+        _kart.transform.forward = _spawnPos.forward;
+        InitCheckPoint();
+        _kart.Stop();
+    }
+
     public void InitCheckPoint()
     {
         _checkPointCount = _checkPointGroup.childCount;
@@ -53,10 +61,8 @@ public class KartAgent : Agent
 
     public override void OnEpisodeBegin()
     {
-        _kart.transform.position = _spawnPos.position + new Vector3(Random.Range(-3f, 3f), 0, Random.Range(-3f, 3f));
-        _kart.transform.forward = _spawnPos.forward;
-        InitCheckPoint();
-        _kart.Stop();
+        Debug.Log("Episode begin");
+        DoStart(); //Comment this if not training
     }
 
     public override void CollectObservations(VectorSensor sensor)

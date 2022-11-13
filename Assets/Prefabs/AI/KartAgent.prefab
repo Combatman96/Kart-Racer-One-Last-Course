@@ -9,10 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5164559678989794834}
+  - component: {fileID: 5164559678989794844}
   - component: {fileID: 5164559678989794845}
   - component: {fileID: 5164559678989794835}
   - component: {fileID: 5164559678989794832}
-  - component: {fileID: 5164559678989794844}
+  - component: {fileID: 5600836388261845407}
   m_Layer: 0
   m_Name: KartAgent
   m_TagString: Untagged
@@ -34,6 +35,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5164559678989794844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5164559678989794847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bd4009a50a77cc42ab887bd66b66a3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 1200
+  _spawnPos: {fileID: 0}
+  _firstCheckPoint: {fileID: 0}
 --- !u!114 &5164559678989794845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,7 +126,7 @@ MonoBehaviour:
   rayMissColor: {r: 1, g: 0.9964248, b: 0, a: 1}
   m_StartVerticalOffset: -1.01
   m_EndVerticalOffset: 0
---- !u!114 &5164559678989794844
+--- !u!114 &5600836388261845407
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,12 +135,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5164559678989794847}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bd4009a50a77cc42ab887bd66b66a3f, type: 3}
+  m_Script: {fileID: 11500000, guid: f2902496c0120472b90269f94a0aec7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agentParameters:
-    maxStep: 0
-  hasUpgradedFromAgentParameters: 1
-  MaxStep: 1200
-  _spawnPos: {fileID: 0}
-  _firstCheckPoint: {fileID: 0}
+  Record: 0
+  NumStepsToRecord: 0
+  DemonstrationName: KartDriveDemo
+  DemonstrationDirectory: BrainDemos
