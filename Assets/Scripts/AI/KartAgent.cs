@@ -56,7 +56,12 @@ public class KartAgent : Agent
 
     public void OnWallEnter()
     {
-        AddReward(-0.6f);
+        AddReward(-0.8f);
+    }
+
+    public void OnWallStay()
+    {
+        AddReward(-0.1f);
     }
 
     public override void OnEpisodeBegin()

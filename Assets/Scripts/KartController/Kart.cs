@@ -220,9 +220,23 @@ public class Kart : MonoBehaviour
         {
             _kartAgent.OnCheckPointReached(other.transform);
         }
-        if (other.CompareTag("Wall"))
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (_kartAgent == null) return;
+        if (other.gameObject.CompareTag("Wall"))
         {
             _kartAgent.OnWallEnter();
+        }
+    }
+
+    private void OnCollisionStay(Collision other)
+    {
+        if (_kartAgent == null) return;
+        if (other.gameObject.CompareTag("Wall"))
+        {
+            _kartAgent.OnWallStay();
         }
     }
 
