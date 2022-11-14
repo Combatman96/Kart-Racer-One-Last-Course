@@ -19,7 +19,7 @@ TagManager:
   - FinishLine
   - Tracker
   - CheckPoint
-  - 
+  - BackGround
   - 
   - 
   - 
@@ -40,6 +40,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BackGround
+    uniqueID: 2861946143
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
