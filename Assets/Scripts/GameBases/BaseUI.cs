@@ -11,7 +11,7 @@ public class BaseUI : MonoBehaviour
 
     }
     
-    public void Show()
+    public virtual void Show()
     {
         var listScreen = UIController.instance.listScreen;
         if(listScreen.Count == 0) return;
@@ -28,7 +28,7 @@ public class BaseUI : MonoBehaviour
         this.enabled = true;
     }
 
-    public void Hide()
+    public virtual void Hide()
     {
         this.gameObject.SetActive(false);
     }
