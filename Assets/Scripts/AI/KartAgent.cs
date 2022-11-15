@@ -21,7 +21,6 @@ public class KartAgent : Agent
     {
         _kart.transform.position = _spawnPos.position + new Vector3(Random.Range(-4f, 4f), 0, Random.Range(-4f, 4f));
         _kart.transform.forward = _spawnPos.forward;
-        InitCheckPoint();
         _kart.Stop();
     }
 
@@ -67,7 +66,8 @@ public class KartAgent : Agent
     public override void OnEpisodeBegin()
     {
         Debug.Log("Episode begin");
-        DoStart(); //Comment this if not training
+        InitCheckPoint();
+        // DoStart(); //Comment this if not training
     }
 
     public override void CollectObservations(VectorSensor sensor)

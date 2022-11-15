@@ -1,0 +1,56 @@
+{
+    "KartDrive": {
+        "checkpoints": [
+            {
+                "steps": 499998,
+                "file_path": "results\\racetrack4\\KartDrive\\KartDrive-499998.onnx",
+                "reward": null,
+                "creation_time": 1668488093.5444674,
+                "auxillary_file_paths": [
+                    "results\\racetrack4\\KartDrive\\KartDrive-499998.pt"
+                ]
+            },
+            {
+                "steps": 999999,
+                "file_path": "results\\racetrack4\\KartDrive\\KartDrive-999999.onnx",
+                "reward": null,
+                "creation_time": 1668498607.5956686,
+                "auxillary_file_paths": [
+                    "results\\racetrack4\\KartDrive\\KartDrive-999999.pt"
+                ]
+            },
+            {
+                "steps": 1499997,
+                "file_path": "results\\racetrack4\\KartDrive\\KartDrive-1499997.onnx",
+                "reward": null,
+                "creation_time": 1668509149.558293,
+                "auxillary_file_paths": [
+                    "results\\racetrack4\\KartDrive\\KartDrive-1499997.pt"
+                ]
+            },
+            {
+                "steps": 1850000,
+                "file_path": "results\\racetrack4\\KartDrive\\KartDrive-1850000.onnx",
+                "reward": null,
+                "creation_time": 1668518086.8095357,
+                "auxillary_file_paths": [
+                    "results\\racetrack4\\KartDrive\\KartDrive-1850000.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1850000,
+            "file_path": "results\\racetrack4\\KartDrive.onnx",
+            "reward": null,
+            "creation_time": 1668518086.8095357,
+            "auxillary_file_paths": [
+                "results\\racetrack4\\KartDrive\\KartDrive-1850000.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}
