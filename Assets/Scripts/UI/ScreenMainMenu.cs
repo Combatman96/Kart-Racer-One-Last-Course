@@ -14,10 +14,18 @@ public class ScreenMainMenu : BaseUI
     // Start is called before the first frame update
     void Start()
     {
+        SetEvent(_arcadeBtn, ()=> OnSelectGameMode(GameMode.Arcade));
+        SetEvent(_freeRaceBtn, () => OnSelectGameMode(GameMode.FreeRace));
+
         SetEvent(_quitBtn, () =>
         {
             Application.Quit();
         });
+    }
+
+    void OnSelectGameMode(GameMode gameMode)
+    {
+        EventManager.instance.RaiseEvent(GameEvent.GameMode_Selected, new object[] { gameMode });
     }
 
     public override void Show()

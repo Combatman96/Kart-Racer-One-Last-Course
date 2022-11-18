@@ -43,7 +43,17 @@ public class GameManager : MonoBehaviour
                 var trackName = (SceneName)p[0];
                 LoadScene(trackName);
                 break;
+            case GameEvent.GameMode_Selected:
+                var mode = (GameMode)p[0];
+                SetGameMode(mode);
+                break;
         }
+    }
+
+    private void SetGameMode(GameMode mode)
+    {
+        var gameData = DataManager.instance.gameData;
+        gameData.gameMode = mode;
     }
 
     private void SetPlayerKart(KartName kartName)
