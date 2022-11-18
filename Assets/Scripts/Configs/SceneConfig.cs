@@ -19,5 +19,8 @@ public enum SceneName
 {
     TitleScreen = 0,
     OptionsScreen = 1,
-    KartSelectScreen = 2
+    KartSelectScreen = 2,
+    CircusTrack,
+    SpaceTrack,
+    CityTrack
 }

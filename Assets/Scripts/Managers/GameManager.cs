@@ -43,7 +43,6 @@ public class GameManager : MonoBehaviour
                 var trackName = (SceneName)p[0];
                 LoadScene(trackName);
                 break;
-
         }
     }
 
@@ -74,7 +73,10 @@ public class GameManager : MonoBehaviour
 
     public void LoadScene(SceneName sceneName)
     {
-        SceneManager.LoadScene(sceneName.ToString(), LoadSceneMode.Single);
+        int buidldIndex = 0;
+        var sceneConfig = DataManager.instance.config.sceneConfig;
+        buidldIndex =  sceneConfig.GetSceneBuildIndex(sceneName);
+        SceneManager.LoadScene(buidldIndex, LoadSceneMode.Single);
     }
 
     private void SetGameFlow(SceneName sceneName)
