@@ -10,6 +10,8 @@ public class DataManager : MonoBehaviour
         if (instance == null) instance = this;
     }
 
+    [Header("Config")] public GameConfig config;
+
     [Header("Data")]
     public GameData gameData;
     public PlayerData playerData;

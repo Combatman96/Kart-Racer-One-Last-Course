@@ -43,8 +43,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 517b4ab760633734099864ce35bf9d48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  config: {fileID: 11400000, guid: 5fba1f610d8263744968004a75af10bb, type: 2}
   gameData:
     playerKartName: 0
     gameMode: 0
     maxKart: 5
     track: 0
+  playerData:
+    gameSetting:
+      lapPerRace: 3
+    records: []
+  _isPersistance: 0

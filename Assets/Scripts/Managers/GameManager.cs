@@ -35,6 +35,30 @@ public class GameManager : MonoBehaviour
             case GameEvent.Empty_Event:
                 Debug.Log(eventName);
                 break;
+            case GameEvent.Kart_Selected:
+                var kartSelected = (KartName)p[0];
+                SetPlayerKart(kartSelected);
+                break;
+            case GameEvent.Track_Selected:
+                var trackName = (SceneName)p[0];
+                LoadScene(trackName);
+                break;
+
+        }
+    }
+
+    private void SetPlayerKart(KartName kartName)
+    {
+        var dataGame = DataManager.instance.gameData;
+        dataGame.playerKartName = kartName;
+        switch(dataGame.gameMode)
+        {
+            case GameMode.Arcade:
+                //Change to race track scene
+                break;
+            case GameMode.FreeRace:
+                //Change to track select screen
+                break;
         }
     }
 
@@ -48,9 +72,9 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(buidldIndex, LoadSceneMode.Single);
     }
 
-    public void LoadScene(string sceneName)
+    public void LoadScene(SceneName sceneName)
     {
-        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+        SceneManager.LoadScene(sceneName.ToString(), LoadSceneMode.Single);
     }
 
     private void SetGameFlow(SceneName sceneName)
@@ -83,11 +107,4 @@ public enum GameFlow
     OptionsScreen = 1,
     KartSelectScreen = 2,
     GamePlay = 3
-}
-
-public enum SceneName
-{
-    TitleScreen = 0,
-    OptionsScreen = 1,
-    KartSelectScreen = 2
 }

@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d629832490753984ca8746c6cdae4159, type: 3}
+  m_Name: GameConfig
+  m_EditorClassIdentifier: 
+  arcadeConfig: {fileID: 11400000, guid: 35e1f8d2eafc2d541b67e690e293cbb5, type: 2}
+  sceneConfig: {fileID: 11400000, guid: 992041fbcdf836c42814e41f451c12a0, type: 2}

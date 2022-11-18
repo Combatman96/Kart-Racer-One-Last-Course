@@ -17,5 +17,6 @@ public class GameData
 
 public enum GameMode
 {
-
+    Arcade,
+    FreeRace
 }
