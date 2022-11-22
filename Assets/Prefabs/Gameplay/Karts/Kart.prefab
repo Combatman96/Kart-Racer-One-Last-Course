@@ -283,7 +283,7 @@ MonoBehaviour:
   _groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  _maxSteeringAngle: 20
+  _maxSteeringAngle: 12
   _maxSteeringSpeed: 10
   _frontTiresGripCurve:
     serializedVersion: 2
