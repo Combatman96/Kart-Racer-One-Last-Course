@@ -79,26 +79,31 @@ public class KartAgent : Agent
 
     public override void OnActionReceived(ActionBuffers actions)
     {
-        float verticalInput = actions.ContinuousActions[0];
-        float horizontalInput = actions.ContinuousActions[1];
-        float drifInput = actions.DiscreteActions[0];
+        float acceleration = actions.DiscreteActions[0] - 1f;
+        float steeringInput = actions.DiscreteActions[1] - 1f;
+
+        int drifInput = actions.DiscreteActions[2];
         bool isDrif = (drifInput > 0) ? true : false;
 
-        _kart.InputHandler(verticalInput, horizontalInput, drifInput: isDrif);
+        _kart.InputHandler(acceleration, steeringInput, drifInput: isDrif);
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
     {
-        float accelerationInput = Input.GetAxis("Vertical");
-        float steeringInput = Input.GetAxis("Horizontal");
-        bool drifInput = Input.GetKey(KeyCode.LeftShift);
+        int accelerationInput = 1;
+        int steeringInput = 1;
 
-        ActionSegment<float> continuousActions = actionsOut.ContinuousActions;
-        continuousActions[0] = accelerationInput;
-        continuousActions[1] = steeringInput;
+        if (Input.GetKey(KeyCode.UpArrow)) accelerationInput = 2;
+        if (Input.GetKey(KeyCode.DownArrow)) accelerationInput = 0;
 
-        int dirfValue = (drifInput) ? 1 : 0;
-        ActionSegment<int> discreateActions = actionsOut.DiscreteActions;
-        discreateActions[0] = dirfValue;
+        if (Input.GetKey(KeyCode.RightArrow)) steeringInput = 2;
+        if (Input.GetKey(KeyCode.LeftArrow)) steeringInput = 0;
+
+        int drifInput = (Input.GetKey(KeyCode.LeftShift)) ? 1 : 0;
+
+        ActionSegment<int> discreteActions = actionsOut.DiscreteActions;
+        discreteActions[0] = accelerationInput;
+        discreteActions[1] = steeringInput;
+        discreteActions[2] = drifInput;
     }
 }
