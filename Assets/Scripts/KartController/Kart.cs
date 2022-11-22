@@ -52,7 +52,7 @@ public class Kart : MonoBehaviour
         _rearTiresGripFactor = _normalRearGripFactor;
     }
 
-    public void InputHandler(float accelerationInput, float steeringInput, bool flipInput = false, bool drifInput = false)
+    public void InputHandler(int accelerationInput, int steeringInput, bool flipInput = false, bool drifInput = false)
     {
         _acceleration = accelerationInput * _topSpeed;
         if (_acceleration < 0) _acceleration = accelerationInput * _topSpeed * 0.18f;
@@ -69,12 +69,31 @@ public class Kart : MonoBehaviour
     {
         if (!isPlayer) return;
 
-        float accelerationInput = Input.GetAxis("Vertical");
-        float steeringInput = Input.GetAxis("Horizontal");
+        int accelInput = 0;
+        int steerInput = 0;
+
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            accelInput = 1;
+        }
+        else if (Input.GetKey(KeyCode.DownArrow))
+        {
+            accelInput = -1;
+        }
+
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            steerInput = 1;
+        }
+        else if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            steerInput = -1;
+        }
+
         bool drifInput = Input.GetKey(KeyCode.LeftShift);
         bool flipInput = Input.GetButtonDown("Jump");
 
-        InputHandler(accelerationInput, steeringInput, flipInput, drifInput);
+        InputHandler(accelInput, steerInput, flipInput, drifInput);
     }
 
     private void FixedUpdate()
