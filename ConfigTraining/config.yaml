@@ -28,6 +28,6 @@ behaviors:
       demo_path: BrainDemos\KartDriveDemo.demo
       strength: 1.0
     keep_checkpoints: 5
-    max_steps: 5000000
+    max_steps: 2000000
     time_horizon: 3
     summary_freq: 20000
