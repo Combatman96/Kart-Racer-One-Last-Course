@@ -67,7 +67,7 @@ public class KartAgent : Agent
     {
         Debug.Log("Episode begin");
         InitCheckPoint();
-        // DoStart(); //Comment this if not training
+        DoStart(); //Comment this if not training
     }
 
     public override void CollectObservations(VectorSensor sensor)
