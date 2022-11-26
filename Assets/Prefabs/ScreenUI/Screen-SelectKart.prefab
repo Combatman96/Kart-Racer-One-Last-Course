@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 3187623514903886102}
   - component: {fileID: 3733544231638927342}
   m_Layer: 5
-  m_Name: Button
+  m_Name: ContinueBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -414,7 +414,7 @@ MonoBehaviour:
   _kartSelectTxt: {fileID: 2453256083888267300}
   _nextKartBtn: {fileID: 6999729230680652072}
   _previousKartBtn: {fileID: 9190888479130545884}
-  _continueBtn: {fileID: 0}
+  _continueBtn: {fileID: 3733544231638927342}
   _rotateSpeed: 2
 --- !u!1 &6470751803461429213
 GameObject:
