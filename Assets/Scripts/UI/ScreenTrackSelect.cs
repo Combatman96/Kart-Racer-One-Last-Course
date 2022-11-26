@@ -13,9 +13,9 @@ public class ScreenTrackSelect : BaseUI
     // Start is called before the first frame update
     void Start()
     {
-        SetEvent(_circusTrackBtn, () => OnTrackSelect(SceneName.CircusTrack));
-        SetEvent(_spaceTrackBtn, () => OnTrackSelect(SceneName.SpaceTrack));
-        SetEvent(_cityTrackBtn, () => OnTrackSelect(SceneName.CityTrack));
+        SetEvent(_circusTrackBtn, () => OnTrackSelect(SceneName.RaceCircus));
+        SetEvent(_spaceTrackBtn, () => OnTrackSelect(SceneName.SpaceCircus));
+        SetEvent(_cityTrackBtn, () => OnTrackSelect(SceneName.CityCircus));
     }
 
     private void OnTrackSelect(SceneName track)

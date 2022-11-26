@@ -17,10 +17,8 @@ public class SceneConfig : ScriptableObject
 
 public enum SceneName
 {
-    TitleScreen = 0,
-    OptionsScreen = 1,
-    KartSelectScreen = 2,
-    CircusTrack,
-    SpaceTrack,
-    CityTrack
+    TitleScreen,
+    RaceCircus,
+    SpaceCircus,
+    CityCircus
 }
