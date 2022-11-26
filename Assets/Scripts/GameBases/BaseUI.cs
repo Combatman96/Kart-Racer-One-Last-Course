@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class BaseUI : MonoBehaviour
 {
@@ -13,7 +14,8 @@ public class BaseUI : MonoBehaviour
     
     public virtual void Show()
     {
-        var listScreen = UIController.instance.listScreen;
+        var UI = FindObjectOfType<BaseUIController>();
+        var listScreen = UI.GetListScreens();
         if(listScreen.Count == 0) return;
 
         foreach(var screen in listScreen)

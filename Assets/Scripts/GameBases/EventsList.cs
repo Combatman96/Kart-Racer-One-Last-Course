@@ -9,6 +9,7 @@ public static class EventsList
 
 public static class GameEvent
 {
+    public const string GameTitleScreen = "GameEvent.GameTitleScreen";
     public const string Empty_Event = "GameEvent.Empty_Event";
     public const string Kart_Selected = "GameEvent.Kart_Selected";
     public const string Track_Selected = "GameEvent.Track_Selected";
