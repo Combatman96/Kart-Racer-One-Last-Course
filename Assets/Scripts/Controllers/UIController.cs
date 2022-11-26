@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class UIController : MonoBehaviour
+public class UIController : BaseUIController
 {
     public static UIController instance;
 
@@ -75,5 +75,13 @@ public class UIController : MonoBehaviour
         }
     }
 
+    public void ShowScreen(BaseUI screen)
+    {
+        screen.Show();
+    }
 
+    public override List<BaseUI> GetListScreens()
+    {
+        return listScreen;
+    }
 }

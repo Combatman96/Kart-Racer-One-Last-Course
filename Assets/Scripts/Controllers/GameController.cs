@@ -99,9 +99,10 @@ public class GameController : MonoBehaviour
 
 public enum GameState
 {
-    StartGame,
-    GamePlay,
-    Pause,
-    EndGame
+ StartGame,
+ GamePlay,
+ Pause,
+EndGame,
 }
+
 
