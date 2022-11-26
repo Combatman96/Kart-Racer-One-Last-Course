@@ -9,7 +9,7 @@ public class ScreenMainMenu : BaseUI
     [SerializeField] private Button _freeRaceBtn;
     [SerializeField] private Button _quitBtn;
 
-    private MockupScene _mockupScene => FindObjectOfType<MockupScene>();
+    private MockupScene _mockupScene;
 
     // Start is called before the first frame update
     void Start()
@@ -31,12 +31,13 @@ public class ScreenMainMenu : BaseUI
     public override void Show()
     {
         base.Show();
+        _mockupScene = FindObjectOfType<MockupScene>();
         _mockupScene.gameObject.SetActive(true);
     }
 
     public override void Hide()
     {
         base.Hide();
-        _mockupScene.gameObject.SetActive(false);
+        if(_mockupScene != null) _mockupScene.gameObject.SetActive(false);
     }
 }

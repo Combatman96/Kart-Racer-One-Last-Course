@@ -16,7 +16,7 @@ public class ScreenSelectKart : BaseUI
     private List<KartName> _listKartName;
     [SerializeField] Button _continueBtn;
 
-    private KartDisplay kartDisplay => FindObjectOfType<KartDisplay>(true);
+    private KartDisplay _kartDisplay;
     [SerializeField] private float _rotateSpeed = 2f;
 
     // Start is called before the first frame update
@@ -30,13 +30,14 @@ public class ScreenSelectKart : BaseUI
     public override void Show()
     {
         base.Show();
-        kartDisplay.gameObject.SetActive(true);
+        _kartDisplay = FindObjectOfType<KartDisplay>(true);
+        _kartDisplay.gameObject.SetActive(true);
     }
 
     public override void Hide()
     {
         base.Hide();
-        kartDisplay.gameObject.SetActive(false);
+        if(_kartDisplay != null) _kartDisplay.gameObject.SetActive(false);
     }
 
     public override void DoStart()
@@ -52,9 +53,9 @@ public class ScreenSelectKart : BaseUI
         _index = _index + ((isNext) ? +1 : -1);
         _index = Mathf.Clamp(_index, 0, _listKartName.Count - 1);
         _kartSelect = _listKartName[_index];
-        for (int i = 0; i < kartDisplay.transform.childCount; i++)
+        for (int i = 0; i < _kartDisplay.transform.childCount; i++)
         {
-            var kart = kartDisplay.transform.GetChild(i);
+            var kart = _kartDisplay.transform.GetChild(i);
             kart.gameObject.SetActive(i == _index);
         }
         _kartSelectTxt.text = _kartSelect.ToString();
@@ -63,7 +64,7 @@ public class ScreenSelectKart : BaseUI
     // Update is called once per frame
     void Update()
     {
-        kartDisplay.transform.Rotate(new Vector3( 0, _rotateSpeed, 0), Space.Self);
+        _kartDisplay.transform.Rotate(new Vector3( 0, _rotateSpeed, 0), Space.Self);
     }
 
     void OnContinueBtnClick()
