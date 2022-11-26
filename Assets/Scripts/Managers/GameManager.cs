@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public GameFlow gameFlow;
+
     public SceneName scene;
 
     private void Awake()
@@ -37,14 +37,17 @@ public class GameManager : MonoBehaviour
                 break;
             case GameEvent.Kart_Selected:
                 var kartSelected = (KartName)p[0];
+                Debug.Log("KART SELECT : " + kartSelected.ToString());
                 SetPlayerKart(kartSelected);
                 break;
             case GameEvent.Track_Selected:
                 var trackName = (SceneName)p[0];
+                Debug.Log("TRACK SELECT : " + trackName.ToString());
                 LoadScene(trackName);
                 break;
             case GameEvent.GameMode_Selected:
                 var mode = (GameMode)p[0];
+                Debug.Log("GAME MODE : " + mode.ToString());
                 SetGameMode(mode);
                 break;
         }
@@ -87,13 +90,6 @@ public class GameManager : MonoBehaviour
         var sceneConfig = DataManager.instance.config.sceneConfig;
         buidldIndex =  sceneConfig.GetSceneBuildIndex(sceneName);
         SceneManager.LoadScene(buidldIndex, LoadSceneMode.Single);
-    }
-
-    private void SetGameFlow(SceneName sceneName)
-    {
-        if ((int)sceneName > 2) gameFlow = GameFlow.GamePlay;
-        else gameFlow = (GameFlow)((int)sceneName);
-        scene = sceneName;
     }
 
     private void Update()
