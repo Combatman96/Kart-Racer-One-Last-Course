@@ -379,7 +379,7 @@ MonoBehaviour:
   _normalRearGripFactor: 0.59
   _drifRearGripFactor: 0.04
   _drifFrontGripFactor: 0.8
-  _topSpeed: 500
+  _topSpeed: 300
   _speedCurve:
     serializedVersion: 2
     m_Curve:

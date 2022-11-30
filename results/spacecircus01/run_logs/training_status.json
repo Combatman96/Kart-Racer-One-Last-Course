@@ -1,0 +1,29 @@
+{
+    "KartDrive": {
+        "checkpoints": [
+            {
+                "steps": 1365,
+                "file_path": "results\\spacecircus01\\KartDrive\\KartDrive-1365.onnx",
+                "reward": null,
+                "creation_time": 1669364604.184916,
+                "auxillary_file_paths": [
+                    "results\\spacecircus01\\KartDrive\\KartDrive-1365.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1365,
+            "file_path": "results\\spacecircus01\\KartDrive.onnx",
+            "reward": null,
+            "creation_time": 1669364604.184916,
+            "auxillary_file_paths": [
+                "results\\spacecircus01\\KartDrive\\KartDrive-1365.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}
