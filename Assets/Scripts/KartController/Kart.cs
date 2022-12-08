@@ -106,9 +106,9 @@ public class Kart : MonoBehaviour
         Transform suspension = _suspensions.GetChild(wheelIndex);
         Vector3 springDir = suspension.up;
         Vector3 springVel = _rigidbody.GetPointVelocity(suspension.position);
-        float offet = _length - hit.distance;
+        float offset = _length - hit.distance;
         float velocity = Vector3.Dot(springDir, springVel);
-        float force = (offet * _strength) - (velocity * _damper);
+        float force = (offset * _strength) - (velocity * _damper);
         _rigidbody.AddForceAtPosition(springDir * force, suspension.position);
     }
 
