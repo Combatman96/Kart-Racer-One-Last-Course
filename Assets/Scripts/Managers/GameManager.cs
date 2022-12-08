@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
             case GameEvent.Track_Selected:
                 var trackName = (SceneName)p[0];
                 Debug.Log("TRACK SELECT : " + trackName.ToString());
-                // LoadScene(trackName);
+                LoadScene(trackName);
                 break;
             case GameEvent.GameMode_Selected:
                 var mode = (GameMode)p[0];
