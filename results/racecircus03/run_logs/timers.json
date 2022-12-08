@@ -1,0 +1,42 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1669122271",
+        "python_version": "3.7.9 (tags/v3.7.9:13c94747c7, Aug 17 2020, 18:58:18) [MSC v.1900 64 bit (AMD64)]",
+        "command_line_arguments": "F:\\Projects\\Unity-Projects\\Kart-Racer-One-Last-Course\\venv\\Scripts\\mlagents-learn ConfigTraining\\config2.yaml --initialize-from=racecircus02 --run-id=racecircus03",
+        "mlagents_version": "0.28.0",
+        "mlagents_envs_version": "0.28.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "1.7.1+cu110",
+        "numpy_version": "1.21.2",
+        "end_time_seconds": "1669122348"
+    },
+    "total": 76.4836994,
+    "count": 1,
+    "self": 0.006902900000000045,
+    "children": {
+        "run_training.setup": {
+            "total": 0.07192049999999994,
+            "count": 1,
+            "self": 0.07192049999999994
+        },
+        "TrainerController.start_learning": {
+            "total": 76.404876,
+            "count": 1,
+            "self": 0.00011620000002210418,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 76.40474139999999,
+                    "count": 1,
+                    "self": 76.40474139999999
+                },
+                "TrainerController._save_models": {
+                    "total": 1.8399999987650517e-05,
+                    "count": 1,
+                    "self": 1.8399999987650517e-05
+                }
+            }
+        }
+    }
+}

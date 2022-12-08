@@ -1,0 +1,65 @@
+{
+    "KartDrive": {
+        "checkpoints": [
+            {
+                "steps": 1499997,
+                "file_path": "results\\spacecircus03\\KartDrive\\KartDrive-1499997.onnx",
+                "reward": null,
+                "creation_time": 1669417479.5460308,
+                "auxillary_file_paths": [
+                    "results\\spacecircus03\\KartDrive\\KartDrive-1499997.pt"
+                ]
+            },
+            {
+                "steps": 1999998,
+                "file_path": "results\\spacecircus03\\KartDrive\\KartDrive-1999998.onnx",
+                "reward": null,
+                "creation_time": 1669433526.9874642,
+                "auxillary_file_paths": [
+                    "results\\spacecircus03\\KartDrive\\KartDrive-1999998.pt"
+                ]
+            },
+            {
+                "steps": 2499999,
+                "file_path": "results\\spacecircus03\\KartDrive\\KartDrive-2499999.onnx",
+                "reward": null,
+                "creation_time": 1669453344.776497,
+                "auxillary_file_paths": [
+                    "results\\spacecircus03\\KartDrive\\KartDrive-2499999.pt"
+                ]
+            },
+            {
+                "steps": 2999997,
+                "file_path": "results\\spacecircus03\\KartDrive\\KartDrive-2999997.onnx",
+                "reward": null,
+                "creation_time": 1669472797.8781474,
+                "auxillary_file_paths": [
+                    "results\\spacecircus03\\KartDrive\\KartDrive-2999997.pt"
+                ]
+            },
+            {
+                "steps": 3167892,
+                "file_path": "results\\spacecircus03\\KartDrive\\KartDrive-3167892.onnx",
+                "reward": null,
+                "creation_time": 1669479301.6992805,
+                "auxillary_file_paths": [
+                    "results\\spacecircus03\\KartDrive\\KartDrive-3167892.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 3167892,
+            "file_path": "results\\spacecircus03\\KartDrive.onnx",
+            "reward": null,
+            "creation_time": 1669479301.6992805,
+            "auxillary_file_paths": [
+                "results\\spacecircus03\\KartDrive\\KartDrive-3167892.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

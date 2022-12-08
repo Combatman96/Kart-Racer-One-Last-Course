@@ -7,7 +7,7 @@ using Unity.MLAgents.Actuators;
 
 public class KartAgent : Agent
 {
-    private Transform _checkPointGroup;
+    private Transform _checkPointGroup => FindObjectOfType<CheckPointGroup>().transform;
     private Kart _kart => GetComponentInParent<Kart>();
 
     [SerializeField] private Transform _spawnPos;
@@ -17,9 +17,15 @@ public class KartAgent : Agent
     private int _nextCheckPointIndex = 0;
     private int _checkPointCount;
 
+    private void DoStart()
+    {
+        _kart.transform.position = _spawnPos.position + new Vector3(Random.Range(-4f, 4f), 0, Random.Range(-4f, 4f));
+        _kart.transform.forward = _spawnPos.forward;
+        _kart.Stop();
+    }
+
     public void InitCheckPoint()
     {
-        _checkPointGroup = FindObjectOfType<CheckPointGroup>().transform;
         _checkPointCount = _checkPointGroup.childCount;
         _nextCheckPointIndex = _firstCheckPoint.GetSiblingIndex() % _checkPointCount;
         _curCheckPointIndex = (_nextCheckPointIndex - 1) % _checkPointCount;
@@ -30,13 +36,15 @@ public class KartAgent : Agent
         int index = checkPoint.GetSiblingIndex();
         if (index == _nextCheckPointIndex)
         {
-            AddReward(1f);
+            AddReward(1.5f);
+            Debug.Log("right way");
             _curCheckPointIndex = _nextCheckPointIndex;
             _nextCheckPointIndex = (_nextCheckPointIndex + 1) % _checkPointCount;
         }
         else
         {
             AddReward(-1f);
+            Debug.Log("wrong way");
         }
     }
 
@@ -45,12 +53,21 @@ public class KartAgent : Agent
         AddReward(-0.1f);
     }
 
+    public void OnWallEnter()
+    {
+        AddReward(-0.8f);
+    }
+
+    public void OnWallStay()
+    {
+        AddReward(-0.1f);
+    }
+
     public override void OnEpisodeBegin()
     {
-        _kart.transform.position = _spawnPos.position = new Vector3(Random.Range(-3f, 3f), 0, Random.Range(-3f, 3f));
-        _kart.transform.forward = _spawnPos.forward;
+        Debug.Log("Episode begin");
         InitCheckPoint();
-        _kart.Stop();
+        DoStart(); //Comment this if not training
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -62,26 +79,31 @@ public class KartAgent : Agent
 
     public override void OnActionReceived(ActionBuffers actions)
     {
-        float verticalInput = actions.ContinuousActions[0];
-        float horizontalInput = actions.ContinuousActions[1];
-        float drifInput = actions.DiscreteActions[0];
+        float acceleration = actions.DiscreteActions[0] - 1f;
+        float steeringInput = actions.DiscreteActions[1] - 1f;
+
+        int drifInput = actions.DiscreteActions[2];
         bool isDrif = (drifInput > 0) ? true : false;
 
-        _kart.InputHandler(verticalInput, horizontalInput, drifInput: isDrif);
+        _kart.InputHandler(acceleration, steeringInput, drifInput: isDrif);
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
     {
-        float accelerationInput = Input.GetAxis("Vertical");
-        float steeringInput = Input.GetAxis("Horizontal");
-        bool drifInput = Input.GetKey(KeyCode.LeftShift);
+        int accelerationInput = 1;
+        int steeringInput = 1;
 
-        ActionSegment<float> continuousActions = actionsOut.ContinuousActions;
-        continuousActions[0] = accelerationInput;
-        continuousActions[1] = steeringInput;
+        if (Input.GetKey(KeyCode.UpArrow)) accelerationInput = 2;
+        if (Input.GetKey(KeyCode.DownArrow)) accelerationInput = 0;
 
-        int dirfValue = (drifInput) ? 1 : 0;
-        ActionSegment<int> discreateActions = actionsOut.DiscreteActions;
-        discreateActions[0] = dirfValue;
+        if (Input.GetKey(KeyCode.RightArrow)) steeringInput = 2;
+        if (Input.GetKey(KeyCode.LeftArrow)) steeringInput = 0;
+
+        int drifInput = (Input.GetKey(KeyCode.LeftShift)) ? 1 : 0;
+
+        ActionSegment<int> discreteActions = actionsOut.DiscreteActions;
+        discreteActions[0] = accelerationInput;
+        discreteActions[1] = steeringInput;
+        discreteActions[2] = drifInput;
     }
 }

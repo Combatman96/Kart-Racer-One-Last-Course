@@ -2,22 +2,22 @@
     "KartDrive": {
         "checkpoints": [
             {
-                "steps": 128,
-                "file_path": "results\\ppo\\KartDrive\\KartDrive-128.onnx",
+                "steps": 45648,
+                "file_path": "results\\ppo\\KartDrive\\KartDrive-45648.onnx",
                 "reward": null,
-                "creation_time": 1668241892.9480388,
+                "creation_time": 1668266779.861012,
                 "auxillary_file_paths": [
-                    "results\\ppo\\KartDrive\\KartDrive-128.pt"
+                    "results\\ppo\\KartDrive\\KartDrive-45648.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 128,
+            "steps": 45648,
             "file_path": "results\\ppo\\KartDrive.onnx",
             "reward": null,
-            "creation_time": 1668241892.9480388,
+            "creation_time": 1668266779.861012,
             "auxillary_file_paths": [
-                "results\\ppo\\KartDrive\\KartDrive-128.pt"
+                "results\\ppo\\KartDrive\\KartDrive-45648.pt"
             ]
         }
     },

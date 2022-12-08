@@ -44,6 +44,8 @@ public class Kart : MonoBehaviour
     private float _acceleration = 0f;
     private float _steering = 0f;
 
+    private KartAgent _kartAgent => GetComponentInChildren<KartAgent>();
+
     private void Awake()
     {
         _frontTiresGripFactor = _normalFrontGripFactor;
@@ -53,6 +55,7 @@ public class Kart : MonoBehaviour
     public void InputHandler(float accelerationInput, float steeringInput, bool flipInput = false, bool drifInput = false)
     {
         _acceleration = accelerationInput * _topSpeed;
+        if (_acceleration < 0) _acceleration = accelerationInput * _topSpeed * 0.18f;
         for (int i = 0; i < 2; i++)
         {
             var suspension = _suspensions.GetChild(i);
@@ -103,9 +106,9 @@ public class Kart : MonoBehaviour
         Transform suspension = _suspensions.GetChild(wheelIndex);
         Vector3 springDir = suspension.up;
         Vector3 springVel = _rigidbody.GetPointVelocity(suspension.position);
-        float offet = _length - hit.distance;
+        float offset = _length - hit.distance;
         float velocity = Vector3.Dot(springDir, springVel);
-        float force = (offet * _strength) - (velocity * _damper);
+        float force = (offset * _strength) - (velocity * _damper);
         _rigidbody.AddForceAtPosition(springDir * force, suspension.position);
     }
 
@@ -211,6 +214,38 @@ public class Kart : MonoBehaviour
             int kartIndex = transform.GetSiblingIndex();
             Vector3 vel = _rigidbody.velocity.normalized;
             EventController.instance.RaiseEvent(EventGameplay.Kart_Cross_Finish_Line, new object[] { kartIndex, vel });
+        }
+        if (_kartAgent == null) return;
+        if (other.CompareTag("CheckPoint"))
+        {
+            _kartAgent.OnCheckPointReached(other.transform);
+        }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (_kartAgent == null) return;
+        if (other.gameObject.CompareTag("Wall"))
+        {
+            _kartAgent.OnWallEnter();
+        }
+    }
+
+    private void OnCollisionStay(Collision other)
+    {
+        if (_kartAgent == null) return;
+        if (other.gameObject.CompareTag("Wall"))
+        {
+            _kartAgent.OnWallStay();
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (_kartAgent == null) return;
+        if (other.CompareTag("CheckPoint"))
+        {
+            _kartAgent.OnCheckPointStay();
         }
     }
 

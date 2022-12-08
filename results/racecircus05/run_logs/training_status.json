@@ -1,0 +1,56 @@
+{
+    "KartDrive": {
+        "checkpoints": [
+            {
+                "steps": 499998,
+                "file_path": "results\\racecircus05\\KartDrive\\KartDrive-499998.onnx",
+                "reward": null,
+                "creation_time": 1669222512.3946843,
+                "auxillary_file_paths": [
+                    "results\\racecircus05\\KartDrive\\KartDrive-499998.pt"
+                ]
+            },
+            {
+                "steps": 999998,
+                "file_path": "results\\racecircus05\\KartDrive\\KartDrive-999998.onnx",
+                "reward": null,
+                "creation_time": 1669240417.92656,
+                "auxillary_file_paths": [
+                    "results\\racecircus05\\KartDrive\\KartDrive-999998.pt"
+                ]
+            },
+            {
+                "steps": 1499999,
+                "file_path": "results\\racecircus05\\KartDrive\\KartDrive-1499999.onnx",
+                "reward": null,
+                "creation_time": 1669258372.83217,
+                "auxillary_file_paths": [
+                    "results\\racecircus05\\KartDrive\\KartDrive-1499999.pt"
+                ]
+            },
+            {
+                "steps": 1709248,
+                "file_path": "results\\racecircus05\\KartDrive\\KartDrive-1709248.onnx",
+                "reward": null,
+                "creation_time": 1669265911.5928297,
+                "auxillary_file_paths": [
+                    "results\\racecircus05\\KartDrive\\KartDrive-1709248.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1709248,
+            "file_path": "results\\racecircus05\\KartDrive.onnx",
+            "reward": null,
+            "creation_time": 1669265911.5928297,
+            "auxillary_file_paths": [
+                "results\\racecircus05\\KartDrive\\KartDrive-1709248.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}
