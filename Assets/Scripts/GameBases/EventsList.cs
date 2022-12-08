@@ -14,6 +14,7 @@ public static class GameEvent
     public const string Kart_Selected = "GameEvent.Kart_Selected";
     public const string Track_Selected = "GameEvent.Track_Selected";
     public const string GameMode_Selected = "GameEvent.GameMode_Selected";
+    public const string Show_Record = "GameEvent.Show_Record";
 }
 
 public static class EventGameplay

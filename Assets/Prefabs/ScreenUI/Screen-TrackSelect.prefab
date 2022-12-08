@@ -361,6 +361,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8099981386452437649, guid: 6ab6a59b9b7b4594b8cd135e4c10ba35, type: 3}
+      propertyPath: m_text
+      value: 'Race
+
+        Circus'
+      objectReference: {fileID: 0}
     - target: {fileID: 9056135230449101028, guid: 6ab6a59b9b7b4594b8cd135e4c10ba35, type: 3}
       propertyPath: m_TargetGraphic
       value: 
@@ -478,6 +484,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8099981386452437649, guid: 6ab6a59b9b7b4594b8cd135e4c10ba35, type: 3}
+      propertyPath: m_text
+      value: Space Circus
+      objectReference: {fileID: 0}
     - target: {fileID: 9056135230449101028, guid: 6ab6a59b9b7b4594b8cd135e4c10ba35, type: 3}
       propertyPath: m_TargetGraphic
       value: 
@@ -594,6 +604,12 @@ PrefabInstance:
     - target: {fileID: 3748827788427196733, guid: 6ab6a59b9b7b4594b8cd135e4c10ba35, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8099981386452437649, guid: 6ab6a59b9b7b4594b8cd135e4c10ba35, type: 3}
+      propertyPath: m_text
+      value: 'City
+
+        CirCus'
       objectReference: {fileID: 0}
     - target: {fileID: 9056135230449101028, guid: 6ab6a59b9b7b4594b8cd135e4c10ba35, type: 3}
       propertyPath: m_TargetGraphic

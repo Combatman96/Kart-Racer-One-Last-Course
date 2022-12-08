@@ -17,7 +17,7 @@ public class SceneConfig : ScriptableObject
 
 public enum SceneName
 {
-    TitleScreen,
+    TitleScreen = 0,
     RaceCircus,
     SpaceCircus,
     CityCircus

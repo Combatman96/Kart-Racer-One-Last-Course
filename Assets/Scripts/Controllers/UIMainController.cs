@@ -5,7 +5,7 @@ using System.Linq;
 
 public class UIMainController : BaseUIController
 {
-        public static UIMainController instance;
+    public static UIMainController instance;
 
     private void Awake()
     {
@@ -18,6 +18,7 @@ public class UIMainController : BaseUIController
     public ScreenMainMenu screenMainMenu => GetComponentInChildren<ScreenMainMenu>(true);
     public ScreenSelectKart screenSelectKart => GetComponentInChildren<ScreenSelectKart>(true);
     public ScreenTrackSelect screenTrackSelect => GetComponentInChildren<ScreenTrackSelect>(true);
+    public ScreenRecord screenRecord => GetComponentInChildren<ScreenRecord>(true);
 
     private void Start()
     {
@@ -46,17 +47,21 @@ public class UIMainController : BaseUIController
                 break;
             case GameEvent.Kart_Selected:
                 var mode = DataManager.instance.gameData.gameMode;
-                if(mode == GameMode.Arcade)
+                if (mode == GameMode.Arcade)
                 {
                     return;
                 }
-                if(mode == GameMode.FreeRace)
+                if (mode == GameMode.FreeRace)
                 {
                     screenTrackSelect.Show();
                     screenTrackSelect.DoStart();
                 }
                 break;
             case GameEvent.Track_Selected:
+                break;
+            case GameEvent.Show_Record:
+                screenRecord.Show();
+                screenRecord.DoStart();
                 break;
         }
     }
