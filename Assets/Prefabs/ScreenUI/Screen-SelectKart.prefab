@@ -296,7 +296,7 @@ MonoBehaviour:
   _nextKartBtn: {fileID: 6999729230680652072}
   _previousKartBtn: {fileID: 9190888479130545884}
   _continueBtn: {fileID: 3733544231638927342}
-  _rotateSpeed: 2
+  _rotateSpeed: 0.2
 --- !u!1 &7043654291009202929
 GameObject:
   m_ObjectHideFlags: 0

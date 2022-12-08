@@ -20,6 +20,20 @@ public class DataManager : MonoBehaviour
     [SerializeField] private bool _isPersistance;
     private const string _SAVE_FILE = "SaveData\\SaveFile.json";
 
+    private void Start()
+    {
+        try
+        {
+            LoadPlayerData();
+            Debug.Log("load Player data");
+        }
+        catch (System.Exception)
+        {
+            Debug.Log("FILE NOT FOUND");
+            playerData.InitRecords();
+        }
+    }
+
     public void SavePlayerData()
     {
         string data = JsonUtility.ToJson(playerData);

@@ -50,6 +50,9 @@ public class GameManager : MonoBehaviour
                 Debug.Log("GAME MODE : " + mode.ToString());
                 SetGameMode(mode);
                 break;
+            case GameEvent.Game_Title_Screen:
+                LoadScene(SceneName.TitleScreen);
+                break;
         }
     }
 
@@ -63,7 +66,7 @@ public class GameManager : MonoBehaviour
     {
         var dataGame = DataManager.instance.gameData;
         dataGame.playerKartName = kartName;
-        switch(dataGame.gameMode)
+        switch (dataGame.gameMode)
         {
             case GameMode.Arcade:
                 //Change to race track scene
@@ -88,8 +91,9 @@ public class GameManager : MonoBehaviour
     {
         int buidldIndex = 0;
         var sceneConfig = DataManager.instance.config.sceneConfig;
-        buidldIndex =  sceneConfig.GetSceneBuildIndex(sceneName);
+        buidldIndex = sceneConfig.GetSceneBuildIndex(sceneName);
         SceneManager.LoadScene(buidldIndex, LoadSceneMode.Single);
+        Debug.Log("uiui");
     }
 
     private void Update()

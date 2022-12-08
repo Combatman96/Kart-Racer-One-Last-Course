@@ -19,15 +19,20 @@ public class PlayerData
         }
     }
 
-    public RaceData GetRecordByTrack(SceneName track)
+    public RaceData GetRecordDataByTrack(SceneName track)
     {
         return records.SingleOrDefault(x => x.track == track).raceData;
+    }
+
+    public Record GetRecordByTrack(SceneName track)
+    {
+        return records.SingleOrDefault(x => x.track == track);
     }
 
     public bool IsNewRecord(SceneName track, RaceData raceData)
     {
         InitRecords();
-        RaceData data = GetRecordByTrack(track);
+        RaceData data = GetRecordDataByTrack(track);
         var newTime = raceData.endRaceTicks - raceData.startRaceTicks;
         var oldTime = data.endRaceTicks - data.startRaceTicks;
         if (oldTime > newTime || oldTime == 0)
@@ -37,7 +42,7 @@ public class PlayerData
 
     public void UpdateRaceData(SceneName track, RaceData raceData)
     {
-        var data = GetRecordByTrack(track);
+        var data = GetRecordDataByTrack(track);
         data = raceData;
     }
 }
@@ -52,6 +57,16 @@ public class Record
     {
         this.track = track;
         this.raceData = raceData;
+    }
+
+    public int GetRecordPos()
+    {
+        return raceData.racePosition;
+    }
+
+    public string GetRecordTime()
+    {
+        return raceData.GetRaceTime();
     }
 }
 

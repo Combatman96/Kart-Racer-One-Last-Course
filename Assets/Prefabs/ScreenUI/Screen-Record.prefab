@@ -1785,7 +1785,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90fe00c5bb82412489786dc0b6aacebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isHideOtherScreen: 0
+  _isHideOtherScreen: 1
+  trackTxts:
+  - {fileID: 6958983733771885420}
+  - {fileID: 4103603260267831719}
+  - {fileID: 457719086916181714}
+  timeTxts:
+  - {fileID: 3408495862907447420}
+  - {fileID: 3362375658000695040}
+  - {fileID: 7561299238329254166}
+  posTxts:
+  - {fileID: 2947699155205281179}
+  - {fileID: 2794619600613989206}
+  - {fileID: 7920576517935475844}
+  backBtn: {fileID: 8315239978088583541}
 --- !u!1 &7623806919664648242
 GameObject:
   m_ObjectHideFlags: 0
@@ -2265,6 +2278,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4882992010799171189, guid: 58a6aaec9bf90a144b113bada6cd1d62, type: 3}
   m_PrefabInstance: {fileID: 810246653087926003}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8315239978088583541 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8672588995602519942, guid: 58a6aaec9bf90a144b113bada6cd1d62, type: 3}
+  m_PrefabInstance: {fileID: 810246653087926003}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4535346207939085557
 PrefabInstance:
   m_ObjectHideFlags: 0

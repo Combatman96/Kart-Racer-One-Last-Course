@@ -7,6 +7,6 @@ public class TitleController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        EventManager.instance.RaiseEvent(GameEvent.GameTitleScreen);
+        EventManager.instance.RaiseEvent(GameEvent.Main_Menu);
     }
 }

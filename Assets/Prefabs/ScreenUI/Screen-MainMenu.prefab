@@ -939,6 +939,7 @@ MonoBehaviour:
   _isHideOtherScreen: 1
   _arcadeBtn: {fileID: 7005375273709872259}
   _freeRaceBtn: {fileID: 7005375275289716971}
+  _recordBtn: {fileID: 8550267597524411044}
   _quitBtn: {fileID: 7005375275184806901}
 --- !u!1 &7005375275289716973
 GameObject:

@@ -37,7 +37,7 @@ public class UIMainController : BaseUIController
             case EventGameplay.Empty_Event:
                 Debug.Log(eventName);
                 break;
-            case GameEvent.GameTitleScreen:
+            case GameEvent.Main_Menu:
                 screenMainMenu.Show();
                 screenMainMenu.DoStart();
                 break;
