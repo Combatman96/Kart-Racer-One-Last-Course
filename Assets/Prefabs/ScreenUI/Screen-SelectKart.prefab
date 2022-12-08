@@ -295,6 +295,7 @@ MonoBehaviour:
   _kartSelectTxt: {fileID: 2453256083888267300}
   _nextKartBtn: {fileID: 6999729230680652072}
   _previousKartBtn: {fileID: 9190888479130545884}
+  _backBtn: {fileID: 2377482665702648319}
   _continueBtn: {fileID: 3733544231638927342}
   _rotateSpeed: 0.2
 --- !u!1 &7043654291009202929
@@ -770,6 +771,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4882992010799171189, guid: 58a6aaec9bf90a144b113bada6cd1d62, type: 3}
   m_PrefabInstance: {fileID: 6387716562220187257}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2377482665702648319 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8672588995602519942, guid: 58a6aaec9bf90a144b113bada6cd1d62, type: 3}
+  m_PrefabInstance: {fileID: 6387716562220187257}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7795836857687068460
 PrefabInstance:
   m_ObjectHideFlags: 0

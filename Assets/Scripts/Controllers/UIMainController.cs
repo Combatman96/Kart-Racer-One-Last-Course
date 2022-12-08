@@ -46,18 +46,12 @@ public class UIMainController : BaseUIController
                 screenSelectKart.DoStart();
                 break;
             case GameEvent.Kart_Selected:
-                var mode = DataManager.instance.gameData.gameMode;
-                if (mode == GameMode.Arcade)
-                {
-                    return;
-                }
-                if (mode == GameMode.FreeRace)
-                {
-                    screenTrackSelect.Show();
-                    screenTrackSelect.DoStart();
-                }
                 break;
             case GameEvent.Track_Selected:
+                break;
+            case GameEvent.Select_Race_Track:
+                screenTrackSelect.Show();
+                screenTrackSelect.DoStart();
                 break;
             case GameEvent.Show_Record:
                 screenRecord.Show();

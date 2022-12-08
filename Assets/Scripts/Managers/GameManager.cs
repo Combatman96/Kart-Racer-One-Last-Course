@@ -69,10 +69,13 @@ public class GameManager : MonoBehaviour
         switch (dataGame.gameMode)
         {
             case GameMode.Arcade:
-                //Change to race track scene
+                var arcadeConfig = DataManager.instance.config.arcadeConfig;
+                int firstBuildIndex = arcadeConfig.trackScenes[0].buidldIndex;
+                LoadScene(firstBuildIndex);
                 break;
             case GameMode.FreeRace:
                 //Change to track select screen
+                EventManager.instance.RaiseEvent(GameEvent.Select_Race_Track);
                 break;
         }
     }

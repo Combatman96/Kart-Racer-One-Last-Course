@@ -9,6 +9,11 @@ public class ScreenTrackSelect : BaseUI
     [SerializeField] Button _spaceTrackBtn;
     [SerializeField] Button _cityTrackBtn;
 
+    public override void Show()
+    {
+        base.Show();
+        Debug.Log("track select");
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -21,5 +26,5 @@ public class ScreenTrackSelect : BaseUI
     private void OnTrackSelect(SceneName track)
     {
         EventManager.instance.RaiseEvent(GameEvent.Track_Selected, new object[] { track });
-    }    
+    }
 }
