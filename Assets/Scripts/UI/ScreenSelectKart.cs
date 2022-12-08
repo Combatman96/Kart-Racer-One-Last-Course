@@ -12,6 +12,7 @@ public class ScreenSelectKart : BaseUI
     [SerializeField] private TextMeshProUGUI _kartSelectTxt;
     [SerializeField] private Button _nextKartBtn;
     [SerializeField] private Button _previousKartBtn;
+    [SerializeField] private Button _backBtn;
     private int _index = 0;
     private List<KartName> _listKartName;
     [SerializeField] Button _continueBtn;
@@ -23,8 +24,9 @@ public class ScreenSelectKart : BaseUI
     void Start()
     {
         SetEvent(_previousKartBtn, () => SetKartSelect(false));
-        SetEvent(_nextKartBtn, ()=> SetKartSelect(true));
+        SetEvent(_nextKartBtn, () => SetKartSelect(true));
         SetEvent(_continueBtn, () => OnContinueBtnClick());
+        SetEvent(_backBtn, () => OnBackBtnClick());
     }
 
     public override void Show()
@@ -37,7 +39,7 @@ public class ScreenSelectKart : BaseUI
     public override void Hide()
     {
         base.Hide();
-        if(_kartDisplay != null) _kartDisplay.gameObject.SetActive(false);
+        if (_kartDisplay != null) _kartDisplay.gameObject.SetActive(false);
     }
 
     public override void DoStart()
@@ -64,7 +66,7 @@ public class ScreenSelectKart : BaseUI
     // Update is called once per frame
     void Update()
     {
-        _kartDisplay.transform.Rotate(new Vector3( 0, _rotateSpeed, 0), Space.Self);
+        _kartDisplay.transform.Rotate(new Vector3(0, _rotateSpeed, 0), Space.Self);
     }
 
     void OnContinueBtnClick()
@@ -72,5 +74,10 @@ public class ScreenSelectKart : BaseUI
         EventManager.instance.RaiseEvent(GameEvent.Kart_Selected, new object[] {
             _kartSelect
         });
+    }
+
+    void OnBackBtnClick()
+    {
+        EventManager.instance.RaiseEvent(GameEvent.Main_Menu);
     }
 }
