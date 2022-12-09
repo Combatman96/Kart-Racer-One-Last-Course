@@ -12,5 +12,18 @@ public class ArcadeConfig : ScriptableObject
     {
         return trackScenes.SingleOrDefault(x => x.scene == sceneName).buidldIndex;
     }
+
+    public SceneName GetNextScene(SceneName sceneName)
+    {
+        SceneName nextScene = SceneName.TitleScreen;
+        int curIndex = trackScenes.FindIndex(x => x.scene == sceneName);
+        if (curIndex >= trackScenes.Count - 1)
+        {
+            return nextScene;
+        }
+        int nextIndex = curIndex + 1;
+        nextScene = trackScenes[nextIndex].scene;
+        return nextScene;
+    }
 }
 

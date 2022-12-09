@@ -18,7 +18,14 @@ public class ScreenIngame : BaseUI
     [SerializeField] private TextMeshProUGUI _currentLap;
     [SerializeField] private TextMeshProUGUI _totalLap;
 
+    [SerializeField] Button pauseBtn;
+
     private Kart _playerKart;
+
+    private void Start()
+    {
+        SetEvent(pauseBtn, () => OnPauseGame());
+    }
 
     public override void DoStart()
     {
@@ -56,5 +63,10 @@ public class ScreenIngame : BaseUI
     public void SetLapCounter(int lap)
     {
         _currentLap.SetText(lap.ToString());
+    }
+
+    void OnPauseGame()
+    {
+        EventController.instance.RaiseEvent(EventGameplay.Change_State_Game, new object[] { GameState.Pause });
     }
 }

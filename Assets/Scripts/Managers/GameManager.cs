@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
 
-    public SceneName scene;
+    public SceneName scene = SceneName.TitleScreen;
 
     private void Awake()
     {
@@ -70,8 +70,8 @@ public class GameManager : MonoBehaviour
         {
             case GameMode.Arcade:
                 var arcadeConfig = DataManager.instance.config.arcadeConfig;
-                int firstBuildIndex = arcadeConfig.trackScenes[0].buidldIndex;
-                LoadScene(firstBuildIndex);
+                SceneName firstScene = arcadeConfig.trackScenes[0].scene;
+                LoadScene(firstScene);
                 break;
             case GameMode.FreeRace:
                 //Change to track select screen
@@ -90,13 +90,29 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(buidldIndex, LoadSceneMode.Single);
     }
 
+    public void ReLoadScene()
+    {
+        LoadScene(this.scene);
+    }
+
     public void LoadScene(SceneName sceneName)
     {
         int buidldIndex = 0;
         var sceneConfig = DataManager.instance.config.sceneConfig;
         buidldIndex = sceneConfig.GetSceneBuildIndex(sceneName);
         SceneManager.LoadScene(buidldIndex, LoadSceneMode.Single);
-        Debug.Log("uiui");
+        scene = sceneName;
+        // Debug.Log("uiui");
+    }
+
+    public void OnRaceComplete()
+    {
+        var Data = DataManager.instance;
+        if (Data.gameData.gameMode == GameMode.Arcade)
+        {
+            var nextScene = Data.config.arcadeConfig.GetNextScene(scene);
+            LoadScene(nextScene);
+        }
     }
 
     private void Update()

@@ -44,9 +44,9 @@ public class Kart : MonoBehaviour
     private float _acceleration = 0f;
     private float _steering = 0f;
 
-    private KartAgent _kartAgent => GetComponentInChildren<KartAgent>();
+    [SerializeField] private KartAgent _kartAgent;
 
-    private void Awake()
+    private void Start()
     {
         _frontTiresGripFactor = _normalFrontGripFactor;
         _rearTiresGripFactor = _normalRearGripFactor;
@@ -54,6 +54,8 @@ public class Kart : MonoBehaviour
 
     public void InputHandler(float accelerationInput, float steeringInput, bool flipInput = false, bool drifInput = false)
     {
+        // if (GameController.instance.gameState != GameState.GamePlay) return;
+
         _acceleration = accelerationInput * _topSpeed;
         if (_acceleration < 0) _acceleration = accelerationInput * _topSpeed * 0.18f;
         for (int i = 0; i < 2; i++)
@@ -258,6 +260,11 @@ public class Kart : MonoBehaviour
     public void Stop()
     {
         _rigidbody.velocity = Vector3.zero;
+    }
+
+    public void SetIsPlayer(bool isPlayer)
+    {
+        this.isPlayer = isPlayer;
     }
 }
 

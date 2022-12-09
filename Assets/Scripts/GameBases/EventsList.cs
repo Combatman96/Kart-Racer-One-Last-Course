@@ -26,4 +26,8 @@ public static class EventGameplay
     public const string Change_State_Game = "EventGameplay.Change_State_Game";
     public const string Is_New_Record = "EventGameplay.Is_New_Record";
     public const string Player_Cross_FinishLine = "EventGameplay.Player_Cross_FinishLine";
+    public const string Race_Done = "EventGameplay.Race_Done";
+
+    public const string Restart_Race = "EventGameplay.Restart_Race";
+    public const string Quit_Race = "EventGameplay.Quit_Race";
 }

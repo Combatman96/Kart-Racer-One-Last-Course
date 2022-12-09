@@ -523,6 +523,7 @@ MonoBehaviour:
   _confetti: {fileID: 0}
   _raceTimeTxt: {fileID: 2711780148913288529}
   _newRecordTxt: {fileID: 8305741629249731668}
+  _continueBtn: {fileID: 2853507166332966788}
 --- !u!1 &7144271605932596349
 GameObject:
   m_ObjectHideFlags: 0
@@ -761,3 +762,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4882992010799171189, guid: 58a6aaec9bf90a144b113bada6cd1d62, type: 3}
   m_PrefabInstance: {fileID: 6900227231995871234}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2853507166332966788 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8672588995602519942, guid: 58a6aaec9bf90a144b113bada6cd1d62, type: 3}
+  m_PrefabInstance: {fileID: 6900227231995871234}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

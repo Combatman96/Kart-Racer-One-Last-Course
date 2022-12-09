@@ -51,6 +51,7 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 1200
+  _checkPointGroup: {fileID: 0}
   _spawnPos: {fileID: 0}
   _firstCheckPoint: {fileID: 0}
 --- !u!114 &5164559678989794845
@@ -75,9 +76,9 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: ecf714b553ebfdc45909711a3ccc259a, type: 3}
   m_InferenceDevice: 0
-  m_BehaviorType: 0
+  m_BehaviorType: 2
   m_BehaviorName: KartDrive
   TeamId: 0
   m_UseChildSensors: 1

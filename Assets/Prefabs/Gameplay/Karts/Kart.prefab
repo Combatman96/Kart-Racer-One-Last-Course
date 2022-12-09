@@ -273,7 +273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kartName: 0
-  isPlayer: 0
+  isPlayer: 1
   _tireMass: 10
   _suspensions: {fileID: 4587280264126965112}
   _length: 3
@@ -422,6 +422,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _kartAgent: {fileID: 2180014394792142301}
 --- !u!114 &4474266545925749100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -602,7 +603,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9210178157990052527
 Transform:
   m_ObjectHideFlags: 0
@@ -715,6 +716,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: KartAgent
       objectReference: {fileID: 0}
+    - target: {fileID: 5164559678989794847, guid: 67de81bd674b9824faeee3a56cc839c4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67de81bd674b9824faeee3a56cc839c4, type: 3}
 --- !u!4 &2180014394792142291 stripped
@@ -722,3 +727,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5164559678989794834, guid: 67de81bd674b9824faeee3a56cc839c4, type: 3}
   m_PrefabInstance: {fileID: 6479769607907253185}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2180014394792142301 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5164559678989794844, guid: 67de81bd674b9824faeee3a56cc839c4, type: 3}
+  m_PrefabInstance: {fileID: 6479769607907253185}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bd4009a50a77cc42ab887bd66b66a3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

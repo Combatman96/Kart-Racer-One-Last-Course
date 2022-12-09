@@ -5,6 +5,7 @@ using NaughtyAttributes;
 using PathCreation;
 using System.Linq;
 using System;
+using Cinemachine;
 
 public class RaceController : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class RaceController : MonoBehaviour
     private List<float> _lapDistances = new List<float>();
     [SerializeField] private int _lapRequire;
 
+    [SerializeField] private CinemachineVirtualCamera vCamera;
+
     public static RaceController instance;
 
     private void Awake()
@@ -32,6 +35,7 @@ public class RaceController : MonoBehaviour
 
     public void DoStart()
     {
+        Debug.Log("Start race");
         raceDatas.Clear();
         _lapDistances.Clear();
         _lapRequire = DataManager.instance.playerData.gameSetting.lapPerRace;
@@ -40,11 +44,15 @@ public class RaceController : MonoBehaviour
         var playerKartName = DataManager.instance.gameData.playerKartName;
         _playerKart = _karts.SingleOrDefault(x => x.kartName == playerKartName);
         _playerKart.transform.SetSiblingIndex(0);
+
+        vCamera.Follow = _playerKart.transform;
+        vCamera.LookAt = _playerKart.transform;
+
         _karts = kartGroup.GetComponentsInChildren<Kart>().ToList();
         for (int i = 0; i < kartGroup.childCount; i++)
         {
-            _karts[i].isPlayer = false;
             raceDatas.Add(new RaceData(_karts[i].kartName, 0));
+            // _karts[i].SetIsPlayer(true);
             _lapDistances.Add(0);
             kartGroup.GetChild(i).transform.position = _kartPosGroup.GetChild(i).position;
             kartGroup.GetChild(i).transform.rotation = _kartPosGroup.GetChild(i).rotation;
@@ -57,7 +65,12 @@ public class RaceController : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
 
-        _playerKart.isPlayer = true;
+        for (int i = 0; i < kartGroup.childCount; i++)
+        {
+            if (_karts[i].kartName == _playerKart.kartName) continue;
+            _karts[i].SetIsPlayer(false);
+        }
+        _playerKart.SetIsPlayer(true);
         SetStartTimes();
         EventController.instance.RaiseEvent(EventGameplay.Change_State_Game, GameState.GamePlay);
     }

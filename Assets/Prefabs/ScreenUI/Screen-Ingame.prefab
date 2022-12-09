@@ -99,6 +99,7 @@ MonoBehaviour:
   _speedMeter: {fileID: 5275722023276479973}
   _currentLap: {fileID: 3231011392608027786}
   _totalLap: {fileID: 787375021621541153}
+  pauseBtn: {fileID: 1966240347218187374}
 --- !u!1 &1356531890117783495
 GameObject:
   m_ObjectHideFlags: 0

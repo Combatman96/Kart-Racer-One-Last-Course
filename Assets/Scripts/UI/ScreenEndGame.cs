@@ -13,6 +13,13 @@ public class ScreenEndGame : BaseUI
     [SerializeField] TextMeshProUGUI _raceTimeTxt;
     [SerializeField] TextMeshProUGUI _newRecordTxt;
 
+    [SerializeField] Button _continueBtn;
+
+    private void Start()
+    {
+        SetEvent(_continueBtn, () => EventController.instance.RaiseEvent(EventGameplay.Race_Done));
+    }
+
     public override void DoStart()
     {
         ShowResult();

@@ -4,6 +4,15 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/TitleScreen.unity
+    guid: e3a9093784966ed44a58c298be247300
+  - enabled: 1
+    path: Assets/Scenes/TestPositionSystem.unity
+    guid: 33304de32a8c32048ac31d0e4563a7ac
+  - enabled: 1
+    path: Assets/Scenes/NewSpaceTrack.unity
+    guid: 5a090ee3613475c409bef39e3d4988b3
   m_configObjects:
     com.unity.ml-agents.settings: {fileID: 11400000, guid: de10103b0f298fb44a03196943a939ef, type: 2}

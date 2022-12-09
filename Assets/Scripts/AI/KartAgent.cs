@@ -7,7 +7,7 @@ using Unity.MLAgents.Actuators;
 
 public class KartAgent : Agent
 {
-    private Transform _checkPointGroup => FindObjectOfType<CheckPointGroup>().transform;
+    [SerializeField] private Transform _checkPointGroup;
     private Kart _kart => GetComponentInParent<Kart>();
 
     [SerializeField] private Transform _spawnPos;
@@ -26,9 +26,17 @@ public class KartAgent : Agent
 
     public void InitCheckPoint()
     {
-        _checkPointCount = _checkPointGroup.childCount;
-        _nextCheckPointIndex = _firstCheckPoint.GetSiblingIndex() % _checkPointCount;
-        _curCheckPointIndex = (_nextCheckPointIndex - 1) % _checkPointCount;
+        try
+        {
+            _checkPointCount = _checkPointGroup.childCount;
+            _nextCheckPointIndex = _firstCheckPoint.GetSiblingIndex() % _checkPointCount;
+            _curCheckPointIndex = (_nextCheckPointIndex - 1) % _checkPointCount;
+        }
+        catch (System.Exception)
+        {
+
+            // throw;
+        }
     }
 
     public void OnCheckPointReached(Transform checkPoint)
@@ -38,8 +46,16 @@ public class KartAgent : Agent
         {
             AddReward(1.5f);
             Debug.Log("right way");
-            _curCheckPointIndex = _nextCheckPointIndex;
-            _nextCheckPointIndex = (_nextCheckPointIndex + 1) % _checkPointCount;
+            try
+            {
+                _curCheckPointIndex = _nextCheckPointIndex;
+                _nextCheckPointIndex = (_nextCheckPointIndex + 1) % _checkPointCount;
+            }
+            catch (System.Exception)
+            {
+
+                // throw;
+            }
         }
         else
         {
@@ -67,14 +83,20 @@ public class KartAgent : Agent
     {
         Debug.Log("Episode begin");
         InitCheckPoint();
-        DoStart(); //Comment this if not training
+        // DoStart(); //Comment this if not training
     }
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        Vector3 checkPointForward = _checkPointGroup.GetChild(_nextCheckPointIndex).forward;
-        float dotDir = Vector3.Dot(_kart.transform.forward, checkPointForward);
-        sensor.AddObservation(dotDir);
+        try
+        {
+            Vector3 checkPointForward = _checkPointGroup.GetChild(_nextCheckPointIndex).forward;
+            float dotDir = Vector3.Dot(_kart.transform.forward, checkPointForward);
+            sensor.AddObservation(dotDir);
+        }
+        catch (System.Exception)
+        {
+        }
     }
 
     public override void OnActionReceived(ActionBuffers actions)
@@ -85,7 +107,8 @@ public class KartAgent : Agent
         int drifInput = actions.DiscreteActions[2];
         bool isDrif = (drifInput > 0) ? true : false;
 
-        _kart.InputHandler(acceleration, steeringInput, drifInput: isDrif);
+        if (!_kart.isPlayer)
+            _kart.InputHandler(acceleration, steeringInput, drifInput: isDrif);
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
