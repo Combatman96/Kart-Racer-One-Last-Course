@@ -6,9 +6,6 @@ using TMPro;
 
 public class ScreenIngame : BaseUI
 {
-    [Header("Position Counter")]
-    [SerializeField] private TextMeshProUGUI _positionCounter;
-    [SerializeField] private TextMeshProUGUI _totalKartCounter;
 
     [Header("Speed Counter")]
     [SerializeField] private TextMeshProUGUI _speedCounter;
@@ -32,7 +29,6 @@ public class ScreenIngame : BaseUI
         _playerKart = RaceController.instance.GetPlayerKart();
 
         int totalKart = RaceController.instance.GetTotalKart();
-        _totalKartCounter.SetText("/" + totalKart);
         int totalLap = RaceController.instance.GetLapRequire();
         _totalLap.SetText("/" + totalLap);
         _currentLap.SetText("0");
@@ -43,7 +39,6 @@ public class ScreenIngame : BaseUI
         if (GameController.instance.gameState != GameState.GamePlay) return;
 
         UpdateSpeedCounter();
-        UpdatePositionCounter();
     }
 
     public void UpdateSpeedCounter()
@@ -54,11 +49,6 @@ public class ScreenIngame : BaseUI
         _speedCounter.SetText(speed.ToString());
     }
 
-    public void UpdatePositionCounter()
-    {
-        int playerPos = RaceController.instance.GetPlayerRacePosition();
-        _positionCounter.SetText(playerPos.ToString());
-    }
 
     public void SetLapCounter(int lap)
     {
