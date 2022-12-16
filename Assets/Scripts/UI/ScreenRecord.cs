@@ -33,7 +33,7 @@ public class ScreenRecord : BaseUI
 
     private void ShowRecord()
     {
-        for (int i = 0; i < records.Count; i++)
+        for (int i = 0; i < records.Count - 1; i++)
         {
             trackTxts[i].text = records[i].track.ToString();
             timeTxts[i].text = records[i].GetRecordTime();
