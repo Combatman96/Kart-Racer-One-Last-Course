@@ -22,7 +22,7 @@ public class UIController : BaseUIController
 
     private void Start()
     {
-        // EventController.instance.onRaiseEvent += OnEventRaise;
+        EventController.instance.onRaiseEvent += OnEventRaise;
 
         listScreen = GetComponentsInChildren<BaseUI>(true).ToList();
         screenStartGame = GetComponentInChildren<ScreenStartGame>(true);
@@ -33,30 +33,28 @@ public class UIController : BaseUIController
 
     private void OnDestroy()
     {
-        // EventController.instance.onRaiseEvent -= OnEventRaise;
+        EventController.instance.onRaiseEvent -= OnEventRaise;
     }
 
-    // private void OnEventRaise(string eventName, params object[] p)
-    // {
-    //     switch (eventName)
-    //     {
-    //         case EventGameplay.Empty_Event:
-    //             Debug.Log(eventName);
-    //             break;
-    //         case EventGameplay.Change_State_Game:
-    //             GameState state = (GameState)p[0];
-    //             OnGameStateChange(state);
-    //             break;
-    //         case EventGameplay.Is_New_Record:
-    //             bool isNewRecord = (bool)p[0];
-    //             screenEndGame.NewRecord(isNewRecord);
-    //             break;
-    //         case EventGameplay.Player_Cross_FinishLine:
-    //             int lap = (int)p[0];
-    //             screenIngame.SetLapCounter(lap);
-    //             break;
-    //     }
-    // }
+    private void OnEventRaise(string eventName, params object[] p)
+    {
+        switch (eventName)
+        {
+            case EventGameplay.Empty_Event:
+                Debug.Log(eventName);
+                break;
+            case EventGameplay.Change_State_Game:
+                break;
+            case EventGameplay.Is_New_Record:
+                bool isNewRecord = (bool)p[0];
+                screenEndGame.NewRecord(isNewRecord);
+                break;
+            case EventGameplay.Player_Cross_FinishLine:
+                int lap = (int)p[0];
+                screenIngame.SetLapCounter(lap);
+                break;
+        }
+    }
 
     public void OnGameStateChange(GameState state)
     {

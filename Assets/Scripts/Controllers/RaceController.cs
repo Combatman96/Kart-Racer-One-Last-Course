@@ -28,6 +28,8 @@ public class RaceController : MonoBehaviour
 
     public static RaceController instance;
 
+    private List<KartName> clearRaceList = new List<KartName>();
+
     private void Awake()
     {
         if (instance == null) instance = this;
@@ -37,6 +39,7 @@ public class RaceController : MonoBehaviour
     public void DoStart()
     {
         // Debug.Log("Start race");
+        clearRaceList.Clear();
         raceDatas.Clear();
         _lapDistances.Clear();
         _lapRequire = DataManager.instance.playerData.gameSetting.lapPerRace;
@@ -90,12 +93,12 @@ public class RaceController : MonoBehaviour
     private void FixedUpdate()
     {
         return;
-        if (GameController.instance.gameState == GameState.GamePlay)
-        {
-            GetKartsDistances();
-            SetKartsPositionsInRace();
-            MarkKartsPositions();
-        }
+        // if (GameController.instance.gameState == GameState.GamePlay)
+        // {
+        //     GetKartsDistances();
+        //     SetKartsPositionsInRace();
+        //     MarkKartsPositions();
+        // }
     }
 
     private void MarkKartsPositions()
@@ -156,6 +159,7 @@ public class RaceController : MonoBehaviour
 
         Vector3 kartPos = kartGroup.GetChild(kartIndex).position;
         Vector3 trackForward = finishLine.Find("TrackForward").localPosition.normalized;
+        Debug.Log("Hi");
         float dot = Vector3.Dot(inComingDir, trackForward);
         if (dot < 0)
         {
@@ -169,15 +173,19 @@ public class RaceController : MonoBehaviour
             raceDatas[kartIndex].lap += 1;
         }
         _lapDistances[kartIndex] = track.path.length * (raceDatas[kartIndex].lap);
-        UpdatePlayerKartLap(kartIndex);
+        UpdateKartLap(kartIndex);
         CheckEndRace();
     }
 
-    private void UpdatePlayerKartLap(int index)
+    private void UpdateKartLap(int index)
     {
+        var raceData = GetRaceData(_karts[index].kartName);
+        if (raceData.lap == _lapRequire + 1)
+        {
+            clearRaceList.Add(raceData.kartName);
+            raceData.racePosition = GetRacePosition(raceData.kartName);
+        };
         if (!_karts[index].isPlayer) return;
-
-        var raceData = GetRaceData(_playerKart.kartName);
         EventController.instance.RaiseEvent(EventGameplay.Player_Cross_FinishLine, new object[] { raceData.lap });
     }
 
@@ -186,11 +194,11 @@ public class RaceController : MonoBehaviour
         var playerRaceData = GetRaceData(_playerKart.kartName);
         if (playerRaceData.lap <= _lapRequire) return;
 
-        foreach (Transform child in _markerGroup)
-        {
-            child.gameObject.SetActive(false);
-        }
-        int pos = GetRacePosition(_playerKart.kartName);
+        // foreach (Transform child in _markerGroup)
+        // {
+        //     child.gameObject.SetActive(false);
+        // }
+        // int pos = GetRacePosition(_playerKart.kartName);
         SetEndTimes();
         EventController.instance.RaiseEvent(EventGameplay.Change_State_Game, new object[] { GameState.EndGame });
     }
@@ -218,12 +226,13 @@ public class RaceController : MonoBehaviour
 
     public int GetRacePosition(KartName kartName)
     {
-        return racePositions.IndexOf(kartName) + 1;
+        return clearRaceList.IndexOf(kartName) + 1;
     }
 
     public int GetPlayerRacePosition()
     {
-        return GetRacePosition(_playerKart.kartName);
+        // return GetRacePosition(_playerKart.kartName);
+        return clearRaceList.IndexOf(_playerKart.kartName) + 1;
     }
 
     public Kart GetPlayerKart()
