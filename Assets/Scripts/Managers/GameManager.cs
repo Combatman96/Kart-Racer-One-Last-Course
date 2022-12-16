@@ -113,6 +113,10 @@ public class GameManager : MonoBehaviour
             var nextScene = Data.config.arcadeConfig.GetNextScene(scene);
             LoadScene(nextScene);
         }
+        if (Data.gameData.gameMode == GameMode.FreeRace)
+        {
+            LoadScene(SceneName.TitleScreen);
+        }
     }
 
     private void Update()

@@ -15,4 +15,3 @@ MonoBehaviour:
   trackScenes:
   - {fileID: 11400000, guid: fe43df1841a4f1643a99b10231322d0e, type: 2}
   - {fileID: 11400000, guid: 3c0864fbeea52fe42ac397775b43c0d7, type: 2}
-  - {fileID: 11400000, guid: a03670b6a5a8d084dbdc4bf1b553ac1f, type: 2}
