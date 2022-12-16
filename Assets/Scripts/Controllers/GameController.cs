@@ -56,6 +56,7 @@ public class GameController : MonoBehaviour
         if (isNewRecord)
         {
             DataManager.instance.UpdateRecord(track, playerRaceData);
+            // Debug.Log(playerRaceData.GetRaceTime() + " - " + playerRaceData.kartName + " - " + playerRaceData.racePosition);
             DataManager.instance.SavePlayerData();
         }
         EventController.instance.RaiseEvent(EventGameplay.Is_New_Record, new object[] { isNewRecord });

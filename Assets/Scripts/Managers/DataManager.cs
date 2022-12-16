@@ -68,6 +68,8 @@ public class DataManager : MonoBehaviour
 
     public void UpdateRecord(SceneName track, RaceData raceData)
     {
-        playerData.UpdateRaceData(track, raceData);
+        int index = playerData.records.FindIndex(x => x.track == track);
+        playerData.records[index].raceData.racePosition = raceData.racePosition;
+        playerData.records[index].raceData.endRaceTicks = raceData.endRaceTicks;
     }
 }
