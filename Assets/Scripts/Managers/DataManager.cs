@@ -70,6 +70,7 @@ public class DataManager : MonoBehaviour
     {
         int index = playerData.records.FindIndex(x => x.track == track);
         playerData.records[index].raceData.racePosition = raceData.racePosition;
+        playerData.records[index].raceData.startRaceTicks = raceData.startRaceTicks;
         playerData.records[index].raceData.endRaceTicks = raceData.endRaceTicks;
     }
 }
