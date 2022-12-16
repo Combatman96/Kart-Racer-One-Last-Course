@@ -57,7 +57,7 @@ public class Kart : MonoBehaviour
         if (GameController.instance.gameState != GameState.GamePlay) return;
 
         _acceleration = accelerationInput * _topSpeed;
-        if (_acceleration < 0) _acceleration = accelerationInput * _topSpeed * 0.18f;
+        if (_acceleration < 0) _acceleration = accelerationInput * _topSpeed * 0.6f;
         for (int i = 0; i < 2; i++)
         {
             var suspension = _suspensions.GetChild(i);
