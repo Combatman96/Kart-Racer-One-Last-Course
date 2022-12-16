@@ -73,5 +73,5 @@ public class Record
 [Serializable]
 public class GameSetting
 {
-    public int lapPerRace = 1;
+    public int lapPerRace = 3;
 }
