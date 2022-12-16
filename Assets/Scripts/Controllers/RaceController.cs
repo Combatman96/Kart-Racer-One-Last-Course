@@ -90,51 +90,6 @@ public class RaceController : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
-    {
-        return;
-        // if (GameController.instance.gameState == GameState.GamePlay)
-        // {
-        //     GetKartsDistances();
-        //     SetKartsPositionsInRace();
-        //     MarkKartsPositions();
-        // }
-    }
-
-    private void MarkKartsPositions()
-    {
-        var worldPosList = new List<Vector3>();
-        foreach (var x in racePositions)
-        {
-            var worldPos = _karts.SingleOrDefault(k => k.kartName == x).transform.position;
-            worldPosList.Add(worldPos);
-        }
-        var playerPos = GetPlayerRacePosition();
-
-        for (int i = 0; i < _markerGroup.childCount; i++)
-        {
-            var marker = _markerGroup.GetChild(i);
-            if (i > worldPosList.Count - 1)
-            {
-                marker.gameObject.SetActive(false);
-                continue;
-            }
-            marker.position = worldPosList[i] + _markerOffet;
-            marker.forward = UIController.instance.uiCamera.transform.forward;
-            if (i == playerPos - 1)
-            {
-                marker.gameObject.SetActive(false);
-            }
-            else
-            {
-                if (marker.gameObject.activeInHierarchy == false)
-                {
-                    marker.gameObject.SetActive(true);
-                }
-            }
-        }
-    }
-
     [Button]
     public void GetKartsDistances()
     {
@@ -201,17 +156,6 @@ public class RaceController : MonoBehaviour
         // int pos = GetRacePosition(_playerKart.kartName);
         SetEndTimes();
         EventController.instance.RaiseEvent(EventGameplay.Change_State_Game, new object[] { GameState.EndGame });
-    }
-
-    public void SetKartsPositionsInRace()
-    {
-        List<RaceData> DES = new List<RaceData>(raceDatas);
-        DES.Sort((a, b) => b.distance.CompareTo(a.distance));
-        racePositions = DES.Select(x => x.kartName).ToList();
-        foreach (var data in raceDatas)
-        {
-            data.racePosition = GetRacePosition(data.kartName);
-        }
     }
 
     public RaceData GetRaceData(KartName kartName)
