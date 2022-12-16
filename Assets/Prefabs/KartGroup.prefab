@@ -42,6 +42,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 582049388991586183}
     m_Modifications:
+    - target: {fileID: 4957997747935972673, guid: 426b01031dd275646bd06bc269f55653, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4957997747935972674, guid: 426b01031dd275646bd06bc269f55653, type: 3}
       propertyPath: _spawnPos
       value: 
@@ -116,6 +120,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 582049388991586183}
     m_Modifications:
+    - target: {fileID: 4957997747935972673, guid: 16836129ca65a6041abb2daedaca476b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4957997747935972674, guid: 16836129ca65a6041abb2daedaca476b, type: 3}
       propertyPath: _spawnPos
       value: 
@@ -190,6 +198,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 582049388991586183}
     m_Modifications:
+    - target: {fileID: 4957997747935972673, guid: fda42e86081b01049b9623b699dfe1c9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4957997747935972674, guid: fda42e86081b01049b9623b699dfe1c9, type: 3}
       propertyPath: _spawnPos
       value: 
@@ -264,6 +276,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 582049388991586183}
     m_Modifications:
+    - target: {fileID: 4957997747935972673, guid: df4c2e04de9770c48ac4eac8aaf4518f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4957997747935972674, guid: df4c2e04de9770c48ac4eac8aaf4518f, type: 3}
       propertyPath: _spawnPos
       value: 
@@ -338,6 +354,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 582049388991586183}
     m_Modifications:
+    - target: {fileID: 4957997747935972673, guid: 4ffa9ec9ea879cd4491c27f6a0ade903, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4957997747935972674, guid: 4ffa9ec9ea879cd4491c27f6a0ade903, type: 3}
       propertyPath: _spawnPos
       value: 

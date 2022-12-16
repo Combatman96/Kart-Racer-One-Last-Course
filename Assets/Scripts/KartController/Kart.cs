@@ -54,7 +54,7 @@ public class Kart : MonoBehaviour
 
     public void InputHandler(float accelerationInput, float steeringInput, bool flipInput = false, bool drifInput = false)
     {
-        // if (GameController.instance.gameState != GameState.GamePlay) return;
+        if (GameController.instance.gameState != GameState.GamePlay) return;
 
         _acceleration = accelerationInput * _topSpeed;
         if (_acceleration < 0) _acceleration = accelerationInput * _topSpeed * 0.18f;
@@ -212,7 +212,7 @@ public class Kart : MonoBehaviour
     {
         if (other.CompareTag("FinishLine"))
         {
-            // Debug.Log(kartName.ToString() + " cross finish line");
+            Debug.Log(kartName.ToString() + " cross finish line");
             int kartIndex = transform.GetSiblingIndex();
             Vector3 vel = _rigidbody.velocity.normalized;
             EventController.instance.RaiseEvent(EventGameplay.Kart_Cross_Finish_Line, new object[] { kartIndex, vel });

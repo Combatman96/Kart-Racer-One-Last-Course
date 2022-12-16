@@ -6,6 +6,7 @@ using PathCreation;
 using System.Linq;
 using System;
 using Cinemachine;
+using System.Threading.Tasks;
 
 public class RaceController : MonoBehaviour
 {
@@ -35,7 +36,7 @@ public class RaceController : MonoBehaviour
 
     public void DoStart()
     {
-        Debug.Log("Start race");
+        // Debug.Log("Start race");
         raceDatas.Clear();
         _lapDistances.Clear();
         _lapRequire = DataManager.instance.playerData.gameSetting.lapPerRace;
@@ -52,28 +53,23 @@ public class RaceController : MonoBehaviour
         for (int i = 0; i < kartGroup.childCount; i++)
         {
             raceDatas.Add(new RaceData(_karts[i].kartName, 0));
-            // _karts[i].SetIsPlayer(true);
+            _karts[i].SetIsPlayer(false);
             _lapDistances.Add(0);
             kartGroup.GetChild(i).transform.position = _kartPosGroup.GetChild(i).position;
             kartGroup.GetChild(i).transform.rotation = _kartPosGroup.GetChild(i).rotation;
             kartGroup.GetChild(i).gameObject.SetActive(i < DataManager.instance.gameData.maxKart);
         }
-        StartCoroutine(CountDown(4));
+        _playerKart.SetIsPlayer(true);
+        CoundownTask();
     }
 
-    public IEnumerator CountDown(int time)
+    public async void CoundownTask()
     {
-        yield return new WaitForSeconds(time);
-
-        for (int i = 0; i < kartGroup.childCount; i++)
-        {
-            if (_karts[i].kartName == _playerKart.kartName) continue;
-            _karts[i].SetIsPlayer(false);
-        }
-        _playerKart.SetIsPlayer(true);
+        await Task.Delay(4000);
         SetStartTimes();
         EventController.instance.RaiseEvent(EventGameplay.Change_State_Game, GameState.GamePlay);
     }
+
 
     private void SetStartTimes()
     {
@@ -93,6 +89,7 @@ public class RaceController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        return;
         if (GameController.instance.gameState == GameState.GamePlay)
         {
             GetKartsDistances();

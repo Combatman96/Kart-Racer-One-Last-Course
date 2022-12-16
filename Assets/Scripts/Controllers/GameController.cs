@@ -21,6 +21,7 @@ public class GameController : MonoBehaviour
     private void OnStartGame()
     {
         gameState = GameState.StartGame;
+        UIController.instance.OnGameStateChange(gameState);
 
         RaceController.instance.DoStart();
     }
@@ -28,19 +29,21 @@ public class GameController : MonoBehaviour
     private void OnPauseGame()
     {
         gameState = GameState.Pause;
+        UIController.instance.OnGameStateChange(gameState);
         Time.timeScale = 0f;
     }
 
     private void OnPlayGame()
     {
         gameState = GameState.GamePlay;
+        UIController.instance.OnGameStateChange(gameState);
         Time.timeScale = 1f;
     }
 
     private void OnEndGame()
     {
         gameState = GameState.EndGame;
-
+        UIController.instance.OnGameStateChange(gameState);
         int playerPos = RaceController.instance.GetPlayerRacePosition();
         CheckRecord();
     }
@@ -106,8 +109,8 @@ public class GameController : MonoBehaviour
 
     private void OnRestartRace()
     {
-        // EventController.instance.RaiseEvent(EventGameplay.Change_State_Game, new object[] { GameState.StartGame });
-        GameManager.instance.ReLoadScene();
+        EventController.instance.RaiseEvent(EventGameplay.Change_State_Game, new object[] { GameState.StartGame });
+        // GameManager.instance.ReLoadScene();
     }
 
     private void OnQuitRace()

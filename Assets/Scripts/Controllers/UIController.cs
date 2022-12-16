@@ -14,45 +14,51 @@ public class UIController : BaseUIController
 
     public Camera uiCamera;
 
-    public List<BaseUI> listScreen => GetComponentsInChildren<BaseUI>(true).ToList();
-    public ScreenStartGame screenStartGame => GetComponentInChildren<ScreenStartGame>(true);
-    public ScreenIngame screenIngame => GetComponentInChildren<ScreenIngame>(true);
-    public PopupPauseGame popupPauseGame => GetComponentInChildren<PopupPauseGame>(true);
-    public ScreenEndGame screenEndGame => GetComponentInChildren<ScreenEndGame>(true);
+    public List<BaseUI> listScreen;
+    public ScreenStartGame screenStartGame;
+    public ScreenIngame screenIngame;
+    public PopupPauseGame popupPauseGame;
+    public ScreenEndGame screenEndGame;
 
     private void Start()
     {
-        EventController.instance.onRaiseEvent += OnEventRaise;
+        // EventController.instance.onRaiseEvent += OnEventRaise;
+
+        listScreen = GetComponentsInChildren<BaseUI>(true).ToList();
+        screenStartGame = GetComponentInChildren<ScreenStartGame>(true);
+        screenIngame = GetComponentInChildren<ScreenIngame>(true);
+        popupPauseGame = GetComponentInChildren<PopupPauseGame>(true);
+        screenEndGame = GetComponentInChildren<ScreenEndGame>(true);
     }
 
     private void OnDestroy()
     {
-        EventController.instance.onRaiseEvent -= OnEventRaise;
+        // EventController.instance.onRaiseEvent -= OnEventRaise;
     }
 
-    private void OnEventRaise(string eventName, params object[] p)
-    {
-        switch (eventName)
-        {
-            case EventGameplay.Empty_Event:
-                Debug.Log(eventName);
-                break;
-            case EventGameplay.Change_State_Game:
-                GameState state = (GameState)p[0];
-                OnGameStateChange(state);
-                break;
-            case EventGameplay.Is_New_Record:
-                bool isNewRecord = (bool)p[0];
-                screenEndGame.NewRecord(isNewRecord);
-                break;
-            case EventGameplay.Player_Cross_FinishLine:
-                int lap = (int)p[0];
-                screenIngame.SetLapCounter(lap);
-                break;
-        }
-    }
+    // private void OnEventRaise(string eventName, params object[] p)
+    // {
+    //     switch (eventName)
+    //     {
+    //         case EventGameplay.Empty_Event:
+    //             Debug.Log(eventName);
+    //             break;
+    //         case EventGameplay.Change_State_Game:
+    //             GameState state = (GameState)p[0];
+    //             OnGameStateChange(state);
+    //             break;
+    //         case EventGameplay.Is_New_Record:
+    //             bool isNewRecord = (bool)p[0];
+    //             screenEndGame.NewRecord(isNewRecord);
+    //             break;
+    //         case EventGameplay.Player_Cross_FinishLine:
+    //             int lap = (int)p[0];
+    //             screenIngame.SetLapCounter(lap);
+    //             break;
+    //     }
+    // }
 
-    private void OnGameStateChange(GameState state)
+    public void OnGameStateChange(GameState state)
     {
         switch (state)
         {

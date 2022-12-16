@@ -15,10 +15,11 @@ public class ScreenStartGame : BaseUI
 
     public void CountDown()
     {
+        _countDownAnim.Stop();
         _countDownAnim.Play();
     }
 
-    public void UpdateCountDownText( string txt) 
+    public void UpdateCountDownText(string txt)
     {
         _countDownTxt.SetText(txt);
     }
