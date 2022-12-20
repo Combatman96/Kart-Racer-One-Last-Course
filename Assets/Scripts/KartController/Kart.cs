@@ -44,6 +44,9 @@ public class Kart : MonoBehaviour
     private float _acceleration = 0f;
     private float _steering = 0f;
 
+    [SerializeField] private AudioSource _engineSFX;
+
+    [Header("AI")]
     [SerializeField] private KartAgent _kartAgent;
 
     private void Start()
@@ -146,6 +149,8 @@ public class Kart : MonoBehaviour
             float speedNormalized = Mathf.Clamp01(Mathf.Abs(carSpeed) / _topSpeed);
             float torque = _speedCurve.Evaluate(speedNormalized) * _acceleration;
             _rigidbody.AddForceAtPosition(accelDir * torque, wheelTransform.position);
+
+            _engineSFX.volume = speedNormalized;
         }
     }
 
