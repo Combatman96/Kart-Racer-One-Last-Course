@@ -30,6 +30,8 @@ public class RaceController : MonoBehaviour
 
     private List<KartName> clearRaceList = new List<KartName>();
 
+    [SerializeField] AudioSource _crossFinishLineSFX;
+
     private void Awake()
     {
         if (instance == null) instance = this;
@@ -111,6 +113,9 @@ public class RaceController : MonoBehaviour
     public void OnKartsCrossFinishLine(int kartIndex, Vector3 inComingDir)
     {
         if (GameController.instance.gameState != GameState.GamePlay) return;
+
+        _crossFinishLineSFX.Stop();
+        _crossFinishLineSFX.Play();
 
         Vector3 kartPos = kartGroup.GetChild(kartIndex).position;
         Vector3 trackForward = finishLine.Find("TrackForward").localPosition.normalized;
