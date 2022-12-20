@@ -150,7 +150,7 @@ public class Kart : MonoBehaviour
             float torque = _speedCurve.Evaluate(speedNormalized) * _acceleration;
             _rigidbody.AddForceAtPosition(accelDir * torque, wheelTransform.position);
 
-            _engineSFX.volume = speedNormalized;
+            _engineSFX.volume = (GameController.instance.gameState == GameState.Pause) ? 0 : speedNormalized;
         }
     }
 
