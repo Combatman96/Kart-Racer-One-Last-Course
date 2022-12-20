@@ -7,6 +7,7 @@ public class ScreenStartGame : BaseUI
 {
     [SerializeField] private TextMeshProUGUI _countDownTxt;
     [SerializeField] private Animation _countDownAnim;
+    [SerializeField] private AudioSource _countDownSFX;
 
     public override void DoStart()
     {
@@ -22,5 +23,7 @@ public class ScreenStartGame : BaseUI
     public void UpdateCountDownText(string txt)
     {
         _countDownTxt.SetText(txt);
+        _countDownSFX.Stop();
+        _countDownSFX.Play();
     }
 }
