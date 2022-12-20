@@ -114,9 +114,6 @@ public class RaceController : MonoBehaviour
     {
         if (GameController.instance.gameState != GameState.GamePlay) return;
 
-        _crossFinishLineSFX.Stop();
-        _crossFinishLineSFX.Play();
-
         Vector3 kartPos = kartGroup.GetChild(kartIndex).position;
         Vector3 trackForward = finishLine.Find("TrackForward").localPosition.normalized;
         Debug.Log("Hi");
@@ -146,6 +143,10 @@ public class RaceController : MonoBehaviour
             raceData.racePosition = GetRacePosition(raceData.kartName);
         };
         if (!_karts[index].isPlayer) return;
+
+        _crossFinishLineSFX.Stop();
+        _crossFinishLineSFX.Play();
+
         EventController.instance.RaiseEvent(EventGameplay.Player_Cross_FinishLine, new object[] { raceData.lap });
     }
 
