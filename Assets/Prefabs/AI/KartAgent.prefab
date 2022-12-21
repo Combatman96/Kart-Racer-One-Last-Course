@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5164559678989794845}
   - component: {fileID: 5164559678989794835}
   - component: {fileID: 5164559678989794832}
-  - component: {fileID: 5600836388261845407}
   m_Layer: 0
   m_Name: KartAgent
   m_TagString: Untagged
@@ -127,19 +126,3 @@ MonoBehaviour:
   rayMissColor: {r: 1, g: 0.9964248, b: 0, a: 1}
   m_StartVerticalOffset: -1.01
   m_EndVerticalOffset: 0
---- !u!114 &5600836388261845407
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5164559678989794847}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2902496c0120472b90269f94a0aec7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Record: 0
-  NumStepsToRecord: 0
-  DemonstrationName: KartDriveDemo
-  DemonstrationDirectory: BrainDemos
