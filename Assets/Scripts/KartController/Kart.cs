@@ -58,7 +58,7 @@ public class Kart : MonoBehaviour
     public void InputHandler(float accelerationInput, float steeringInput, bool flipInput = false, bool drifInput = false)
     {
         // if (GameController.instance.gameState != GameState.GamePlay) return;
-
+        // Debug.Log("Kart.InputHandler()");
         _acceleration = accelerationInput * _topSpeed;
         if (_acceleration < 0) _acceleration = accelerationInput * _topSpeed * 0.6f;
         for (int i = 0; i < 2; i++)
@@ -258,8 +258,7 @@ public class Kart : MonoBehaviour
 
     public float GetSpeed()
     {
-        var vel = _rigidbody.velocity;
-        return vel.sqrMagnitude;
+        return _rigidbody.velocity.magnitude * 2.23693629f;
     }
 
     public void Stop()
@@ -270,6 +269,16 @@ public class Kart : MonoBehaviour
     public void SetIsPlayer(bool isPlayer)
     {
         this.isPlayer = isPlayer;
+    }
+
+    public Vector3 Position()
+    {
+        return _rigidbody.position;
+    }
+
+    public float MaxSpeed()
+    {
+        return _topSpeed;
     }
 }
 
