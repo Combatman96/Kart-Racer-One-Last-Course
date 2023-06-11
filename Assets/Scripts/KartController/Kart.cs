@@ -57,7 +57,7 @@ public class Kart : MonoBehaviour
 
     public void InputHandler(float accelerationInput, float steeringInput, bool flipInput = false, bool drifInput = false)
     {
-        if (GameController.instance.gameState != GameState.GamePlay) return;
+        // if (GameController.instance.gameState != GameState.GamePlay) return;
 
         _acceleration = accelerationInput * _topSpeed;
         if (_acceleration < 0) _acceleration = accelerationInput * _topSpeed * 0.6f;
@@ -150,7 +150,7 @@ public class Kart : MonoBehaviour
             float torque = _speedCurve.Evaluate(speedNormalized) * _acceleration;
             _rigidbody.AddForceAtPosition(accelDir * torque, wheelTransform.position);
 
-            _engineSFX.volume = (GameController.instance.gameState == GameState.Pause) ? 0 : speedNormalized;
+            // _engineSFX.volume = (GameController.instance.gameState == GameState.Pause) ? 0 : speedNormalized;
         }
     }
 
