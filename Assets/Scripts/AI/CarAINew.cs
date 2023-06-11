@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CarAIHandler : MonoBehaviour
+public class CarAINew : MonoBehaviour
 {
     private Kart car => GetComponent<Kart>();
     [SerializeField] private Transform waypointsGroup;
@@ -12,7 +12,7 @@ public class CarAIHandler : MonoBehaviour
     [NaughtyAttributes.Button]
     private void SetFollowPath()
     {
-        foreach(Transform waypoint in waypointsGroup)
+        foreach (Transform waypoint in waypointsGroup)
         {
             FollowPoint pointPath = new FollowPoint(waypoint.position, waypoint.forward, waypoint.rotation);
             path.Add(pointPath);
@@ -66,6 +66,7 @@ public class CarAIHandler : MonoBehaviour
     [SerializeField] private float m_AccelWanderSpeed = 0.1f;                                 // how fast the cars acceleration wandering will fluctuate
     [SerializeField] private BrakeCondition m_BrakeCondition = BrakeCondition.TargetDistance; // what should the AI consider when accelerating/braking?
     [SerializeField] private bool m_isDriving;                                                  // whether the AI is currently actively driving or stopped.
+    private GameObject TargetGameObject;
     [SerializeField] private FollowPoint m_Target;                                              // 'target' the target object to aim for.
     [SerializeField] private bool m_StopWhenTargetReached;                                    // should we stop driving when we reach the target?
     [SerializeField] private float m_ReachTargetThreshold = 2;                                // proximity to target to consider we 'reached' it, and stop driving.
@@ -198,65 +199,7 @@ public class CarAIHandler : MonoBehaviour
         }
     }
 
-    private void OnCollisionStay(Collision col)
-    {
-        // detect collision against other cars, so that we can take evasive action
-        if (col.rigidbody != null)
-        {
-            var otherAI = col.rigidbody.GetComponent<Kart>();
-            if (otherAI != null)
-            {
-                // we'll take evasive action for 1 second
-                m_AvoidOtherCarTime = Time.time + 1;
-
-                // but who's in front?...
-                if (Vector3.Angle(transform.forward, otherAI.transform.position - transform.position) < 90)
-                {
-                    // the other ai is in front, so it is only good manners that we ought to brake...
-                    m_AvoidOtherCarSlowdown = 0.5f;
-                }
-                else
-                {
-                    // we're in front! ain't slowing down for anybody...
-                    m_AvoidOtherCarSlowdown = 1;
-                }
-
-                // both cars should take evasive action by driving along an offset from the path centre,
-                // away from the other car
-                var otherCarLocalDelta = transform.InverseTransformPoint(otherAI.transform.position);
-                float otherCarAngle = Mathf.Atan2(otherCarLocalDelta.x, otherCarLocalDelta.z);
-                m_AvoidPathOffset = m_LateralWanderDistance * -Mathf.Sign(otherCarAngle);
-            }
-        }
-    }
 
 }
 
 
-public enum BrakeCondition
-{
-    NeverBrake,                 // the car simply accelerates at full throttle all the time.
-    TargetDirectionDifference,  // the car will brake according to the upcoming change in direction of the target. Useful for route-based AI, slowing for corners.
-    TargetDistance,             // the car will brake as it approaches its target, regardless of the target's direction. Useful if you want the car to
-                                // head for a stationary target and come to rest when it arrives there.
-}
-
-[System.Serializable]
-public struct FollowPoint
-{
-    public Vector3 position;
-    public Vector3 forward;
-    public Quaternion quaternion;
-
-    public FollowPoint(Vector3 position, Vector3 forward, Quaternion quaternion)
-    {
-        this.position = position;
-        this.forward = forward;
-        this.quaternion = quaternion;
-    }
-
-    public Vector3 Right()
-    {
-        return quaternion * Vector3.right;
-    }
-}
