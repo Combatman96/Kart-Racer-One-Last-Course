@@ -280,6 +280,11 @@ public class Kart : MonoBehaviour
     {
         return _topSpeed;
     }
+
+    public float MaxSteerAngle()
+    {
+        return _maxSteeringAngle;
+    }
 }
 
 

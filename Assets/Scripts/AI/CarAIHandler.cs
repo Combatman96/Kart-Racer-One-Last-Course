@@ -31,8 +31,7 @@ public class CarAIHandler : MonoBehaviour
         m_isDriving = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    void WaypointUpdate()
     {
         if (!IsBehindWaypoint())
         {
@@ -53,18 +52,18 @@ public class CarAIHandler : MonoBehaviour
     }
 
 
-    [SerializeField][Range(0, 1)] private float m_CautiousSpeedFactor = 0.05f;               // percentage of max speed to use when being maximally cautious
-    [SerializeField][Range(0, 180)] private float m_CautiousMaxAngle = 50f;                  // angle of approaching corner to treat as warranting maximum caution
+    [SerializeField][Range(0, 1)] private float m_CautiousSpeedFactor = 0.5f;               // percentage of max speed to use when being maximally cautious
+    [SerializeField][Range(0, 180)] private float m_CautiousMaxAngle = 20f;                  // angle of approaching corner to treat as warranting maximum caution
     [SerializeField] private float m_CautiousMaxDistance = 100f;                              // distance at which distance-based cautiousness begins
     [SerializeField] private float m_CautiousAngularVelocityFactor = 30f;                     // how cautious the AI should be when considering its own current angular velocity (i.e. easing off acceleration if spinning!)
-    [SerializeField] private float m_SteerSensitivity = 0.05f;                                // how sensitively the AI uses steering input to turn to the desired direction
-    [SerializeField] private float m_AccelSensitivity = 0.04f;                                // How sensitively the AI uses the accelerator to reach the current desired speed
+    [SerializeField] private float m_SteerSensitivity = 0.01f;                                // how sensitively the AI uses steering input to turn to the desired direction
+    [SerializeField] private float m_AccelSensitivity = 1f;                                // How sensitively the AI uses the accelerator to reach the current desired speed
     [SerializeField] private float m_BrakeSensitivity = 1f;                                   // How sensitively the AI uses the brake to reach the current desired speed
     [SerializeField] private float m_LateralWanderDistance = 3f;                              // how far the car will wander laterally towards its target
-    [SerializeField] private float m_LateralWanderSpeed = 0.1f;                               // how fast the lateral wandering will fluctuate
+    [SerializeField] private float m_LateralWanderSpeed = 0.2f;                               // how fast the lateral wandering will fluctuate
     [SerializeField][Range(0, 1)] private float m_AccelWanderAmount = 0.1f;                  // how much the cars acceleration will wander
     [SerializeField] private float m_AccelWanderSpeed = 0.1f;                                 // how fast the cars acceleration wandering will fluctuate
-    [SerializeField] private BrakeCondition m_BrakeCondition = BrakeCondition.TargetDistance; // what should the AI consider when accelerating/braking?
+    [SerializeField] private BrakeCondition m_BrakeCondition = BrakeCondition.TargetDirectionDifference; // what should the AI consider when accelerating/braking?
     [SerializeField] private bool m_isDriving;                                                  // whether the AI is currently actively driving or stopped.
     [SerializeField] private FollowPoint m_Target;                                              // 'target' the target object to aim for.
     [SerializeField] private bool m_StopWhenTargetReached;                                    // should we stop driving when we reach the target?
@@ -78,6 +77,7 @@ public class CarAIHandler : MonoBehaviour
 
     private void FixedUpdate()
     {
+        WaypointUpdate();
         if (!m_isDriving)
         {
             // Car should not be moving,
@@ -161,6 +161,8 @@ public class CarAIHandler : MonoBehaviour
                 offsetTargetPos += m_Target.Right() *
                                    (Mathf.PerlinNoise(Time.time * m_LateralWanderSpeed, m_RandomPerlin) * 2 - 1) *
                                    m_LateralWanderDistance;
+                // offsetTargetPos = m_Target.position + m_Target.Right() * lateralOffet;
+                Debug.DrawRay(offsetTargetPos, transform.position, Color.blue);
             }
 
             // use different sensitivity depending on whether accelerating or braking:
@@ -195,6 +197,9 @@ public class CarAIHandler : MonoBehaviour
             {
                 m_isDriving = false;
             }
+
+            debugSphere.transform.position = offsetTargetPos;
+            debugSphere.transform.rotation = m_Target.quaternion;
         }
     }
 
@@ -229,7 +234,8 @@ public class CarAIHandler : MonoBehaviour
             }
         }
     }
-
+    [SerializeField] Transform debugSphere;
+    [SerializeField] float lateralOffet;
 }
 
 
@@ -257,6 +263,6 @@ public struct FollowPoint
 
     public Vector3 Right()
     {
-        return quaternion * Vector3.right;
+        return quaternion * Vector3.up;
     }
 }

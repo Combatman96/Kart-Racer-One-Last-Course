@@ -184,7 +184,8 @@ public class CarAINew : MonoBehaviour
             float targetAngle = Mathf.Atan2(localTarget.x, localTarget.z) * Mathf.Rad2Deg;
 
             // get the amount of steering needed to aim the car towards the target
-            float steer = Mathf.Clamp(targetAngle * m_SteerSensitivity, -1, 1) * Mathf.Sign(car.GetSpeed());
+            // float steer = Mathf.Clamp(targetAngle * m_SteerSensitivity, -1, 1) * Mathf.Sign(car.GetSpeed());
+            float steer = Steer(offsetTargetPos);
 
             // feed input to the car controller.
             // m_CarController.Move(steer, accel, accel, 0f);
@@ -199,6 +200,12 @@ public class CarAINew : MonoBehaviour
         }
     }
 
+    public float Steer(Vector3 target)
+    {
+        float angle = Vector3.SignedAngle(transform.forward, target - transform.position, Vector3.up);
+        float steerAmount = angle / car.MaxSteerAngle() * -1f;
+        return Mathf.Clamp(steerAmount, -1f, 1f);
+    }
 
 }
 
